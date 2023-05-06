@@ -14,5 +14,13 @@ module.exports = defineConfig({
       nodeIntegration: true,
       contextIsolation: false,
     }
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: '@import "@/assets/style/tailwind.css";',
+        implementation: require('node-sass'),
+      }
+    }
   }
 })
