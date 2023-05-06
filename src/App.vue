@@ -1,25 +1,37 @@
 <template>
-  <ScrollableView></ScrollableView>
+  <ScrollableView :data="mediator"></ScrollableView>
 </template>
 
 <script>
 import ScrollableView from "@/components/ScrollableView.vue";
+import { ipcRenderer } from "electron";
 
 export default {
   name: "App",
   components: {
     ScrollableView
   },
-};
+  data() {
+    return {
+      mediator: {}
+    }
+  },
+  mounted() {
+    ipcRenderer.on("gg", (event, message) => {
+      this.mediator = message
+    })
+  }
+}
 </script>
 
-<style>
+<style lang="scss">
+html, body {
+  @apply h-full;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  @apply h-full;
 }
 </style>

@@ -21,7 +21,7 @@ async function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      
+
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
@@ -30,9 +30,6 @@ async function createWindow() {
   })
 
   server.post('/api/receiver', (req, res) => {
-    // todo remove
-    console.log(req. body)
-
     // send to renderer
     win.webContents.send('gg', req.body)
 
