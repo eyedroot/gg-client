@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <ScrollableView></ScrollableView>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue"
+import ScrollableView from "@/components/ScrollableView.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    ScrollableView
   },
 };
 </script>

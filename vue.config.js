@@ -18,7 +18,6 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       sass: {
-        additionalData: '@import "@/assets/style/tailwind.css";',
         implementation: require('node-sass'),
       }
     }
