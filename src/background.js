@@ -3,10 +3,12 @@
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
-const isDevelopment = process.env.NODE_ENV !== 'production'
+import express from 'express'
 
-// eslint-disable-next-line no-unused-vars
-import server from './server'
+const isDevelopment = process.env.NODE_ENV !== 'production'
+const server = express()
+
+server.use(express.json())
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -25,6 +27,20 @@ async function createWindow() {
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
     }
+  })
+
+  server.post('/api/receiver', (req, res) => {
+    // todo remove
+    console.log(req. body)
+
+    // send to renderer
+    win.webContents.send('gg', req.body)
+
+    res.status(200).send('gg')
+  })
+
+  server.listen(21868, () => {
+    console.log('server started at http://localhost:21868')
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
