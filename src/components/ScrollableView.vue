@@ -1,15 +1,17 @@
 <template>
-  <section>
-    <component v-for="(value, key) in logs"
+  <section class="flex flex-col">
+    <component v-for="(object, key) in logs"
                :key="key"
-               :is="guessDumpComponent(value)"
-               :data="value">
+               :is="getDataComponent(object)"
+               :id="key"
+               :data="object">
     </component>
   </section>
 </template>
 
 <script>
 import ScalarDump from '@/components/dump/ScalarDump.vue'
+import '@/assets/style/badge.scss'
 
 export default {
   name: "ScrollableView",
@@ -29,22 +31,13 @@ export default {
   },
   watch: {
     data: function (newValue) {
-      console.log(newValue)
       this.logs.push(newValue)
     }
   },
   methods: {
-    guessDumpComponent(data) {
-      console.log('guessDumpComponent', data)
-
-      return data?.isScalarType ? 'ScalarDump' : 'ScalarDump'
+    getDataComponent(data) {
+      return data?.isScalarType ? 'ScalarDump' : undefined
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-section {
-  @apply flex flex-col h-full;
-}
-</style>
