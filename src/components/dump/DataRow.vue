@@ -4,7 +4,8 @@
       <line-number :line="id"></line-number>
     </div>
 
-    <div class="flex items-center w-[13%] justify-end border-r-[1px] border-gray-100 pr-3">
+    <div class="flex items-center justify-end border-r-[1px] border-gray-100 pr-3">
+      <back-trace :backtrace="messageDto.backtrace"></back-trace>
     </div>
 
     <div class="flex-1 items-center">
@@ -23,10 +24,12 @@ import TimeAgo from "@/components/dump/rows/TimeAgo.vue";
 import LineNumber from "@/components/dump/rows/LineNumber.vue";
 import DataConverter from "@/components/dump/DataConverter.vue";
 import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
+import BackTrace from "@/components/dump/rows/BackTrace.vue";
 
 export default {
   name: "DataRow",
   components: {
+    BackTrace,
     LanguageVersion,
     DataConverter,
     LineNumber,
