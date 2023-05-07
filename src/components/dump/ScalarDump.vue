@@ -1,9 +1,17 @@
 <template>
   <div class="flex flex-row space-x-3 border-b-[1px] border-gray-100" :class="backgroundColor">
-    <div class="flex text-sm items-center w-[15%] justify-end border-r-[1px] border-gray-100 pr-3">
+    <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-100">
+      <line-number :line="id"></line-number>
+    </div>
+
+    <div class="flex items-center w-[13%] justify-end border-r-[1px] border-gray-100 pr-3">
       <span class="badge" :class="getBadgeColor">{{ data.type }}</span>
     </div>
-    <div class="flex-1 items-center --value py-3" :class="textColor">{{ data.data === null ? 'null' : data.data }}</div>
+
+    <div class="flex-1 items-center --value py-3" :class="textColor">
+      {{ data.data === null ? 'null' : data.data }}
+    </div>
+
     <div class="flex items-center ml-auto pr-5">
       <time-ago></time-ago>
     </div>
@@ -12,10 +20,12 @@
 
 <script>
 import TimeAgo from "@/components/dump/TimeAgo.vue";
+import LineNumber from "@/components/dump/LineNumber.vue";
 
 export default {
   name: "ScalarDump",
   components: {
+    LineNumber,
     TimeAgo
   },
   props: {

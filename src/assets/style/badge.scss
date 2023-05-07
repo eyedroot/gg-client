@@ -1,5 +1,5 @@
 .badge {
-  @apply inline-block px-2.5 py-1 mr-2 font-bold uppercase leading-none rounded-full text-[12px];
+  @apply flex items-center justify-center  px-2.5 py-0.5 mr-2 font-bold uppercase rounded-full text-[10px];
 
   &.red {
     @apply bg-red-600 text-red-200;

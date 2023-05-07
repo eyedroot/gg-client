@@ -1,13 +1,21 @@
 <template>
-  <span>asdf</span>
+  <span class="text-[11px] tracking-tight text-gray-700">
+    {{ getFromNow }}
+  </span>
 </template>
 
 <script>
 export default {
-  name: 'TimeAgo'
+  name: 'TimeAgo',
+  data() {
+    return {
+      now: new Date()
+    }
+  },
+  computed: {
+    getFromNow() {
+      return this.$dayjs(this.now).fromNow()
+    }
+  }
 }
 </script>
-
-<style lang="scss">
-
-</style>
