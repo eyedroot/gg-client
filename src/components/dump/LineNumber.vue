@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row items-center">
-    <span class="flex-1 rounded-full bg-violet-500 w-1.5 h-1.5 mr-1.5"></span>
+    <span class="flex-1 rounded-full bg-blue-500 w-1.5 h-1.5 mr-1.5"></span>
     <span class="flex-1 italic text-gray-500">{{ getLineNumber }}</span>
   </div>
 </template>

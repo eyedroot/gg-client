@@ -8,7 +8,7 @@
       <span class="badge" :class="getBadgeColor">{{ data.type }}</span>
     </div>
 
-    <div class="flex-1 items-center --value" :class="textColor">
+    <div class="flex-1 items-center">
       <component :is="getDataComponent()" :data="data.data"></component>
     </div>
 
@@ -43,15 +43,18 @@ export default {
   },
   methods: {
     getDataComponent() {
-      console.log(this.data)
+      if (this.data.isScalarType) {
+        return 'ScalarType'
+      }
 
-      return this.data.isScalarType ? 'ScalarType' : undefined
+      if (this.data.type.toLowerCase() === 'array') {
+        return 'ArrayType'
+      }
+
+      return '(Unknown)'
     }
   },
   computed: {
-    textColor() {
-      return typeof this.data.data
-    },
     backgroundColor() {
       return this.id % 2 === 0 ? 'bg-gray-50' : 'bg-white'
     },
@@ -61,18 +64,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.--value {
-  @apply font-medium text-[13px];
-  &.number {
-    @apply text-blue-700;
-  }
-  &.boolean {
-    @apply text-green-600 italic;
-  }
-  &.object {
-    @apply text-gray-400 italic;
-  }
-}
-</style>
