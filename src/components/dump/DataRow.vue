@@ -24,7 +24,7 @@ import ScalarType from "@/components/dump/datas/ScalarType.vue";
 import LineNumber from "@/components/dump/LineNumber.vue";
 
 export default {
-  name: "DataPrinter",
+  name: "DataRow",
   components: {
     LineNumber,
     ScalarType,
