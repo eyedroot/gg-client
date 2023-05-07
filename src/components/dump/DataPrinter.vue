@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row space-x-3 border-b-[1px] border-gray-100" :class="backgroundColor">
+  <div class="flex flex-row space-x-3 border-b-[1px] border-gray-100 py-3" :class="backgroundColor">
     <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-100">
       <line-number :line="id"></line-number>
     </div>
@@ -8,8 +8,8 @@
       <span class="badge" :class="getBadgeColor">{{ data.type }}</span>
     </div>
 
-    <div class="flex-1 items-center --value py-3" :class="textColor">
-      {{ data.data === null ? 'null' : data.data }}
+    <div class="flex-1 items-center --value" :class="textColor">
+      <component :is="getDataComponent()" :data="data.data"></component>
     </div>
 
     <div class="flex items-center ml-auto pr-5">
@@ -20,12 +20,14 @@
 
 <script>
 import TimeAgo from "@/components/dump/TimeAgo.vue";
+import ScalarType from "@/components/dump/datas/ScalarType.vue";
 import LineNumber from "@/components/dump/LineNumber.vue";
 
 export default {
-  name: "ScalarDump",
+  name: "DataPrinter",
   components: {
     LineNumber,
+    ScalarType,
     TimeAgo
   },
   props: {
@@ -37,6 +39,13 @@ export default {
     data: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    getDataComponent() {
+      console.log(this.data)
+
+      return this.data.isScalarType ? 'ScalarType' : undefined
     }
   },
   computed: {

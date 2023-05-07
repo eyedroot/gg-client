@@ -1,22 +1,21 @@
 <template>
   <section class="flex flex-col">
-    <component v-for="(object, key) in logs"
+    <data-printer v-for="(object, key) in logs"
                :key="key"
-               :is="getDataComponent(object)"
                :id="key"
                :data="object">
-    </component>
+    </data-printer>
   </section>
 </template>
 
 <script>
-import ScalarDump from '@/components/dump/ScalarDump.vue'
 import '@/assets/style/badge.scss'
+import DataPrinter from "@/components/dump/DataPrinter.vue";
 
 export default {
   name: "ScrollableView",
   components: {
-    ScalarDump
+    DataPrinter
   },
   props: {
     data: {
@@ -32,11 +31,6 @@ export default {
   watch: {
     data: function (newValue) {
       this.logs.push(newValue)
-    }
-  },
-  methods: {
-    getDataComponent(data) {
-      return data?.isScalarType ? 'ScalarDump' : undefined
     }
   }
 }
