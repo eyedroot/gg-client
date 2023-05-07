@@ -6,21 +6,21 @@
 export default {
   name: 'ScalarType',
   props: {
-    data: {
+    value: {
       type: [String, Boolean, Number, null],
       required: true
     }
   },
   computed: {
     textColor() {
-      return typeof this.data
+      return typeof this.value
     },
     printScalarType() {
-      if (this.data === null) {
-        return 'NULL'
+      if (this.value === null) {
+        return 'null'
       }
 
-      return this.data
+      return this.value
     }
   }
 }
@@ -33,13 +33,21 @@ export default {
     @apply text-blue-700;
   }
   &.string {
-    @apply text-black underline;
+    &::before {
+      content: '"';
+      @apply text-gray-500;
+    }
+    &::after {
+      content: '"';
+      @apply text-gray-500;
+    }
+    @apply text-black;
   }
   &.boolean {
-    @apply text-green-600 italic;
+    @apply text-green-600;
   }
   &.object {
-    @apply text-gray-400 italic;
+    @apply text-gray-400;
   }
 }
 </style>

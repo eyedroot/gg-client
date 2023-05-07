@@ -1,9 +1,9 @@
 <template>
   <section class="flex flex-col">
-    <data-row v-for="(object, key) in logs"
+    <data-row v-for="(messageDto, key) in logs"
                :key="key"
                :id="key"
-               :data="object">
+               :messageDto="messageDto">
     </data-row>
   </section>
 </template>
@@ -29,8 +29,10 @@ export default {
     }
   },
   watch: {
-    data: function (newValue) {
-      this.logs.push(newValue)
+    data: function (newData) {
+      console.log(newData)
+
+      this.logs.push(newData)
     }
   }
 }
