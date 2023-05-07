@@ -2,38 +2,38 @@
   @apply flex items-center justify-center  px-2.5 py-0.5 mr-2 font-bold capitalize rounded-full text-[10px];
 
   &.red {
-    @apply bg-red-600 text-red-200;
+    @apply bg-red-600 text-white;
   }
 
   &.green {
-    @apply bg-green-600 text-green-200;
+    @apply bg-green-600 text-white;
   }
 
   &.blue {
-    @apply bg-blue-600 text-blue-200;
+    @apply bg-blue-600 text-white;
   }
 
   &.gray {
-    @apply bg-gray-600 text-gray-200;
+    @apply bg-gray-600 text-white;
   }
 
   &.purple {
-    @apply bg-purple-600 text-purple-200;
+    @apply bg-purple-600 text-white;
   }
 
   &.indigo {
-    @apply bg-indigo-600 text-indigo-200;
+    @apply bg-indigo-600 text-white;
   }
 
   &.pink {
-    @apply bg-pink-600 text-pink-200;
+    @apply bg-pink-600 text-white;
   }
 
   &.orange {
-    @apply bg-orange-600 text-orange-200;
+    @apply bg-orange-600 text-white;
   }
 
   &.amber {
-    @apply bg-amber-600 text-amber-200;
+    @apply bg-amber-600 text-white;
   }
 }
