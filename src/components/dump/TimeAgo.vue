@@ -7,9 +7,11 @@
 <script>
 export default {
   name: 'TimeAgo',
-  data() {
-    return {
-      now: new Date()
+  props: {
+    now: {
+      type: Date,
+      default: () => new Date(),
+      required: false
     }
   },
   computed: {

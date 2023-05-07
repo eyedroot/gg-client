@@ -1,21 +1,21 @@
 <template>
   <section class="flex flex-col">
-    <data-printer v-for="(object, key) in logs"
+    <data-row v-for="(object, key) in logs"
                :key="key"
                :id="key"
                :data="object">
-    </data-printer>
+    </data-row>
   </section>
 </template>
 
 <script>
 import '@/assets/style/badge.scss'
-import DataPrinter from "@/components/dump/DataPrinter.vue";
+import DataRow from "@/components/dump/DataRow.vue";
 
 export default {
   name: "ScrollableView",
   components: {
-    DataPrinter
+    DataRow
   },
   props: {
     data: {
