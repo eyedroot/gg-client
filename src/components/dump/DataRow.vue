@@ -1,20 +1,20 @@
 <template>
   <div class="flex flex-row space-x-3 border-b-[1px] border-gray-100 py-3" :class="getRowBackgroundColor">
     <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-100">
-      <line-number :line="id"></line-number>
+      <LineNumber :line="id"></LineNumber>
     </div>
 
     <div class="flex items-center justify-end border-r-[1px] border-gray-100 pr-3">
-      <back-trace :backtrace="messageDto.backtrace"></back-trace>
+      <BackTrace :backtrace="messageDto.backtrace"></BackTrace>
     </div>
 
     <div class="flex-1 items-center">
-      <data-converter :capsule-dto="messageDto.data"></data-converter>
+      <DataConverter :capsule-dto="messageDto.data"></DataConverter>
     </div>
 
     <div class="flex space-x-1.5 items-center ml-auto pr-5">
-      <time-ago></time-ago>
-      <language-version :language="messageDto.language" :version="messageDto.version"></language-version>
+      <TimeAgo></TimeAgo>
+      <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
     </div>
   </div>
 </template>

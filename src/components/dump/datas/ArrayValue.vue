@@ -7,7 +7,7 @@
          :key="key">
       <span class="h-fit">{{ key }}</span>
       <span class="h-fit">=></span>
-      <data-converter :capsule-dto="value"></data-converter>
+      <DataConverter :capsule-dto="value"></DataConverter>
     </div>
 
     <div class="--tail array">]</div>

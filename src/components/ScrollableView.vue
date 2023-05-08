@@ -1,10 +1,10 @@
 <template>
   <section class="flex flex-col">
-    <data-row v-for="(messageDto, key) in logs"
+    <DataRow v-for="(messageDto, key) in logs"
                :key="key"
                :id="key"
                :messageDto="messageDto">
-    </data-row>
+    </DataRow>
   </section>
 </template>
 
