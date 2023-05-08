@@ -18,7 +18,6 @@ export default {
   },
   mounted() {
     ipcRenderer.on("gg", (event, message) => {
-      console.log(message)
       this.mediator = message
     })
   }

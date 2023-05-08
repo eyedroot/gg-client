@@ -30,8 +30,6 @@ export default {
   },
   watch: {
     data: function (newData) {
-      console.log(newData)
-
       this.logs.push(newData)
     }
   }

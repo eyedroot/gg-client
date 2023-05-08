@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'ScalarType',
+  name: 'ScalarValue',
   props: {
     value: {
       type: [String, Boolean, Number, null],
