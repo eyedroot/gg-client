@@ -6,21 +6,21 @@
 export default {
   name: 'ScalarValue',
   props: {
-    value: {
-      type: [String, Boolean, Number, null],
+    capsuleDto: {
+      type: Object,
       required: true
     }
   },
   computed: {
     textColor() {
-      return typeof this.value
+      return typeof this.capsuleDto.value
     },
     printScalarType() {
-      if (this.value === null) {
+      if (this.capsuleDto.value === null) {
         return 'null'
       }
 
-      return this.value
+      return this.capsuleDto.value
     }
   }
 }

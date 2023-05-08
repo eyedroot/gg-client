@@ -1,33 +1,32 @@
 <template>
-  <div>
-    <template v-if="isScalarType">
-      <scalar-value :value="capsuleDto.value"></scalar-value>
-    </template>
-    <template v-if="! isScalarType">
-      <array-object :capsule-dto="capsuleDto"></array-object>
-    </template>
-  </div>
+  <component :is="getComponentName" :capsule-dto="capsuleDto"></component>
 </template>
 
 <script>
 import ScalarValue from "@/components/dump/datas/ScalarValue.vue";
-import ArrayObject from "@/components/dump/datas/ArrayObject.vue";
+import ArrayValue from "@/components/dump/datas/ArrayValue.vue";
+import StdClassValue from "@/components/dump/datas/StdClassValue.vue";
 
 export default {
   name: 'DataConverter',
   components: {
     ScalarValue,
-    ArrayObject
+    ArrayValue,
+    StdClassValue
   },
   props: {
     capsuleDto: {
       type: Object,
       required: true
-    }
+    },
   },
   computed: {
-    isScalarType() {
-      return this.capsuleDto.isScalarType;
+    getComponentName() {
+      if (this.capsuleDto.isScalarType) {
+        return 'ScalarValue'
+      }
+
+      return this.capsuleDto.type === 'array' ? 'ArrayValue' : 'StdClassValue'
     }
   }
 }
