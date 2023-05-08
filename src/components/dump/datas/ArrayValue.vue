@@ -7,7 +7,8 @@
          :key="key">
       <span class="h-fit">{{ key }}</span>
       <span class="h-fit">=></span>
-      <DataConverter :capsule-dto="value"></DataConverter>
+
+      <component :is="this.$getValueComponent(value)" :capsule-dto="value"></component>
     </div>
 
     <div class="--tail array">]</div>
@@ -15,12 +16,14 @@
 </template>
 
 <script>
-import DataConverter from "@/components/dump/DataConverter.vue";
+import ScalarValue from "@/components/dump/datas/ScalarValue.vue";
+import StdClassValue from "@/components/dump/datas/StdClassValue.vue";
 
 export default {
   name: 'ArrayValue',
   components: {
-    DataConverter
+    ScalarValue,
+    StdClassValue
   },
   props: {
     capsuleDto: {

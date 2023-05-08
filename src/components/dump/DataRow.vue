@@ -9,7 +9,7 @@
     </div>
 
     <div class="flex-1 items-center">
-      <DataConverter :capsule-dto="messageDto.data"></DataConverter>
+      <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
     </div>
 
     <div class="flex space-x-1.5 items-center ml-auto pr-5">
@@ -22,18 +22,23 @@
 <script>
 import TimeAgo from "@/components/dump/rows/TimeAgo.vue";
 import LineNumber from "@/components/dump/rows/LineNumber.vue";
-import DataConverter from "@/components/dump/DataConverter.vue";
 import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
+
+import ArrayValue from "@/components/dump/datas/ArrayValue.vue";
+import ScalarValue from "@/components/dump/datas/ScalarValue.vue";
+import StdClassValue from "@/components/dump/datas/StdClassValue.vue";
 
 export default {
   name: "DataRow",
   components: {
     BackTrace,
     LanguageVersion,
-    DataConverter,
     LineNumber,
-    TimeAgo
+    TimeAgo,
+    ArrayValue,
+    ScalarValue,
+    StdClassValue
   },
   props: {
     id: {
