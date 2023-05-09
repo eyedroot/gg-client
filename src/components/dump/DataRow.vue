@@ -25,9 +25,9 @@ import LineNumber from "@/components/dump/rows/LineNumber.vue";
 import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
 
-import ArrayValue from "@/components/dump/datas/ArrayValue.vue";
-import ScalarValue from "@/components/dump/datas/ScalarValue.vue";
-import StdClassValue from "@/components/dump/datas/StdClassValue.vue";
+import ArrayValue from "@/components/dump/values/ArrayValue.vue";
+import ScalarValue from "@/components/dump/values/ScalarValue.vue";
+import StdClassValue from "@/components/dump/values/StdClassValue.vue";
 
 export default {
   name: "DataRow",

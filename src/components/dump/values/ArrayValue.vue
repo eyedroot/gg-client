@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import ScalarValue from "@/components/dump/datas/ScalarValue.vue";
-import StdClassValue from "@/components/dump/datas/StdClassValue.vue";
+import ScalarValue from "@/components/dump/values/ScalarValue.vue";
+import StdClassValue from "@/components/dump/values/StdClassValue.vue";
 
 export default {
   name: 'ArrayValue',
