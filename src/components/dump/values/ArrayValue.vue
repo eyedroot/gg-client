@@ -5,8 +5,12 @@
     <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
-      <span class="h-fit">{{ key }}</span>
-      <span class="h-fit">=></span>
+
+      <span class="h-fit">
+        <ScalarValue :capsule-dto="convertArrayKeyToCapsuleDto(key)"></ScalarValue>
+      </span>
+
+      <span class="h-fit mx-1.5">=></span>
 
       <component :is="this.$getValueComponent(value)" :capsule-dto="value"></component>
     </div>
@@ -30,6 +34,17 @@ export default {
       type: Object,
       required: true
     }
+  },
+  methods: {
+    convertArrayKeyToCapsuleDto(arrayKey) {
+      return {
+        "type": typeof arrayKey,
+        "isScalarType": true,
+        "namespace": null,
+        "className": null,
+        "value": arrayKey
+      }
+    },
   },
   computed: {
     getArrayCount() {
