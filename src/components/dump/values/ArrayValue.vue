@@ -1,8 +1,8 @@
 <template>
-  <div class="relative flex flex-col">
-    <div class="--header array">Array ({{ getArrayCount }}) [</div>
+  <span class="--header array">Array ({{ getArrayCount }}) [</span>
 
-    <div class="flex flex-row space-x-1.5"
+  <div class="relative flex flex-col">
+    <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
       <span class="h-fit">{{ key }}</span>
