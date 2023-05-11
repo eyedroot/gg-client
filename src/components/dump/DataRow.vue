@@ -9,7 +9,9 @@
     </div>
 
     <div class="flex-1 items-center">
-      <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
+      <div class="p-3 rounded bg-gray-100 border-[1px] border-gray-200 box-border w-fit text-[105%] leading-5">
+        <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
+      </div>
     </div>
 
     <div class="flex space-x-1.5 items-center ml-auto pr-5">

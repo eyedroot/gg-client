@@ -18,6 +18,9 @@ export default {
     getStdClassName() {
       return this.capsuleDto.className
     }
+  },
+  mounted() {
+    console.log(this.capsuleDto)
   }
 }
 </script>
