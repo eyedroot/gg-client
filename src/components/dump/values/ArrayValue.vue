@@ -1,5 +1,5 @@
 <template>
-  <span class="--header array">Array ({{ getArrayCount }}) [</span>
+  <span class="--header array">Array ({{ getKeysCount }}) [</span>
 
   <div class="relative flex flex-col">
     <div class="pl-[1.5rem]"
@@ -7,7 +7,7 @@
          :key="key">
 
       <span class="h-fit">
-        <ScalarValue :capsule-dto="convertArrayKeyToCapsuleDto(key)"></ScalarValue>
+        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
       </span>
 
       <span class="h-fit mx-1.5">=></span>
@@ -27,7 +27,7 @@ export default {
   name: 'ArrayValue',
   components: {
     ScalarValue,
-    StdClassValue
+    StdClassValue,
   },
   props: {
     capsuleDto: {
@@ -35,21 +35,10 @@ export default {
       required: true
     }
   },
-  methods: {
-    convertArrayKeyToCapsuleDto(arrayKey) {
-      return {
-        "type": typeof arrayKey,
-        "isScalarType": true,
-        "namespace": null,
-        "className": null,
-        "value": arrayKey
-      }
-    },
-  },
   computed: {
-    getArrayCount() {
+    getKeysCount() {
       return Object.keys(this.capsuleDto.value).length;
     }
-  }
+  },
 }
 </script>
