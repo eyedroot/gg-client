@@ -10,17 +10,18 @@ export default {
   data() {
     return {
       timerId: null,
-      time: new Date(),
+      createdDateTime: new Date(),
+      now: new Date(),
     }
   },
   mounted() {
     this.timerId = setInterval(() => {
-      this.time = new Date()
+      this.now = new Date()
     }, 1000)
   },
   computed: {
     timeAgo() {
-      const diff = Math.floor((new Date() - this.time) / 1000)
+      const diff = Math.floor((this.now.getTime() - this.createdDateTime) / 1000)
 
       if (diff < 60) {
         return `${diff} seconds ago`
