@@ -20,14 +20,13 @@
 </template>
 
 <script>
-import ScalarValue from "@/components/dump/values/ScalarValue.vue";
-import ArrayValue from "@/components/dump/values/ArrayValue.vue";
+import { defineAsyncComponent } from 'vue';
 
 export default {
   name: 'StdClassValue',
   components: {
-    ScalarValue,
-    ArrayValue,
+    ScalarValue: defineAsyncComponent(() => import('@/components/dump/values/ScalarValue.vue')),
+    ArrayValue: defineAsyncComponent(() => import('@/components/dump/values/ArrayValue.vue')),
   },
   props: {
     capsuleDto: {
