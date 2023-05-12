@@ -1,5 +1,5 @@
 <template>
-  <span class="badge" :class="getLanguageColor">{{ language }}/{{ version }}</span>
+  <span class="badge !mr-0" :class="getLanguageColor">{{ language }}/{{ version }}</span>
 </template>
 
 <script>

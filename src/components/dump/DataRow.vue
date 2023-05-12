@@ -9,14 +9,14 @@
     </div>
 
     <div class="flex-1 items-center">
-      <div class="p-3 rounded bg-gray-100 border-[1px] border-gray-200 box-border w-fit text-[105%] leading-5">
+      <div class="p-3 rounded bg-gray-100 border-[1px] border-gray-200 box-border text-[105%] leading-5">
         <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
       </div>
     </div>
 
-    <div class="flex space-x-1.5 items-center ml-auto pr-5">
-      <TimeAgo></TimeAgo>
+    <div class="flex flex-col justify-center items-center space-y-1.5 ml-auto pr-5 min-w-[100px] max-w-[100px]">
       <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
+      <TimeAgo></TimeAgo>
     </div>
   </div>
 </template>

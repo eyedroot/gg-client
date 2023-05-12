@@ -7,10 +7,11 @@
          :key="key">
 
       <span class="h-fit">
-        + <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
+        <span class="text-blue-500">+</span>
+        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
       </span>
 
-      <span class="h-fit mx-1.5">: </span>
+      <span class="h-fit mr-1.5">:</span>
 
       <component :is="this.$getValueComponent(value)" :capsule-dto="value"></component>
     </div>
