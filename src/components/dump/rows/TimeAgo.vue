@@ -1,5 +1,5 @@
 <template>
-  <span class="text-[11px] tracking-tight text-gray-700">
+  <span class="text-[11px] tracking-tight text-gray-700 whitespace-nowrap">
     {{ timeAgo }}
   </span>
 </template>

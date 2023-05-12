@@ -3,7 +3,8 @@ import App from './App.vue'
 
 import FontAwesomeIcon from '@/fontawsome-icon'
 
-import './assets/style/tailwind.css'
+import '@/assets/style/tailwind.css'
+import '@/assets/style/fira_code.css'
 
 const app = createApp(App);
 
