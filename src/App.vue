@@ -1,7 +1,7 @@
 <template>
   <div class="h-full flex flex-row">
-    <SideNavigation></SideNavigation>
-    <ScrollableView :data="mediator"></ScrollableView>
+    <SideNavigation @clear-log="handleClearLog"></SideNavigation>
+    <ScrollableView ref="scrollable-view" :data="mediator"></ScrollableView>
   </div>
 </template>
 
@@ -19,6 +19,11 @@ export default {
   data() {
     return {
       mediator: {}
+    }
+  },
+  methods: {
+    handleClearLog() {
+      this.$refs["scrollable-view"].logs = []
     }
   },
   mounted() {

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import '@/assets/style/badge.scss'
 import DataRow from "@/components/dump/DataRow.vue";
 
 export default {
