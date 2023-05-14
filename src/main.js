@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import FontAwesomeIcon from '@/fontawsome-icon'
+import FontAwesomeIcon from '@/fontawsome_icon'
 
 import '@/assets/style/tailwind.css'
 import '@/assets/style/fira_code.css'

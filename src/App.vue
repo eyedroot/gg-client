@@ -1,15 +1,20 @@
 <template>
-  <ScrollableView :data="mediator"></ScrollableView>
+  <div class="h-full flex flex-row">
+    <SideNavigation></SideNavigation>
+    <ScrollableView :data="mediator"></ScrollableView>
+  </div>
 </template>
 
 <script>
+import SideNavigation from "@/components/SideNavigation.vue";
 import ScrollableView from "@/components/ScrollableView.vue";
 import { ipcRenderer } from "electron";
 
 export default {
   name: "App",
   components: {
-    ScrollableView
+    SideNavigation,
+    ScrollableView,
   },
   data() {
     return {

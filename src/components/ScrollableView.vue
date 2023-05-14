@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col h-full overflow-y-scroll" ref="scrollable">
+  <section class="flex-1 flex-col h-full overflow-y-scroll" ref="scrollable">
     <DataRow v-for="(messageDto, key) in logs"
                :key="key"
                :id="key"
