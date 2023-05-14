@@ -9,8 +9,8 @@
          :key="key">
 
       <span class="h-fit">
-        <span class="text-blue-500">+</span>
-        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
+        <span class="text-blue-500 mr-0.5">{{ getModifierToCharacter(getModifier(key)) }}</span>
+        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))"></ScalarValue>
       </span>
 
       <span class="h-fit mr-1.5">:</span>
@@ -46,6 +46,26 @@ export default {
     capsuleDto: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    getModifier(rawKey) {
+      return rawKey.split('@')[0];
+    },
+    getModifierToCharacter(modifier) {
+      switch (modifier) {
+        case 'public':
+          return '+';
+        case 'protected':
+          return '#';
+        case 'private':
+          return '-';
+        default:
+          return '';
+      }
+    },
+    getPropertyName(rawKey) {
+      return rawKey.split('@')[1];
     }
   },
   computed: {
