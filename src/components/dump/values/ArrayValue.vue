@@ -1,5 +1,7 @@
 <template>
-  <span class="--header array">Array ({{ getKeysCount }}) [</span>
+  <span class="--header array">
+    Array ({{ getKeysCount }}) <span :class="getBracketsIndex">[</span>
+  </span>
 
   <div class="relative flex flex-col">
     <div class="pl-[1.5rem]"
@@ -12,10 +14,16 @@
 
       <span class="h-fit mx-1.5">=></span>
 
-      <component :is="this.$getValueComponent(value)" :capsule-dto="value"></component>
+      <component
+        :is="this.$getValueComponent(value)"
+        :capsule-dto="value"
+        :depth="depth + 1">
+      </component>
     </div>
 
-    <div class="--tail array">]</div>
+    <div class="--tail array">
+      <span :class="getBracketsIndex">]</span>
+    </div>
   </div>
 </template>
 
@@ -29,6 +37,11 @@ export default {
     StdClassValue: defineAsyncComponent(() => import('@/components/dump/values/StdClassValue.vue')),
   },
   props: {
+    depth: {
+      type: Number,
+      default: 0,
+      required: false,
+    },
     capsuleDto: {
       type: Object,
       required: true
@@ -37,7 +50,10 @@ export default {
   computed: {
     getKeysCount() {
       return Object.keys(this.capsuleDto.value).length;
-    }
+    },
+    getBracketsIndex() {
+      return `brackets-${this.depth % 4}`;
+    },
   },
 }
 </script>

@@ -5,6 +5,7 @@ import FontAwesomeIcon from '@/fontawsome-icon'
 
 import '@/assets/style/tailwind.css'
 import '@/assets/style/fira_code.css'
+import '@/assets/style/global.scss'
 
 const app = createApp(App);
 

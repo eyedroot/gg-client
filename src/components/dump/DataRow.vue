@@ -9,7 +9,7 @@
     </div>
 
     <div class="flex-1 items-center">
-      <div class="p-3 rounded bg-gray-100 border-[1px] border-gray-200 box-border text-[105%] leading-5">
+      <div class="--code p-3 rounded bg-gray-100 border-[1px] border-gray-200 box-border text-[100%] leading-5 tracking-tighter">
         <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
       </div>
     </div>
@@ -60,3 +60,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.--code {
+  font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+</style>
