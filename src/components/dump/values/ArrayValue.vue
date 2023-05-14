@@ -1,6 +1,6 @@
 <template>
   <span class="--header array">
-    Array ({{ getKeysCount }}) <span :class="getBracketsIndex">[</span>
+    Array ({{ getKeysCount }}) <span class="brackets" :class="getBracketsIndex">[</span>
   </span>
 
   <div class="relative flex flex-col">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="--tail array">
-      <span :class="getBracketsIndex">]</span>
+      <span class="brackets" :class="getBracketsIndex">]</span>
     </div>
   </div>
 </template>

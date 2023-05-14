@@ -1,6 +1,6 @@
 <template>
   <div class="--header stdclass">
-    {{ getStdClassName }} <span :class="getBracketsIndex">{</span>
+    {{ getStdClassName }} <span class="brackets" :class="getBracketsIndex">{</span>
   </div>
 
   <div class="relative flex flex-col">
@@ -23,7 +23,7 @@
     </div>
 
     <div class="--tail array">
-      <span :class="getBracketsIndex">}</span>
+      <span class="brackets" :class="getBracketsIndex">}</span>
     </div>
   </div>
 </template>

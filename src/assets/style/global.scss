@@ -1,4 +1,7 @@
 .--code {
+  .brackets {
+    @apply font-semibold;
+  }
   .brackets-0 { @apply text-red-700 }
   .brackets-1 { @apply text-green-700 }
   .brackets-2 { @apply text-violet-700 }
