@@ -36,7 +36,7 @@ async function createWindow() {
     res.status(200).send('gg')
   })
 
-  server.listen(21868, () => {
+  server.listen(21868, 'localhost', () => {
     console.log('server started at http://localhost:21868')
   })
 
@@ -80,6 +80,9 @@ app.on('ready', async () => {
   }
   createWindow()
 })
+
+// Electron 애플리케이션의 메인 프로세서에서 로컬호스트만 접근 가능하도록 설정
+// app.commandLine.appendSwitch('host-rules', 'MAP * 127.0.0.1')
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
