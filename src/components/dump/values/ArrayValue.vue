@@ -2,13 +2,13 @@
   <span class="--header array">
     Array ({{ getKeysCount }}) <span class="brackets" :class="getBracketsIndex">[</span>
 
-    <CollapsedTail v-if="this.$collapsed(depth)"
+    <CollapsedTail v-if="isCollapsed"
                    type="array"
                    :bracket-index="getBracketsIndex">
     </CollapsedTail>
   </span>
 
-  <div class="relative flex flex-col" :class="this.$collapsed(depth)">
+  <div class="relative flex flex-col" :class="{ 'collapsed': isCollapsed }">
     <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
@@ -54,12 +54,20 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      collapsed: false,
+    }
+  },
   computed: {
     getKeysCount() {
       return Object.keys(this.capsuleDto.value).length;
     },
     getBracketsIndex() {
       return `brackets-${this.depth % 4}`;
+    },
+    isCollapsed() {
+      return this.depth >= 2 && this.getKeysCount > 3;
     },
   },
 }

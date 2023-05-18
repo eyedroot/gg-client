@@ -18,10 +18,6 @@ app.config.globalProperties.$getValueComponent = (capsuleDto) => {
   return capsuleDto.type === 'array' ? 'ArrayValue' : 'StdClassValue'
 }
 
-app.config.globalProperties.$collapsed = (depth) => {
-  return depth >= 2 ? 'collapsed' : false
-}
-
 app.config.globalProperties.$convertKeyToCapsuleDto = (key) => {
   return {
     "type": typeof key,

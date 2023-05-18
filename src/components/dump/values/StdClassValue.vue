@@ -2,13 +2,13 @@
   <div class="--header stdclass">
     {{ getStdClassName }} <span class="brackets" :class="getBracketsIndex">{</span>
 
-    <CollapsedTail v-if="this.$collapsed(depth)"
+    <CollapsedTail v-if="isCollapsed"
                    type="stdClass"
                    :bracket-index="getBracketsIndex">
     </CollapsedTail>
   </div>
 
-  <div class="relative flex flex-col" :class="this.$collapsed(depth)">
+  <div class="relative flex flex-col" :class="{ 'collapsed': isCollapsed }">
     <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
@@ -55,6 +55,11 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      collapsed: false,
+    }
+  },
   methods: {
     getModifier(rawKey) {
       return rawKey.split('@')[0];
@@ -84,6 +89,9 @@ export default {
     },
     getBracketsIndex() {
       return `brackets-${this.depth % 4}`;
+    },
+    isCollapsed() {
+      return this.depth >= 2 && this.getKeysCount > 3;
     },
   },
 }
