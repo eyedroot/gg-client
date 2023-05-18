@@ -78,7 +78,8 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
-  createWindow()
+
+  await createWindow()
 })
 
 // Electron 애플리케이션의 메인 프로세서에서 로컬호스트만 접근 가능하도록 설정

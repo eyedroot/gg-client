@@ -6,4 +6,8 @@
   .brackets-1 { @apply text-green-700 }
   .brackets-2 { @apply text-violet-700 }
   .brackets-3 { @apply text-pink-700 }
+
+  .collapsed {
+    @apply hidden;
+  }
 }

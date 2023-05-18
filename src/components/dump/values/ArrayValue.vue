@@ -1,9 +1,14 @@
 <template>
   <span class="--header array">
     Array ({{ getKeysCount }}) <span class="brackets" :class="getBracketsIndex">[</span>
+
+    <CollapsedTail v-if="this.$collapsed(depth)"
+                   type="array"
+                   :bracket-index="getBracketsIndex">
+    </CollapsedTail>
   </span>
 
-  <div class="relative flex flex-col">
+  <div class="relative flex flex-col" :class="this.$collapsed(depth)">
     <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
@@ -29,10 +34,12 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
+import CollapsedTail from "@/components/dump/values/CollapsedTail.vue";
 
 export default {
   name: 'ArrayValue',
   components: {
+    CollapsedTail,
     ScalarValue: defineAsyncComponent(() => import('@/components/dump/values/ScalarValue.vue')),
     StdClassValue: defineAsyncComponent(() => import('@/components/dump/values/StdClassValue.vue')),
   },
