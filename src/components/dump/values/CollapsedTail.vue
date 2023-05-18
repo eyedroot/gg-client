@@ -1,5 +1,5 @@
 <template>
-  <span class="inline-flex p-1 bg-gray-300 rounded mx-0.5 cursor-pointer">...</span>
+  <span class="inline-flex p-1 bg-gray-300 rounded mx-0.5 cursor-pointer" @click="$emit('handleCollapsed')">...</span>
   <span class="brackets" :class="bracketIndex">{{ getCollapsedTail }}</span>
 </template>
 

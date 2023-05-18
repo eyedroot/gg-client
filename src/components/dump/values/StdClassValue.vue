@@ -1,12 +1,14 @@
 <template>
-  <div class="--header stdclass">
+  <span class="--header stdclass">
     {{ getStdClassName }} <span class="brackets" :class="getBracketsIndex">{</span>
 
-    <CollapsedTail v-if="isCollapsed"
-                   type="stdClass"
-                   :bracket-index="getBracketsIndex">
+    <CollapsedTail
+      v-if="isCollapsed"
+      type="stdClass"
+      :bracket-index="getBracketsIndex"
+      @handleCollapsed="toggleCollapsed">
     </CollapsedTail>
-  </div>
+  </span>
 
   <div class="relative flex flex-col" :class="{ 'collapsed': isCollapsed }">
     <div class="pl-[1.5rem]"
@@ -57,10 +59,13 @@ export default {
   },
   data() {
     return {
-      collapsed: false,
+      shouldBeCollapsed: false,
     }
   },
   methods: {
+    toggleCollapsed() {
+      this.shouldBeCollapsed = !this.shouldBeCollapsed;
+    },
     getModifier(rawKey) {
       return rawKey.split('@')[0];
     },
@@ -78,7 +83,7 @@ export default {
     },
     getPropertyName(rawKey) {
       return rawKey.split('@')[1];
-    }
+    },
   },
   computed: {
     getStdClassName() {
@@ -91,6 +96,10 @@ export default {
       return `brackets-${this.depth % 4}`;
     },
     isCollapsed() {
+      if (this.shouldBeCollapsed) {
+        return false;
+      }
+
       return this.depth >= 2 && this.getKeysCount > 3;
     },
   },

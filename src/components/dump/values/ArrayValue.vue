@@ -2,9 +2,11 @@
   <span class="--header array">
     Array ({{ getKeysCount }}) <span class="brackets" :class="getBracketsIndex">[</span>
 
-    <CollapsedTail v-if="isCollapsed"
-                   type="array"
-                   :bracket-index="getBracketsIndex">
+    <CollapsedTail
+      v-if="isCollapsed"
+      type="array"
+      :bracket-index="getBracketsIndex"
+      @handleCollapsed="toggleCollapsed">
     </CollapsedTail>
   </span>
 
@@ -56,8 +58,13 @@ export default {
   },
   data() {
     return {
-      collapsed: false,
+      shouldBeCollapsed: false,
     }
+  },
+  methods: {
+    toggleCollapsed() {
+      this.shouldBeCollapsed = !this.shouldBeCollapsed;
+    },
   },
   computed: {
     getKeysCount() {
@@ -67,6 +74,10 @@ export default {
       return `brackets-${this.depth % 4}`;
     },
     isCollapsed() {
+      if (this.shouldBeCollapsed) {
+        return false;
+      }
+
       return this.depth >= 2 && this.getKeysCount > 3;
     },
   },
