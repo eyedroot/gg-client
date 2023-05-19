@@ -2,15 +2,15 @@
   <span class="--header stdclass">
     {{ getStdClassName }} <span class="brackets" :class="getBracketsIndex">{</span>
 
-    <CollapsedTail
-      v-if="isCollapsed"
+    <CodeFolding
+      v-if="isCodeFolded"
       type="stdClass"
       :bracket-index="getBracketsIndex"
       @handleCollapsed="toggleCollapsed">
-    </CollapsedTail>
+    </CodeFolding>
   </span>
 
-  <div class="relative flex flex-col" :class="{ 'collapsed': isCollapsed }">
+  <div class="relative flex flex-col" :class="{ 'collapsed': isCodeFolded }">
     <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
@@ -37,12 +37,12 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
-import CollapsedTail from "@/components/dump/values/CollapsedTail.vue";
+import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
 
 export default {
   name: 'StdClassValue',
   components: {
-    CollapsedTail,
+    CodeFolding,
     ScalarValue: defineAsyncComponent(() => import('@/components/dump/values/ScalarValue.vue')),
     ArrayValue: defineAsyncComponent(() => import('@/components/dump/values/ArrayValue.vue')),
   },
@@ -59,12 +59,12 @@ export default {
   },
   data() {
     return {
-      shouldBeCollapsed: false,
+      shouldBeCodeFolding: false,
     }
   },
   methods: {
     toggleCollapsed() {
-      this.shouldBeCollapsed = !this.shouldBeCollapsed;
+      this.shouldBeCodeFolding = !this.shouldBeCodeFolding;
     },
     getModifier(rawKey) {
       return rawKey.split('@')[0];
@@ -95,8 +95,8 @@ export default {
     getBracketsIndex() {
       return `brackets-${this.depth % 4}`;
     },
-    isCollapsed() {
-      if (this.shouldBeCollapsed) {
+    isCodeFolded() {
+      if (this.shouldBeCodeFolding) {
         return false;
       }
 

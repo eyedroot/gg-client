@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'CollapsedTail',
+  name: 'CodeFolding',
   props: {
     type: {
       type: String,
