@@ -5,7 +5,7 @@
     </div>
 
     <div class="flex items-center justify-end border-r-[1px] border-gray-100 pr-3">
-      <BackTrace :backtrace="messageDto.backtrace"></BackTrace>
+      <CallFile :backtrace="messageDto.backtrace"></CallFile>
     </div>
 
     <div class="flex-1 items-center">
@@ -25,7 +25,7 @@
 import TimeAgo from "@/components/dump/rows/TimeAgo.vue";
 import LineNumber from "@/components/dump/rows/LineNumber.vue";
 import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
-import BackTrace from "@/components/dump/rows/BackTrace.vue";
+import CallFile from "@/components/dump/rows/CallFile.vue";
 
 import ArrayValue from "@/components/dump/values/ArrayValue.vue";
 import ScalarValue from "@/components/dump/values/ScalarValue.vue";
@@ -34,7 +34,7 @@ import StdClassValue from "@/components/dump/values/StdClassValue.vue";
 export default {
   name: "DataRow",
   components: {
-    BackTrace,
+    CallFile,
     LanguageVersion,
     LineNumber,
     TimeAgo,

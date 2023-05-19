@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row space-x-1.5 items-center">
-    <fa-icon icon="code" class="text-gray-300 hover:text-gray-600 cursor-pointer" title="backtrace"></fa-icon>
+    <fa-icon icon="code" class="text-gray-600" title="backtrace"></fa-icon>
     <span class="tracking-tight text-gray-600 underline">{{ getCalledFile }}</span>
   </div>
 </template>
