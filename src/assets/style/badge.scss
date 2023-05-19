@@ -1,5 +1,5 @@
 .badge {
-  @apply flex items-center justify-center  px-2.5 py-0.5 mr-2 font-bold capitalize rounded-full text-[10px];
+  @apply flex items-center justify-center px-2.5 py-0.5 mr-2 font-bold capitalize rounded text-[10px];
 
   &.red {
     @apply bg-red-600 text-white;
