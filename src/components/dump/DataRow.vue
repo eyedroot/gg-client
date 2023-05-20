@@ -26,7 +26,7 @@
         </button>
       </div>
 
-      <div :class="getBacktraceToggleClass()">
+      <div v-if="showBacktrace">
         <BackTrace :backtrace="messageDto.backtrace"></BackTrace>
       </div>
     </div>
@@ -73,11 +73,6 @@ export default {
     };
   },
   methods: {
-    getBacktraceToggleClass() {
-      return {
-        'hidden': ! this.showBacktrace,
-      };
-    },
     toggleBacktrace() {
       this.showBacktrace = ! this.showBacktrace;
     },
