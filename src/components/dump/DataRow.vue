@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     getRowBackgroundColor() {
-      return this.id % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+      return this.id % 2 === 0 ? 'bg-white' : 'bg-white'
     },
   }
 }

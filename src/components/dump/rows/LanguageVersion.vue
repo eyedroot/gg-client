@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     getLanguageColor() {
-      return 'bg-violet-500 text-white'
+      return 'bg-violet-500 text-white border-[1px] border-violet-600'
     }
   }
 }
