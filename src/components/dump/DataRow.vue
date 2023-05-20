@@ -1,22 +1,33 @@
 <template>
-  <div class="flex flex-row space-x-3 border-b-[1px] border-gray-100 py-3" :class="getRowBackgroundColor">
-    <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-100">
+  <div class="flex flex-row space-x-3 border-b-[1px] border-gray-200 py-5" :class="getRowBackgroundColor">
+    <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-200">
       <LineNumber :line="id"></LineNumber>
     </div>
 
-    <div class="flex items-center justify-end border-r-[1px] border-gray-100 pr-3">
-      <CallFile :backtrace="messageDto.backtrace"></CallFile>
-    </div>
+    <div class="flex-1 items-center pr-3">
+      <div class="flex flex-row items-center space-x-1.5 mb-2.5">
+        <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
+        <CallFile :backtrace="messageDto.backtrace[0]"></CallFile>
 
-    <div class="flex-1 items-center">
-      <div class="--code p-3 rounded bg-gray-100 border-[1px] border-gray-200 box-border text-[100%] leading-5 tracking-tighter">
-        <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
+        <div class="flex-grow"></div>
+
+        <div class="ml-auto">
+          <TimeAgo></TimeAgo>
+        </div>
       </div>
-    </div>
 
-    <div class="flex flex-col justify-center items-center space-y-1.5 ml-auto pr-5 min-w-[100px] max-w-[100px]">
-      <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
-      <TimeAgo></TimeAgo>
+      <div class="--code">
+        <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
+
+        <button class="--backtrace-button button transparent absolute right-1 bottom-0 inline-flex items-center justify-center">
+          <fa-icon icon="code" class="mr-1.5"></fa-icon>
+          <span @click="toggleBacktrace">backtrace</span>
+        </button>
+      </div>
+
+      <div :class="getBacktraceToggleClass()">
+        <BackTrace :backtrace="messageDto.backtrace"></BackTrace>
+      </div>
     </div>
   </div>
 </template>
@@ -25,15 +36,17 @@
 import TimeAgo from "@/components/dump/rows/TimeAgo.vue";
 import LineNumber from "@/components/dump/rows/LineNumber.vue";
 import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
-import CallFile from "@/components/dump/rows/CallFile.vue";
 
 import ArrayValue from "@/components/dump/values/ArrayValue.vue";
 import ScalarValue from "@/components/dump/values/ScalarValue.vue";
 import StdClassValue from "@/components/dump/values/StdClassValue.vue";
+import CallFile from "@/components/dump/rows/CallFile.vue";
+import BackTrace from "@/components/dump/rows/BackTrace.vue";
 
 export default {
   name: "DataRow",
   components: {
+    BackTrace,
     CallFile,
     LanguageVersion,
     LineNumber,
@@ -53,16 +66,25 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      showBacktrace: false,
+    };
+  },
+  methods: {
+    getBacktraceToggleClass() {
+      return {
+        'hidden': ! this.showBacktrace,
+      };
+    },
+    toggleBacktrace() {
+      this.showBacktrace = ! this.showBacktrace;
+    },
+  },
   computed: {
     getRowBackgroundColor() {
       return this.id % 2 === 0 ? 'bg-gray-50' : 'bg-white'
-    }
+    },
   }
 }
 </script>
-
-<style lang="scss">
-.--code {
-  font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-}
-</style>

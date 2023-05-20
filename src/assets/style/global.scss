@@ -1,13 +1,30 @@
+html, body {
+  @apply h-full;
+}
+
+#app {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 12px;
+  @apply h-full bg-white;
+}
+
 .--code {
-  .brackets {
-    @apply font-semibold;
-  }
+  font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+  @apply relative p-3 rounded bg-gray-100 border-[1px] border-gray-200 box-border text-[100%] leading-5 tracking-tighter;
+
+  .brackets { @apply font-semibold; }
   .brackets-0 { @apply text-red-700 }
   .brackets-1 { @apply text-green-700 }
   .brackets-2 { @apply text-violet-700 }
   .brackets-3 { @apply text-pink-700 }
 
-  .collapsed {
-    @apply hidden;
-  }
+  .collapsed { @apply hidden; }
+  .--backtrace-button { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
+}
+
+.--backtrace {
+  font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }

@@ -35,15 +35,5 @@ export default {
 </script>
 
 <style lang="scss">
-html, body {
-  @apply h-full;
-}
 
-#app {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 12px;
-  @apply h-full bg-white;
-}
 </style>
