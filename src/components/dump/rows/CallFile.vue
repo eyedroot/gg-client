@@ -20,6 +20,6 @@ export default {
 
       return split[split.length - 1] + ':' + this.backtrace.line
     }
-  }
+  },
 }
 </script>
