@@ -16,10 +16,13 @@ export default {
   },
   computed: {
     getCalledFile() {
-      const split = this.backtrace.file.split('/')
+      const split = String(this.backtrace.file).split('/')
 
       return split[split.length - 1] + ':' + this.backtrace.line
     }
   },
+  mounted() {
+    console.log(this.backtrace)
+  }
 }
 </script>

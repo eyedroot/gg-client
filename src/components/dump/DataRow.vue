@@ -81,6 +81,9 @@ export default {
     getRowBackgroundColor() {
       return this.id % 2 === 0 ? 'bg-white' : 'bg-white'
     },
+  },
+  mounted() {
+    console.log(this.messageDto)
   }
 }
 </script>
