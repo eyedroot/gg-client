@@ -36,8 +36,8 @@ async function createWindow() {
     res.status(200).send('gg')
   })
 
-  server.listen(21868, 'localhost', () => {
-    console.log('server started at http://localhost:21868')
+  server.listen(21868, '0.0.0.0', () => {
+    console.log('server started at http://0.0.0.0:21868')
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
