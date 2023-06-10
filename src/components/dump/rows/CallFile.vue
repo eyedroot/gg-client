@@ -16,9 +16,7 @@ export default {
   },
   computed: {
     getCalledFile() {
-      const split = String(this.backtrace.file).split('/')
-
-      return split[split.length - 1] + ':' + this.backtrace.line
+      return `${this.backtrace.file}:${this.backtrace.line}`
     }
   },
   mounted() {

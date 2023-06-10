@@ -11,8 +11,12 @@
 
         <div class="flex-grow"></div>
 
-        <div class="ml-auto">
+        <div class="flex flex-row ml-auto space-x-1.5">
           <TimeAgo></TimeAgo>
+
+          <button class="pr-0.5" @click="removeItem(id)">
+            <fa-icon icon="trash-can" class="text-gray-300 hover:text-blue-600"></fa-icon>
+          </button>
         </div>
       </div>
 
@@ -65,7 +69,11 @@ export default {
     messageDto: {
       type: Object,
       required: true
-    }
+    },
+    removeItem: {
+      type: Function,
+      required: true
+    },
   },
   data() {
     return {

@@ -1,9 +1,10 @@
 <template>
   <section class="flex-1 flex-col h-full overflow-y-scroll" ref="scrollable">
     <DataRow v-for="(messageDto, key) in logs"
-               :key="key"
-               :id="key"
-               :messageDto="messageDto">
+             :key="key"
+             :id="key"
+             :messageDto="messageDto"
+             :removeItem="removeItem">
     </DataRow>
   </section>
 </template>
@@ -44,6 +45,9 @@ export default {
       if (scrollable) {
         scrollable.scrollTop = scrollable.scrollHeight - scrollable.clientHeight;
       }
+    },
+    removeItem(id) {
+      this.logs.splice(id, 1)
     },
   },
   mounted() {
