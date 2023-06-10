@@ -7,7 +7,7 @@
     <div class="flex-1 items-center pr-3">
       <div class="flex flex-row items-center space-x-1.5 mb-2.5">
         <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
-        <CallFile :backtrace="messageDto.backtrace[0]"></CallFile>
+        <CallFile :backtrace="getNotVendorTrace()"></CallFile>
 
         <div class="flex-grow"></div>
 
@@ -75,6 +75,15 @@ export default {
   methods: {
     toggleBacktrace() {
       this.showBacktrace = ! this.showBacktrace;
+    },
+    getNotVendorTrace() {
+      for (let i = 0; i < this.messageDto.backtrace.length; i++) {
+        const row = this.messageDto.backtrace[i];
+
+        if (row.file && ! row.file.includes('/vendor/')) {
+          return row;
+        }
+      }
     },
   },
   computed: {
