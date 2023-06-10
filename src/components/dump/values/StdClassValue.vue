@@ -10,9 +10,12 @@
     </CodeFolding>
   </span>
 
+  <div class="--line pl-[1.5rem]" v-if="capsuleDto.pruned">
+    <span class="italic text-gray-500">...pruned properties</span>
+  </div>
+
   <div class="relative flex flex-col" :class="{ 'collapsed': isCodeFolded }">
     <div class="--line pl-[1.5rem]"
-         @mouseover.stop
          v-for="(value, key) in capsuleDto.value"
          :key="key">
 
