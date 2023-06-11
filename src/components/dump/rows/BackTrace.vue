@@ -1,27 +1,31 @@
 <template>
   <div class="--backtrace flex flex-col p-1.5 leading-7 tracking-tighter overflow-x-auto">
 
-    <label class="flex items-center space-x-1.5 my-1.5">
-      <input type="checkbox" v-model="hideVendorDirectories">
+    <label class="flex items-center space-x-1.5 my-1.5 select-none">
+      <input type="checkbox" v-model="hideVendorDirectories" @click="toggleVendorDirectories">
       <span class="text-gray-600">hide **/vendor/** directories</span>
     </label>
 
-    <div v-for="(row, index) in backtrace" :key="index"
+    <div
+      :key="index"
+      v-for="(row, index) in prunedBacktrace"
       class="flex flex-col">
-      <div class="flex flex-row items-center">
-        <fa-icon icon="file-lines" class="mr-1.5 text-gray-300"></fa-icon>
-        <span :class="{ 'font-bold underline': isNotVendorTrace(row.file) }">{{ getFileOrClass(row) }}:<strong>{{ row?.line }}</strong></span>
+        <div class="flex flex-row items-center">
+          <fa-icon icon="file-lines" class="mr-1.5 text-gray-300"></fa-icon>
+          <span :class="{ 'font-bold underline': isNotVendorTrace(row.file) }">{{
+              getFileOrClass(row)
+            }}:<strong>{{ row?.line }}</strong></span>
 
-        <code class="ml-1.5 text-blue-600 font-bold">
-          {{ row?.function }}(<span
-              class="inline-flex bg-gray-300 rounded px-0.5 cursor-pointer text-black"
-              @click="toggleParameters(index)">...</span>)
-        </code>
-      </div>
+          <code class="ml-1.5 text-blue-600 font-bold">
+            {{ row?.function }}(<span
+            class="inline-flex bg-gray-300 rounded px-0.5 cursor-pointer text-black"
+            @click="toggleParameters(index)">...</span>)
+          </code>
+        </div>
 
-      <div class="--code ml-5 my-2" :class="getParametersToggleClass(index)">
-        <component :is="this.$getValueComponent(row?.args)" :capsule-dto="row?.args"></component>
-      </div>
+        <div class="--code ml-5 my-2" :class="getParametersToggleClass(index)">
+          <component :is="this.$getValueComponent(row?.args)" :capsule-dto="row?.args"></component>
+        </div>
     </div>
   </div>
 </template>
@@ -52,6 +56,7 @@ export default {
     return {
       showParametersIndexes: [],
       hideVendorDirectories: false,
+      prunedBacktrace: [],
     }
   },
   methods: {
@@ -66,13 +71,27 @@ export default {
     isNotVendorTrace(file) {
       return file === this.notVendorTrace?.file;
     },
+    toggleVendorDirectories() {
+      this.hideVendorDirectories = ! this.hideVendorDirectories;
+
+      this.prunedBacktrace = this.backtrace.filter(row => {
+        if (this.hideVendorDirectories) {
+          return ! row.file.includes('/vendor/');
+        }
+
+        return true;
+      });
+    },
     toggleParameters(index) {
       if (this.showParametersIndexes.includes(index)) {
         this.showParametersIndexes = this.showParametersIndexes.filter(item => item !== index);
       } else {
         this.showParametersIndexes.push(index);
       }
-    }
+    },
   },
+  created() {
+    this.prunedBacktrace = [...this.backtrace]
+  }
 }
 </script>
