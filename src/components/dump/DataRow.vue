@@ -1,5 +1,6 @@
 <template>
-  <div class="flex flex-row space-x-3 border-b-[1px] border-gray-200 py-5" :class="getRowBackgroundColor">
+  <div v-if="isLogType()"
+    class="flex flex-row space-x-3 border-b-[1px] border-gray-200 py-5" :class="getRowBackgroundColor">
     <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-200">
       <LineNumber :line="id"></LineNumber>
     </div>
@@ -35,6 +36,10 @@
       </div>
     </div>
   </div>
+
+  <div v-if="isDividerType()">
+    <DividerValue></DividerValue>
+  </div>
 </template>
 
 <script>
@@ -47,10 +52,12 @@ import ScalarValue from "@/components/dump/values/ScalarValue.vue";
 import StdClassValue from "@/components/dump/values/StdClassValue.vue";
 import CallFile from "@/components/dump/rows/CallFile.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
+import DividerValue from "@/components/dump/values/DividerValue.vue";
 
 export default {
   name: "DataRow",
   components: {
+    DividerValue,
     BackTrace,
     CallFile,
     LanguageVersion,
@@ -92,6 +99,12 @@ export default {
           return row;
         }
       }
+    },
+    isLogType() {
+      return this.messageDto.type === 'log';
+    },
+    isDividerType() {
+      return this.messageDto.type === 'divider';
     },
   },
   computed: {
