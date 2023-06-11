@@ -37,9 +37,7 @@
     </div>
   </div>
 
-  <div v-if="isDividerType()">
-    <DividerValue></DividerValue>
-  </div>
+  <DividerValue v-else-if="isDividerType()"></DividerValue>
 </template>
 
 <script>
