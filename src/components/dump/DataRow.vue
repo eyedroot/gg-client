@@ -101,10 +101,10 @@ export default {
       }
     },
     isLogType() {
-      return this.messageDto.type === 'log';
+      return this.messageDto.messageType === 'log';
     },
     isDividerType() {
-      return this.messageDto.type === 'divider';
+      return this.messageDto.messageType === 'divider';
     },
   },
   computed: {
