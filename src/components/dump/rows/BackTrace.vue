@@ -11,7 +11,7 @@
       v-for="(row, index) in prunedBacktrace"
       class="flex flex-col">
         <div class="flex flex-row items-center">
-          <fa-icon icon="file-lines" class="mr-1.5 text-gray-300"></fa-icon>
+          <fa-icon icon="file-lines" class="mr-1.5 text-gray-300" :class="{ '!text-blue-500': isNotVendorTrace(row.file) }"></fa-icon>
           <span :class="{ 'font-bold underline': isNotVendorTrace(row.file) }">{{
               getFileOrClass(row)
             }}:<strong>{{ row?.line }}</strong></span>

@@ -1,7 +1,19 @@
 <template>
   <div class="h-full flex flex-row">
-    <SideNavigation @clear-log="handleClearLog"></SideNavigation>
-    <ScrollableView ref="scrollable-view" :data="mediator"></ScrollableView>
+    <SideNavigation
+      :selectedContainer="currentContainer"
+      @clearLog="handleClearLog"
+      @selectContainer="handleSelectContainer"></SideNavigation>
+
+    <ScrollableView
+      v-show="currentContainer === 'logContainer'"
+      ref="logContainer"
+      :data="mediator"></ScrollableView>
+
+    <ScrollableView
+      v-show="currentContainer === 'throwableContainer'"
+      ref="throwableContainer"
+      :data="mediator"></ScrollableView>
   </div>
 </template>
 
@@ -18,13 +30,17 @@ export default {
   },
   data() {
     return {
-      mediator: {}
+      mediator: {},
+      currentContainer: 'logContainer', // logContainer or throwableContainer
     }
   },
   methods: {
     handleClearLog() {
-      this.$refs["scrollable-view"].logs = []
-    }
+      this.$refs["logContainer"].logs = []
+    },
+    handleSelectContainer(container) {
+      this.currentContainer = container
+    },
   },
   mounted() {
     ipcRenderer.on("gg", (event, message) => {
