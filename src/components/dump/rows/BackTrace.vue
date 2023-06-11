@@ -1,10 +1,16 @@
 <template>
   <div class="--backtrace flex flex-col p-1.5 leading-7 tracking-tighter overflow-x-auto">
+
+    <label class="flex items-center space-x-1.5 my-1.5">
+      <input type="checkbox" v-model="hideVendorDirectories">
+      <span class="text-gray-600">hide **/vendor/** directories</span>
+    </label>
+
     <div v-for="(row, index) in backtrace" :key="index"
       class="flex flex-col">
       <div class="flex flex-row items-center">
         <fa-icon icon="file-lines" class="mr-1.5 text-gray-300"></fa-icon>
-        <span>{{ getFileOrClass(row) }}:<strong>{{ row?.line }}</strong></span>
+        <span :class="{ 'font-bold underline': isNotVendorTrace(row.file) }">{{ getFileOrClass(row) }}:<strong>{{ row?.line }}</strong></span>
 
         <code class="ml-1.5 text-blue-600 font-bold">
           {{ row?.function }}(<span
@@ -36,11 +42,16 @@ export default {
     backtrace: {
       type: Array,
       required: true
+    },
+    notVendorTrace: {
+      type: Object,
+      required: true
     }
   },
   data() {
     return {
       showParametersIndexes: [],
+      hideVendorDirectories: false,
     }
   },
   methods: {
@@ -51,6 +62,9 @@ export default {
       return {
         'hidden': ! this.showParametersIndexes.includes(index)
       };
+    },
+    isNotVendorTrace(file) {
+      return file === this.notVendorTrace?.file;
     },
     toggleParameters(index) {
       if (this.showParametersIndexes.includes(index)) {

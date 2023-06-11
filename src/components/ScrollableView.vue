@@ -1,20 +1,27 @@
 <template>
-  <section class="flex-1 flex-col h-full overflow-y-scroll" ref="scrollable">
-    <DataRow v-for="(messageDto, key) in logs"
-             :key="key"
-             :id="key"
-             :messageDto="messageDto"
-             :removeItem="removeItem">
+  <section
+    v-if="logs.length"
+    class="flex-1 flex-col h-full overflow-y-scroll" ref="scrollable">
+    <DataRow
+      v-for="(messageDto, key) in logs"
+      :key="key"
+      :id="key"
+      :messageDto="messageDto"
+      :removeItem="removeItem">
     </DataRow>
   </section>
+
+  <HelloDocument v-else></HelloDocument>
 </template>
 
 <script>
 import DataRow from "@/components/dump/DataRow.vue";
+import HelloDocument from "@/components/HelloDocument.vue";
 
 export default {
   name: "ScrollableView",
   components: {
+    HelloDocument,
     DataRow
   },
   props: {

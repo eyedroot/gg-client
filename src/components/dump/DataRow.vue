@@ -31,7 +31,7 @@
       </div>
 
       <div v-if="showBacktrace">
-        <BackTrace :backtrace="messageDto.backtrace"></BackTrace>
+        <BackTrace :backtrace="messageDto.backtrace" :not-vendor-trace="getNotVendorTrace()"></BackTrace>
       </div>
     </div>
   </div>

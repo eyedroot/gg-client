@@ -2,12 +2,20 @@ html, body {
   @apply h-full;
 }
 
+label {
+  @apply cursor-pointer;
+}
+
 #app {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 12px;
   @apply h-full bg-white;
+}
+
+.fira-code {
+  font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .--code {
