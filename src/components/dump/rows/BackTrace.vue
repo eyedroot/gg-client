@@ -11,14 +11,14 @@
       v-for="(row, index) in prunedBacktrace"
       class="flex flex-col">
         <div class="flex flex-row items-center">
-          <fa-icon icon="file-lines" class="mr-1.5 text-gray-300" :class="{ '!text-blue-500': isNotVendorTrace(row.file) }"></fa-icon>
-          <span :class="{ 'font-bold underline': isNotVendorTrace(row.file) }">{{
+          <fa-icon icon="file-lines" class="mr-1.5 text-gray-300" :class="{ '!text-blue-500': isHighlightedFile(row.file) }"></fa-icon>
+          <span :class="{ 'font-bold underline': isHighlightedFile(row.file) }">{{
               getFileOrClass(row)
             }}:<strong>{{ row?.line }}</strong></span>
 
           <code class="ml-1.5 text-blue-600 font-bold">
             {{ row?.function }}(<span
-            class="inline-flex bg-gray-300 rounded px-0.5 cursor-pointer text-black"
+            class="inline-flex bg-gray-300 rounded px-0.5 cursor-pointer text-black select-none"
             @click="toggleParameters(index)">...</span>)
           </code>
         </div>
@@ -47,7 +47,7 @@ export default {
       type: Array,
       required: true
     },
-    notVendorTrace: {
+    highlightedFile: {
       type: Object,
       required: true
     }
@@ -68,8 +68,8 @@ export default {
         'hidden': ! this.showParametersIndexes.includes(index)
       };
     },
-    isNotVendorTrace(file) {
-      return file === this.notVendorTrace?.file;
+    isHighlightedFile(file) {
+      return file === this.highlightedFile.file;
     },
     toggleVendorDirectories() {
       this.hideVendorDirectories = ! this.hideVendorDirectories;

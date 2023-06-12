@@ -8,12 +8,12 @@
     <ScrollableView
       v-show="currentContainer === 'logContainer'"
       ref="logContainer"
-      :data="mediator"></ScrollableView>
+      :data="logMediator"></ScrollableView>
 
     <ScrollableView
       v-show="currentContainer === 'throwableContainer'"
       ref="throwableContainer"
-      :data="mediator"></ScrollableView>
+      :data="throwableMediator"></ScrollableView>
   </div>
 </template>
 
@@ -30,13 +30,14 @@ export default {
   },
   data() {
     return {
-      mediator: {},
+      logMediator: {},
+      throwableMediator: {},
       currentContainer: 'logContainer', // logContainer or throwableContainer
     }
   },
   methods: {
     handleClearLog() {
-      this.$refs["logContainer"].logs = []
+      this.$refs[this.currentContainer].logs = []
     },
     handleSelectContainer(container) {
       this.currentContainer = container
@@ -44,9 +45,15 @@ export default {
   },
   mounted() {
     ipcRenderer.on("gg", (event, message) => {
-      this.mediator = message
+      console.log(message)
+
+      if (message.messageType === 'throwable') {
+        this.throwableMediator = message
+      } else {
+        this.logMediator = message
+      }
     })
-  }
+  },
 }
 </script>
 

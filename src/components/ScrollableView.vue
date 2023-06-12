@@ -2,13 +2,23 @@
   <section
     v-if="logs.length"
     class="flex-1 flex-col h-full overflow-y-scroll" ref="scrollable">
-    <DataRow
-      v-for="(messageDto, key) in logs"
-      :key="key"
-      :id="key"
-      :messageDto="messageDto"
-      :removeItem="removeItem">
-    </DataRow>
+    <template v-for="(messageDto, key) in logs">
+      <DataRow
+        v-if="isLogMessage(messageDto)"
+        :key="`log-${key}`"
+        :id="key"
+        :messageDto="messageDto"
+        :removeItem="removeItem">
+      </DataRow>
+
+      <ThrowableRow
+        v-else-if="isThrowableMessage(messageDto)"
+        :key="`throwable-${key}`"
+        :id="key"
+        :messageDto="messageDto"
+        :removeItem="removeItem">
+      </ThrowableRow>
+    </template>
   </section>
 
   <HelloDocument v-else></HelloDocument>
@@ -17,10 +27,12 @@
 <script>
 import DataRow from "@/components/dump/DataRow.vue";
 import HelloDocument from "@/components/HelloDocument.vue";
+import ThrowableRow from "@/components/dump/ThrowableRow.vue";
 
 export default {
   name: "ScrollableView",
   components: {
+    ThrowableRow,
     HelloDocument,
     DataRow
   },
@@ -46,6 +58,12 @@ export default {
     }
   },
   methods: {
+    isLogMessage(messageDto) {
+      return messageDto.messageType === 'log' || messageDto.messageType === 'log.space'
+    },
+    isThrowableMessage(messageDto) {
+      return messageDto.messageType === 'throwable'
+    },
     scrollToBottom() {
       const scrollable = this.$refs.scrollable;
 

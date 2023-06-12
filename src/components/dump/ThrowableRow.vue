@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="isLogType()"
-    class="flex flex-row space-x-3 border-b-[1px] border-gray-200 py-5" :class="getRowBackgroundColor">
+  <div class="flex flex-row space-x-3 border-b-[1px] border-gray-200 py-5" :class="getRowBackgroundColor">
     <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-200">
       <LineNumber :line="id"></LineNumber>
     </div>
@@ -9,7 +7,8 @@
     <div class="flex-1 items-center pr-3">
       <div class="flex flex-row items-center space-x-1.5 mb-2.5">
         <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
-        <CallFile :backtrace="getNotVendorTrace()"></CallFile>
+
+        <CallFile :backtrace="messageDto.data.value"></CallFile>
 
         <div class="flex-grow"></div>
 
@@ -22,8 +21,8 @@
         </div>
       </div>
 
-      <div class="--code">
-        <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
+      <div class="--code throwable">
+        <span>{{ this.messageDto.data.value.message }}</span>
 
         <button class="--backtrace-button button transparent absolute right-1 bottom-0 inline-flex items-center justify-center"
                 @click="toggleBacktrace">
@@ -35,16 +34,11 @@
       <div v-if="showBacktrace">
         <BackTrace
           :backtrace="messageDto.backtrace"
-          :highlighted-file="getNotVendorTrace()">
+          :highlighted-file="{ file: messageDto.data.value.file }">
         </BackTrace>
       </div>
     </div>
   </div>
-
-  <SpaceValue
-    v-else-if="isLogSpaceType()"
-    :messageDto="this.messageDto">
-  </SpaceValue>
 </template>
 
 <script>
@@ -52,25 +46,17 @@ import TimeAgo from "@/components/dump/rows/TimeAgo.vue";
 import LineNumber from "@/components/dump/rows/LineNumber.vue";
 import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
 
-import ArrayValue from "@/components/dump/values/ArrayValue.vue";
-import ScalarValue from "@/components/dump/values/ScalarValue.vue";
-import StdClassValue from "@/components/dump/values/StdClassValue.vue";
-import CallFile from "@/components/dump/rows/CallFile.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
-import SpaceValue from "@/components/dump/values/SpaceValue.vue";
+import CallFile from "@/components/dump/rows/CallFile.vue";
 
 export default {
-  name: "DataRow",
+  name: "ThrowableRow",
   components: {
-    SpaceValue,
-    BackTrace,
     CallFile,
+    BackTrace,
     LanguageVersion,
     LineNumber,
     TimeAgo,
-    ArrayValue,
-    ScalarValue,
-    StdClassValue
   },
   props: {
     id: {
@@ -89,7 +75,7 @@ export default {
   },
   data() {
     return {
-      showBacktrace: false,
+      showBacktrace: true,
     };
   },
   methods: {
@@ -104,12 +90,6 @@ export default {
           return row;
         }
       }
-    },
-    isLogType() {
-      return this.messageDto.messageType === 'log';
-    },
-    isLogSpaceType() {
-      return this.messageDto.messageType === 'log.space';
     },
   },
   computed: {
