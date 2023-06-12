@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <DividerValue v-else-if="isDividerType()"></DividerValue>
+  <SpaceValue :messageDto="this.messageDto" v-else-if="isSpaceType()"></SpaceValue>
 </template>
 
 <script>
@@ -50,12 +50,12 @@ import ScalarValue from "@/components/dump/values/ScalarValue.vue";
 import StdClassValue from "@/components/dump/values/StdClassValue.vue";
 import CallFile from "@/components/dump/rows/CallFile.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
-import DividerValue from "@/components/dump/values/DividerValue.vue";
+import SpaceValue from "@/components/dump/values/SpaceValue.vue";
 
 export default {
   name: "DataRow",
   components: {
-    DividerValue,
+    SpaceValue,
     BackTrace,
     CallFile,
     LanguageVersion,
@@ -101,8 +101,8 @@ export default {
     isLogType() {
       return this.messageDto.messageType === 'log';
     },
-    isDividerType() {
-      return this.messageDto.messageType === 'divider';
+    isSpaceType() {
+      return this.messageDto.messageType === 'space';
     },
   },
   computed: {

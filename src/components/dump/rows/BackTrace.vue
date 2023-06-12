@@ -76,7 +76,8 @@ export default {
 
       this.prunedBacktrace = this.backtrace.filter(row => {
         if (this.hideVendorDirectories) {
-          return ! row.file.includes('/vendor/');
+
+          return row.file !== undefined && ! row.file.includes('/vendor/');
         }
 
         return true;

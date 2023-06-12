@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row space-x-1.5 items-center">
     <fa-icon icon="file-lines" class="text-gray-300" title="backtrace"></fa-icon>
-    <span class="tracking-tight text-gray-700 font-bold text-[110%]">{{ getCalledFile }}</span>
+    <span class="tracking-tight text-black text-[110%]">{{ getCalledFile }}</span>
   </div>
 </template>
 
@@ -20,7 +20,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.backtrace)
-  }
+  },
 }
 </script>
