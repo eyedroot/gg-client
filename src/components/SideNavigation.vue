@@ -1,5 +1,5 @@
 <template>
-  <aside class="flex flex-col w-[50px] bg-blue-500 border-r-[1px] border-blue-600 py-5 px-1.5 items-center justify-center">
+  <aside class="flex flex-col w-[45px] bg-gray-200 border-r-[1px] border-gray-300 py-5 px-1.5 items-center justify-center">
     <div class="flex flex-col w-full space-y-3.5">
       <button
         class="nav-button"
@@ -18,7 +18,7 @@
 
     <div class="mt-auto">
       <button @click="emitClearLog">
-        <fa-icon icon="trash-can" class="text-white"></fa-icon>
+        <fa-icon icon="trash-can" class="text-gray-900"></fa-icon>
       </button>
     </div>
   </aside>

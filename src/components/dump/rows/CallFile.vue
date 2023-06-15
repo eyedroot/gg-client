@@ -1,7 +1,5 @@
 <template>
-  <div class="flex flex-row space-x-1.5 items-center">
-    <span class="text-gray-700 text-[11px]">{{ getCalledFile }}</span>
-  </div>
+  <div class="text-gray-500 tracking-tighter text-[11px] mb-2.5">{{ getCalledFile }}</div>
 </template>
 
 <script>

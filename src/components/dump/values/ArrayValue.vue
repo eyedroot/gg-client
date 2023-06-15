@@ -1,6 +1,6 @@
 <template>
   <span class="--header array">
-    Array ({{ getKeysCount }}) <span class="brackets" :class="getBracketsIndex">[</span>
+    <span class="text-purple-900 font-bold">Array:{{ getKeysCount }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
 
     <CodeFolding
       v-if="isCodeFolded"

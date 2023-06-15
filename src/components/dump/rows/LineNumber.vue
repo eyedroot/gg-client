@@ -1,7 +1,6 @@
 <template>
-  <div class="flex w-full flex-row items-center justify-center">
-    <span class="flex rounded-full w-1.5 h-1.5 mr-1.5" :class="circleColor"></span>
-    <span class="flex text-gray-500">{{ getLineNumber }}</span>
+  <div class="flex flex-row items-center justify-center">
+    <span class="flex rounded-full w-1.5 h-1.5" :class="circleColor"></span>
   </div>
 </template>
 
@@ -27,7 +26,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.circleColor = 'bg-white'
+      this.circleColor = 'bg-gray-200'
     }, 1000 * 60)
   }
 }

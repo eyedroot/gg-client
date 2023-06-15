@@ -1,6 +1,6 @@
 <template>
   <span class="--header stdclass">
-    {{ getStdClassName }} <span class="brackets" :class="getBracketsIndex">{</span>
+    <span class="text-purple-900 font-bold">{{ getStdClassName }}</span> <span class="brackets" :class="getBracketsIndex">{</span>
 
     <CodeFolding
       v-if="isCodeFolded"

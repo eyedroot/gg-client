@@ -1,34 +1,16 @@
 <template>
-  <div
-    v-if="isLogType()"
+  <div v-if="isLogType()"
     class="flex flex-row space-x-3 border-b-[1px] border-gray-200" :class="getRowBackgroundColor">
-    <div class="flex w-[40px] border-r-[1px] border-gray-200">
-      <LineNumber :line="id"></LineNumber>
-    </div>
-
-    <div class="flex-auto items-center pr-3 py-2.5">
-      <div class="flex flex-row items-center space-x-1.5 mb-2.5">
-        <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
+    <div class="flex-auto items-center px-3.5 py-3.5">
+      <div class="--code">
         <CallFile :backtrace="getNotVendorTrace()"></CallFile>
 
-        <div class="flex-grow"></div>
-
-        <div class="flex flex-row ml-auto space-x-1.5">
-          <TimeAgo></TimeAgo>
-
-          <button class="pr-0.5" @click="removeItem(id)">
-            <fa-icon icon="trash-can" class="text-gray-300 hover:text-blue-600"></fa-icon>
-          </button>
-        </div>
-      </div>
-
-      <div class="--code">
         <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
 
         <button class="--backtrace-button button transparent absolute right-1 bottom-0 inline-flex items-center justify-center"
                 @click="toggleBacktrace">
           <fa-icon icon="code" class="mr-1.5"></fa-icon>
-          <span>backtrace</span>
+          <span class="text-gray-800">backtrace_{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>
         </button>
       </div>
 

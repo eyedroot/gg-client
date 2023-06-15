@@ -1,33 +1,16 @@
 <template>
-  <div class="flex flex-row space-x-3 border-b-[1px] border-gray-200 py-5" :class="getRowBackgroundColor">
-    <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-200">
-      <LineNumber :line="id"></LineNumber>
-    </div>
-
-    <div class="flex-1 items-center pr-3">
-      <div class="flex flex-row items-center space-x-1.5 mb-2.5">
-        <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
-
-        <CallFile :backtrace="messageDto.data.value"></CallFile>
-
-        <div class="flex-grow"></div>
-
-        <div class="flex flex-row ml-auto space-x-1.5">
-          <TimeAgo></TimeAgo>
-
-          <button class="pr-0.5" @click="removeItem(id)">
-            <fa-icon icon="trash-can" class="text-gray-300 hover:text-blue-600"></fa-icon>
-          </button>
-        </div>
-      </div>
-
+  <div
+    class="flex flex-row space-x-3 border-b-[1px] border-gray-200" :class="getRowBackgroundColor">
+    <div class="flex-1 items-center px-3.5 py-3.5">
       <div class="--code throwable">
+        <CallFile :backtrace="getNotVendorTrace()"></CallFile>
+
         <span>{{ this.messageDto.data.value.message }}</span>
 
         <button class="--backtrace-button button transparent absolute right-1 bottom-0 inline-flex items-center justify-center"
                 @click="toggleBacktrace">
           <fa-icon icon="code" class="mr-1.5"></fa-icon>
-          <span>backtrace</span>
+          <span class="text-gray-800">backtrace_{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>
         </button>
       </div>
 
@@ -42,10 +25,6 @@
 </template>
 
 <script>
-import TimeAgo from "@/components/dump/rows/TimeAgo.vue";
-import LineNumber from "@/components/dump/rows/LineNumber.vue";
-import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
-
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
 import CallFile from "@/components/dump/rows/CallFile.vue";
 
@@ -54,9 +33,6 @@ export default {
   components: {
     CallFile,
     BackTrace,
-    LanguageVersion,
-    LineNumber,
-    TimeAgo,
   },
   props: {
     id: {
@@ -75,7 +51,7 @@ export default {
   },
   data() {
     return {
-      showBacktrace: true,
+      showBacktrace: false,
     };
   },
   methods: {

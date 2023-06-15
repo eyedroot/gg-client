@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss">
 .--value {
-  @apply font-medium text-[13px];
+  @apply font-medium;
   &.number {
     @apply text-blue-700;
   }
@@ -41,7 +41,7 @@ export default {
       content: '"';
       @apply text-gray-500;
     }
-    @apply text-black;
+    @apply text-gray-900;
   }
   &.boolean {
     @apply text-green-600;

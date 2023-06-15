@@ -1,20 +1,20 @@
 <template>
-  <div class="--backtrace flex flex-col p-1.5 leading-7 tracking-tighter overflow-x-auto">
+  <div class="--backtrace flex flex-col p-1.5 leading-6 tracking-tighter overflow-x-auto">
 
     <label class="flex items-center space-x-1.5 my-1.5 select-none">
       <input type="checkbox" v-model="hideVendorDirectories" @click="toggleVendorDirectories">
       <span class="text-gray-600">hide **/vendor/** directories</span>
     </label>
 
-    <div
-      :key="index"
+    <div :key="index"
       v-for="(row, index) in prunedBacktrace"
       class="flex flex-col">
-        <div class="flex flex-row items-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 pl-2">
+        <div class="flex flex-row items-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 pl-2">
           <span class="square"></span>
-          <span :class="{ 'underline': isHighlightedFile(row.file) }">{{
-              getFileOrClass(row)
-            }}:<strong>{{ row?.line }}</strong></span>
+
+          <span :class="{ 'text-black': isHighlightedFile(row.file) }">
+            {{ getFileOrClass(row) }}:<strong>{{ row?.line }}</strong>
+          </span>
 
           <code class="ml-1.5 text-blue-600 font-bold">
             {{ row?.function }}(<span
