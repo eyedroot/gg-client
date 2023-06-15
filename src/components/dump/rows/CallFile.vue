@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row space-x-1.5 items-center">
-    <span class="tracking-tight text-black text-[110%] fira-code">{{ getCalledFile }}</span>
+    <span class="text-gray-700 text-[11px]">{{ getCalledFile }}</span>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-row items-center">
-    <span class="flex-1 rounded-full w-1.5 h-1.5 mr-1.5" :class="circleColor"></span>
-    <span class="flex-1 italic text-gray-500">{{ getLineNumber }}</span>
+  <div class="flex w-full flex-row items-center justify-center">
+    <span class="flex rounded-full w-1.5 h-1.5 mr-1.5" :class="circleColor"></span>
+    <span class="flex text-gray-500">{{ getLineNumber }}</span>
   </div>
 </template>
 

@@ -1,12 +1,12 @@
 <template>
   <div
     v-if="isLogType()"
-    class="flex flex-row space-x-3 border-b-[1px] border-gray-200 py-5" :class="getRowBackgroundColor">
-    <div class="flex items-center px-4 justify-start border-r-[1px] border-gray-200">
+    class="flex flex-row space-x-3 border-b-[1px] border-gray-200" :class="getRowBackgroundColor">
+    <div class="flex w-[40px] border-r-[1px] border-gray-200">
       <LineNumber :line="id"></LineNumber>
     </div>
 
-    <div class="flex-1 items-center pr-3">
+    <div class="flex-auto items-center pr-3 py-2.5">
       <div class="flex flex-row items-center space-x-1.5 mb-2.5">
         <LanguageVersion :language="messageDto.language" :version="messageDto.version"></LanguageVersion>
         <CallFile :backtrace="getNotVendorTrace()"></CallFile>
