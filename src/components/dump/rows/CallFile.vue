@@ -1,6 +1,6 @@
 <template>
   <div class="text-gray-500 tracking-tighter text-[11px] mb-2.5">
-    <span>#{{ id }}</span> <span>{{ getCalledFile }}</span>
+    <span>// [{{ getCurrentTime() }}] #{{ id }}</span> <span>{{ getCalledFile }}</span>
   </div>
 </template>
 
@@ -28,6 +28,16 @@ export default {
 
       return fileName
     }
+  },
+  methods: {
+    getCurrentTime() {
+      const date = new Date();
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const seconds = date.getSeconds();
+
+      return `${hours}:${minutes}:${seconds}`;
+    },
   },
   mounted() {
   },

@@ -3,7 +3,7 @@
     class="w-full full overflow-y-scroll" ref="scrollable">
     <ScrollableOptions :options="options" @update:options="handleOptions"></ScrollableOptions>
 
-    <div class="grid gap-3 p-2.5" :class="getGridColumns()">
+    <div class="grid gap-3 p-2.5 pt-[33px]" :class="getGridColumns()">
       <template v-for="(messageDto, key) in logs">
         <DataRow
           v-if="isLogMessage(messageDto)"
