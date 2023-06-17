@@ -1,9 +1,9 @@
 <template>
   <div v-if="isLogType()"
-    class="flex h-fit" :class="getRowBackgroundColor">
+    class="flex h-fit overflow-x-auto" :class="getRowBackgroundColor">
     <div class="flex-auto items-center">
       <div class="--code">
-        <CallFile :backtrace="getNotVendorTrace()"></CallFile>
+        <CallFile :backtrace="getNotVendorTrace()" :id="id"></CallFile>
 
         <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
 

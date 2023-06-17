@@ -3,7 +3,7 @@
     class="flex h-fit" :class="getRowBackgroundColor">
     <div class="flex-1 items-center">
       <div class="--code throwable">
-        <CallFile :backtrace="getNotVendorTrace()"></CallFile>
+        <CallFile :backtrace="getNotVendorTrace()" :id="id"></CallFile>
 
         <span>{{ this.messageDto.data.value.message }}</span>
 

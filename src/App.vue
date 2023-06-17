@@ -45,8 +45,6 @@ export default {
   },
   mounted() {
     ipcRenderer.on("gg", (event, message) => {
-      console.log(message)
-
       if (message.messageType === 'throwable') {
         this.throwableMediator = message
       } else {

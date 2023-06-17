@@ -14,6 +14,11 @@ label {
   @apply h-full bg-white;
 }
 
+.grid-reverse {
+  grid-template-rows: 1fr;
+  grid-auto-flow: row-reverse;
+}
+
 .fira-code {
   font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   @apply tracking-tighter;

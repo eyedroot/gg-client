@@ -1,5 +1,7 @@
 <template>
-  <div class="text-gray-500 tracking-tighter text-[11px] mb-2.5">{{ getCalledFile }}</div>
+  <div class="text-gray-500 tracking-tighter text-[11px] mb-2.5">
+    <span>#{{ id }}</span> <span>{{ getCalledFile }}</span>
+  </div>
 </template>
 
 <script>
@@ -9,7 +11,12 @@ export default {
     backtrace: {
       type: Object,
       required: true
-    }
+    },
+    id: {
+      type: Number,
+      default: 1,
+      required: true
+    },
   },
   computed: {
     getCalledFile() {

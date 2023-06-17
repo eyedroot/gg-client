@@ -1,13 +1,14 @@
 <template>
-  <section
-    v-if="logs.length"
-    class="w-full full overflow-y-auto p-2.5" ref="scrollable">
-    <div class="grid grid-cols-3 gap-3">
+  <section v-if="logs.length"
+    class="w-full full overflow-y-scroll" ref="scrollable">
+    <ScrollableOptions :options="options" @update:options="handleOptions"></ScrollableOptions>
+
+    <div class="grid gap-3 p-2.5" :class="getGridColumns()">
       <template v-for="(messageDto, key) in logs">
         <DataRow
           v-if="isLogMessage(messageDto)"
           :key="`log-${key}`"
-          :id="key"
+          :id="getKeyId(key)"
           :messageDto="messageDto"
           :removeItem="removeItem">
         </DataRow>
@@ -15,7 +16,7 @@
         <ThrowableRow
           v-else-if="isThrowableMessage(messageDto)"
           :key="`throwable-${key}`"
-          :id="key"
+          :id="getKeyId(key)"
           :messageDto="messageDto"
           :removeItem="removeItem">
         </ThrowableRow>
@@ -30,10 +31,12 @@
 import DataRow from "@/components/dump/DataRow.vue";
 import HelloDocument from "@/components/HelloDocument.vue";
 import ThrowableRow from "@/components/dump/ThrowableRow.vue";
+import ScrollableOptions from "@/components/ScrollableOptions.vue";
 
 export default {
   name: "ScrollableView",
   components: {
+    ScrollableOptions,
     ThrowableRow,
     HelloDocument,
     DataRow
@@ -46,7 +49,11 @@ export default {
   },
   data() {
     return {
-      logs: []
+      logs: [],
+      options: {
+        grid: 1, // 1, 2, 3
+        reverse: false,
+      },
     }
   },
   watch: {
@@ -57,9 +64,27 @@ export default {
       this.$nextTick(() => {
         this.scrollToBottom()
       })
-    }
+    },
   },
   methods: {
+    handleOptions(options) {
+      if (this.options.reverse !== options.reverse) {
+        this.logs.reverse()
+        console.log(this.logs)
+      }
+
+      this.options = options
+    },
+    getGridColumns() {
+      return {
+        'grid-cols-1': this.options.grid === 1,
+        'grid-cols-2': this.options.grid === 2,
+        'grid-cols-3': this.options.grid === 3
+      }
+    },
+    getKeyId(key) {
+      return this.options.reverse ? this.logs.length - key : key + 1
+    },
     isLogMessage(messageDto) {
       return messageDto.messageType === 'log' || messageDto.messageType === 'log.space'
     },
