@@ -6,7 +6,7 @@
       @update:options="handleOptions"
       @clearLogs="handleClearLogs"></ScrollableOptions>
 
-    <div class="grid gap-3 p-2.5 pt-[33px]" :class="getGridColumns()">
+    <div class="grid gap-2.5 p-2.5 pt-[38px]" :class="getGridColumns()">
       <template v-for="(messageDto, key) in logs">
         <DataRow
           v-if="isLogMessage(messageDto)"
