@@ -1,13 +1,14 @@
 <template>
-  <section v-if="logs.length"
-    class="w-full full overflow-y-scroll" ref="scrollable">
+  <section class="w-full full overflow-y-scroll" ref="scrollable">
     <ScrollableOptions
       :options="options"
+      :scroll-y="scrollY"
       @update:options="handleOptions"
       @clearLogs="handleClearLogs"></ScrollableOptions>
 
-    <div class="grid gap-2.5 p-2.5 pt-[38px]" :class="getGridColumns()">
-      <template v-for="(messageDto, key) in logs">
+    <div v-if="logs.length"
+      class="grid gap-2.5 p-2.5" :class="getGridColumns()">
+      <template v-for="(messageDto, key) in orderedItems">
         <DataRow
           v-if="isLogMessage(messageDto)"
           :key="`log-${key}`"
@@ -27,9 +28,9 @@
         </ThrowableRow>
       </template>
     </div>
-  </section>
 
-  <HelloDocument v-else></HelloDocument>
+    <HelloDocument v-else></HelloDocument>
+  </section>
 </template>
 
 <script>
@@ -59,6 +60,7 @@ export default {
         grid: 1, // 1, 2, 3
         reverse: false,
       },
+      scrollY: 0,
     }
   },
   watch: {
@@ -67,17 +69,23 @@ export default {
 
       // DOM 업데이트가 완료된 후에 스크롤 위치를 업데이트
       this.$nextTick(() => {
-        this.scrollToBottom()
+        if (this.options.reverse === false) {
+          this.scrollToBottom()
+        } else {
+          this.scrollToTop()
+        }
       })
     },
   },
   methods: {
     handleOptions(options) {
-      if (this.options.reverse !== options.reverse) {
-        this.logs.reverse()
-      }
-
       this.options = options
+
+      if (this.options.reverse === false) {
+        this.scrollToBottom()
+      } else {
+        this.scrollToTop()
+      }
     },
     getGridColumns() {
       return {
@@ -105,12 +113,28 @@ export default {
         scrollable.scrollTop = scrollable.scrollHeight - scrollable.clientHeight;
       }
     },
+    scrollToTop() {
+      const scrollable = this.$refs.scrollable;
+
+      if (scrollable) {
+        scrollable.scrollTop = 0;
+      }
+    },
     removeItem(id) {
       this.logs.splice(id, 1)
     },
+    updateScrollY() {
+      this.scrollY = this.$refs.scrollable.scrollTop;
+      console.log(this.scrollY)
+    },
+  },
+  computed: {
+    orderedItems() {
+      return this.options.reverse ? [...this.logs].reverse() : this.logs
+    }
   },
   mounted() {
-    this.scrollToBottom()
-  },
+    this.$refs.scrollable.addEventListener('scroll', this.updateScrollY)
+  }
 }
 </script>
