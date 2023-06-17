@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed top-0 flex flex-row space-x-2.5 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300">
+  <header class="fixed top-0 flex flex-row space-x-2.5 w-full items-center justify-center p-1 z-50 bg-gray-100 border-b-[1px] border-gray-300">
     <button @click="setGrid(1)">Grid 1</button>
     <button @click="setGrid(2)">Grid 2</button>
     <button @click="setGrid(3)">Grid 3</button>
