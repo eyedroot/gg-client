@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed top-0 flex flex-row space-x-6 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300">
+  <header class="fixed top-0 flex flex-row space-x-6 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300 shadow-sm">
     <button @click="setGrid(1)">
       <img src="/assets/image/icons/columns-1.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 1 }" alt="Column 1">
     </button>
