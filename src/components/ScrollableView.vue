@@ -1,24 +1,26 @@
 <template>
   <section
     v-if="logs.length"
-    class="flex-1 flex-col h-full overflow-y-scroll" ref="scrollable">
-    <template v-for="(messageDto, key) in logs">
-      <DataRow
-        v-if="isLogMessage(messageDto)"
-        :key="`log-${key}`"
-        :id="key"
-        :messageDto="messageDto"
-        :removeItem="removeItem">
-      </DataRow>
+    class="w-full full overflow-y-auto p-2.5" ref="scrollable">
+    <div class="grid grid-cols-3 gap-3">
+      <template v-for="(messageDto, key) in logs">
+        <DataRow
+          v-if="isLogMessage(messageDto)"
+          :key="`log-${key}`"
+          :id="key"
+          :messageDto="messageDto"
+          :removeItem="removeItem">
+        </DataRow>
 
-      <ThrowableRow
-        v-else-if="isThrowableMessage(messageDto)"
-        :key="`throwable-${key}`"
-        :id="key"
-        :messageDto="messageDto"
-        :removeItem="removeItem">
-      </ThrowableRow>
-    </template>
+        <ThrowableRow
+          v-else-if="isThrowableMessage(messageDto)"
+          :key="`throwable-${key}`"
+          :id="key"
+          :messageDto="messageDto"
+          :removeItem="removeItem">
+        </ThrowableRow>
+      </template>
+    </div>
   </section>
 
   <HelloDocument v-else></HelloDocument>

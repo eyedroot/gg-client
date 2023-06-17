@@ -11,7 +11,7 @@
 }
 
 .nav-button {
-  @apply flex items-center justify-center w-full h-[35px] text-gray-900 text-sm opacity-60;
+  @apply flex items-center justify-center w-full h-[35px] text-gray-900 font-normal opacity-40;
 
   &.active {
     @apply opacity-100;

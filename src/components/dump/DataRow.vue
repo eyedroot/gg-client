@@ -1,7 +1,7 @@
 <template>
   <div v-if="isLogType()"
-    class="flex flex-row space-x-3 border-b-[1px] border-gray-200" :class="getRowBackgroundColor">
-    <div class="flex-auto items-center px-3.5 py-3.5">
+    class="flex h-fit" :class="getRowBackgroundColor">
+    <div class="flex-auto items-center">
       <div class="--code">
         <CallFile :backtrace="getNotVendorTrace()"></CallFile>
 

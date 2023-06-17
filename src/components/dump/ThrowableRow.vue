@@ -1,7 +1,7 @@
 <template>
   <div
-    class="flex flex-row space-x-3 border-b-[1px] border-gray-200" :class="getRowBackgroundColor">
-    <div class="flex-1 items-center px-3.5 py-3.5">
+    class="flex h-fit" :class="getRowBackgroundColor">
+    <div class="flex-1 items-center">
       <div class="--code throwable">
         <CallFile :backtrace="getNotVendorTrace()"></CallFile>
 
