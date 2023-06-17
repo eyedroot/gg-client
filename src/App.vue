@@ -2,7 +2,6 @@
   <div class="h-full flex flex-row">
     <SideNavigation
       :selectedContainer="currentContainer"
-      @clearLog="handleClearLog"
       @selectContainer="handleSelectContainer"></SideNavigation>
 
     <ScrollableView
@@ -36,9 +35,6 @@ export default {
     }
   },
   methods: {
-    handleClearLog() {
-      this.$refs[this.currentContainer].logs = []
-    },
     handleSelectContainer(container) {
       this.currentContainer = container
     },

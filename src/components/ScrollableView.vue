@@ -1,14 +1,18 @@
 <template>
   <section v-if="logs.length"
     class="w-full full overflow-y-scroll" ref="scrollable">
-    <ScrollableOptions :options="options" @update:options="handleOptions"></ScrollableOptions>
+    <ScrollableOptions
+      :options="options"
+      @update:options="handleOptions"
+      @clearLogs="handleClearLogs"></ScrollableOptions>
 
     <div class="grid gap-3 p-2.5 pt-[33px]" :class="getGridColumns()">
       <template v-for="(messageDto, key) in logs">
         <DataRow
           v-if="isLogMessage(messageDto)"
           :key="`log-${key}`"
-          :id="getKeyId(key)"
+          :id="key"
+          :display-id="getDisplayId(key)"
           :messageDto="messageDto"
           :removeItem="removeItem">
         </DataRow>
@@ -16,7 +20,8 @@
         <ThrowableRow
           v-else-if="isThrowableMessage(messageDto)"
           :key="`throwable-${key}`"
-          :id="getKeyId(key)"
+          :id="key"
+          :display-id="getDisplayId(key)"
           :messageDto="messageDto"
           :removeItem="removeItem">
         </ThrowableRow>
@@ -70,7 +75,6 @@ export default {
     handleOptions(options) {
       if (this.options.reverse !== options.reverse) {
         this.logs.reverse()
-        console.log(this.logs)
       }
 
       this.options = options
@@ -82,7 +86,10 @@ export default {
         'grid-cols-3': this.options.grid === 3
       }
     },
-    getKeyId(key) {
+    handleClearLogs() {
+      this.logs = []
+    },
+    getDisplayId(key) {
       return this.options.reverse ? this.logs.length - key : key + 1
     },
     isLogMessage(messageDto) {

@@ -1,9 +1,8 @@
 <template>
-  <div
-    class="flex h-fit" :class="getRowBackgroundColor">
-    <div class="flex-1 items-center">
+  <div class="flex h-fit" :class="getRowBackgroundColor">
+    <div class="flex-1 items-center relative">
       <div class="--code throwable">
-        <CallFile :backtrace="getNotVendorTrace()" :id="id"></CallFile>
+        <CallFile :backtrace="getNotVendorTrace()" :id="displayId"></CallFile>
 
         <span>{{ this.messageDto.data.value.message }}</span>
 
@@ -37,7 +36,10 @@ export default {
   props: {
     id: {
       type: Number,
-      default: 0,
+      required: true
+    },
+    displayId: {
+      type: Number,
       required: true
     },
     messageDto: {

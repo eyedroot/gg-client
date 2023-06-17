@@ -1,6 +1,6 @@
 <template>
   <div class="text-gray-500 tracking-tighter text-[11px] mb-2.5">
-    <span>// [{{ getCurrentTime() }}] #{{ id }}</span> <span>{{ getCalledFile }}</span>
+    <div>// #{{ id }} {{ getCalledFile }} -- {{ getCurrentTime() }}</div>
   </div>
 </template>
 
@@ -33,8 +33,8 @@ export default {
     getCurrentTime() {
       const date = new Date();
       const hours = date.getHours();
-      const minutes = date.getMinutes();
-      const seconds = date.getSeconds();
+      const minutes = ("0" + date.getMinutes()).slice(-2);
+      const seconds = ("0" + date.getSeconds()).slice(-2);
 
       return `${hours}:${minutes}:${seconds}`;
     },

@@ -1,9 +1,12 @@
 <template>
-  <div v-if="isLogType()"
-    class="flex h-fit overflow-x-auto" :class="getRowBackgroundColor">
-    <div class="flex-auto items-center">
+  <div v-if="isLogType()" class="flex h-fit overflow-x-auto" :class="getRowBackgroundColor">
+    <div class="flex-auto items-center relative">
+      <button class="absolute top-1 right-1.5 z-20" @click="removeItem(id)">
+        <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
+      </button>
+
       <div class="--code">
-        <CallFile :backtrace="getNotVendorTrace()" :id="id"></CallFile>
+        <CallFile :backtrace="getNotVendorTrace()" :id="displayId"></CallFile>
 
         <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
 
@@ -57,7 +60,10 @@ export default {
   props: {
     id: {
       type: Number,
-      default: 0,
+      required: true
+    },
+    displayId: {
+      type: Number,
       required: true
     },
     messageDto: {
@@ -72,7 +78,7 @@ export default {
   data() {
     return {
       showBacktrace: false,
-    };
+    }
   },
   methods: {
     toggleBacktrace() {

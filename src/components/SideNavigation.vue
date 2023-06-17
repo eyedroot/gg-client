@@ -17,9 +17,7 @@
     </div>
 
     <div class="mt-auto">
-      <button @click="emitClearLog">
-        <fa-icon icon="trash-can" class="text-gray-900"></fa-icon>
-      </button>
+
     </div>
   </aside>
 </template>
@@ -38,9 +36,6 @@ export default {
     return {}
   },
   methods: {
-    emitClearLog() {
-      this.$emit("clearLog")
-    },
     emitSelectContainer(container) {
       this.$emit("selectContainer", container)
     },
