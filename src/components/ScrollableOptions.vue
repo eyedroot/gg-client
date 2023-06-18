@@ -10,7 +10,7 @@
       <img src="/assets/image/icons/columns-3.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 3 }" alt="Column 3">
     </button>
     <button @click="setReverse()">
-      Reverse
+      <fa-icon :icon="getSortIcon()" class="text-gray-800"></fa-icon>
     </button>
     <button @click="clearLogs()">
       <fa-icon icon="eraser" class="text-gray-800"></fa-icon>
@@ -49,6 +49,13 @@ name: "ScrollableOptions",
         this.$emit('clearLogs')
       }
     },
+    getSortIcon() {
+      if (this.options.reverse) {
+        return 'arrow-up-wide-short'
+      }
+
+      return 'arrow-down-short-wide'
+    }
   },
 }
 </script>
