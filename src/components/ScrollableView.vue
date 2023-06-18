@@ -6,7 +6,7 @@
       @update:options="handleOptions"
       @clearLogs="handleClearLogs"></ScrollableOptions>
 
-    <div v-if="logs.length" class="flex flex-wrap" :class="getReversedClass">
+    <div v-if="logs.length" class="flex flex-wrap" :class="{'flex-row-reverse': options.reverse}">
       <template v-for="(messageDto, key) in logs">
 
         <DataRow :class="getColumnSize()"
@@ -126,11 +126,6 @@ export default {
     updateScrollY() {
       this.scrollY = this.$refs.scrollable.scrollTop;
     },
-  },
-  computed: {
-    getReversedClass() {
-      return this.options.reverse ? 'flex-row-reverse' : ''
-    }
   },
   mounted() {
     this.$refs.scrollable.addEventListener('scroll', this.updateScrollY)
