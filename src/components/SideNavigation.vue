@@ -4,8 +4,7 @@
       <span class="relative inline-flex">
         <SideNavigationBalloon :notice-count="noticeCount.logContainer"></SideNavigationBalloon>
 
-        <button
-          class="nav-button"
+        <button class="nav-button"
           :class="{ 'active': selectedContainer === 'logContainer' }"
           @click="emitSelectContainer('logContainer')">
           <fa-icon icon="code" class="text-sm"></fa-icon>
@@ -15,8 +14,7 @@
       <span class="relative inline-flex">
         <SideNavigationBalloon :notice-count="noticeCount.throwableContainer"></SideNavigationBalloon>
 
-        <button
-          class="nav-button"
+        <button class="nav-button"
           :class="{ 'active': selectedContainer === 'throwableContainer' }"
           @click="emitSelectContainer('throwableContainer')">
           <fa-icon icon="bug" class="text-sm"></fa-icon>
@@ -24,8 +22,24 @@
       </span>
     </div>
 
-    <div class="mt-auto">
+    <div class="relative mt-auto">
+      <button
+        @mouseover="showZoomLayer = true"
+        @mouseleave="showZoomLayer = false"
+        class="nav-button hover:opacity-100" @click="handleZoomInOut(true)">
+        <fa-icon icon="magnifying-glass-plus" class="text-sm"></fa-icon>
+      </button>
+      <button
+        @mouseover="showZoomLayer = true"
+        @mouseleave="showZoomLayer = false"
+        class="nav-button hover:opacity-100" @click="handleZoomInOut(false)">
+        <fa-icon icon="magnifying-glass-minus" class="text-sm"></fa-icon>
+      </button>
 
+      <div v-if="showZoomLayer"
+        class="absolute bottom-4 -right-[80px] inline-flex bg-gray-900 rounded-xl text-white font-bold items-center justify-center p-2.5">
+        <span>{{ (currentZoomFactor * 100).toFixed(0) }}%</span>
+      </div>
     </div>
   </aside>
 </template>
@@ -33,9 +47,13 @@
 <script>
 import SideNavigationBalloon from "@/components/SideNavigationBalloon.vue";
 
+import { webFrame } from "electron";
+
 export default {
   name: "SideNavigation",
-  components: {SideNavigationBalloon},
+  components: {
+    SideNavigationBalloon
+  },
   props: {
     selectedContainer: {
       type: String,
@@ -47,13 +65,28 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      showZoomLayer: false,
+      currentZoomFactor: webFrame.getZoomFactor(),
+    }
   },
   methods: {
     emitSelectContainer(container) {
       this.$emit("selectContainer", container)
     },
+    handleZoomInOut(zoomIn = true) {
+      let changeZoom = this.currentZoomFactor + (zoomIn ? 0.1 : -0.1);
+
+      if (changeZoom > 1.5) {
+        changeZoom = 1.5
+      } else if (changeZoom < 1) {
+        changeZoom = 1
+      }
+
+      this.currentZoomFactor = parseFloat(changeZoom.toFixed(1));
+
+      webFrame.setZoomFactor(this.currentZoomFactor);
+    },
   },
-  computed: {},
 }
 </script>

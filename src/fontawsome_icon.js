@@ -8,9 +8,9 @@ import {
   faBug,
   faXmark,
   faArrowDownShortWide,
-  faArrowUpWideShort,
+  faArrowUpWideShort, faMagnifyingGlassPlus, faMagnifyingGlassMinus,
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faClock, faCode, faEraser, faFileLines, faBug, faXmark, faArrowDownShortWide, faArrowUpWideShort)
+library.add(faClock, faCode, faEraser, faFileLines, faBug, faXmark, faArrowDownShortWide, faArrowUpWideShort, faMagnifyingGlassPlus, faMagnifyingGlassMinus)
 
 export default FontAwesomeIcon
