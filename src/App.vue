@@ -2,17 +2,18 @@
   <div class="h-full flex flex-row">
     <SideNavigation
       :selectedContainer="currentContainer"
+      :notice-count="noticeCount"
       @selectContainer="handleSelectContainer"></SideNavigation>
 
     <ScrollableView
-      v-show="currentContainer === 'logContainer'"
       ref="logContainer"
-      :data="logMediator"></ScrollableView>
+      v-show="currentContainer === 'logContainer'"
+      :data="mediator.logContainer"></ScrollableView>
 
     <ScrollableView
-      v-show="currentContainer === 'throwableContainer'"
       ref="throwableContainer"
-      :data="throwableMediator"></ScrollableView>
+      v-show="currentContainer === 'throwableContainer'"
+      :data="mediator.throwableContainer"></ScrollableView>
   </div>
 </template>
 
@@ -30,9 +31,25 @@ export default {
   data() {
     return {
       logMediator: {},
-      throwableMediator: {},
+      mediator: {
+        logContainer: {},
+        throwableContainer: {},
+      },
       currentContainer: 'logContainer', // logContainer or throwableContainer
+      noticeCount: {
+        logContainer: 0,
+        throwableContainer: 0,
+      }
     }
+  },
+  watch: {
+    currentContainer: function (selectContainer) {
+      if (selectContainer === 'logContainer') {
+        this.noticeCount.logContainer = 0
+      } else {
+        this.noticeCount.throwableContainer = 0
+      }
+    },
   },
   methods: {
     handleSelectContainer(container) {
@@ -42,9 +59,17 @@ export default {
   mounted() {
     ipcRenderer.on("gg", (event, message) => {
       if (message.messageType === 'throwable') {
-        this.throwableMediator = message
+        this.mediator.throwableContainer = message
+
+        if (this.currentContainer !== 'throwableContainer') {
+          this.noticeCount.throwableContainer += 1
+        }
       } else {
-        this.logMediator = message
+        this.mediator.logContainer = message
+
+        if (this.currentContainer !== 'logContainer') {
+          this.noticeCount.logContainer += 1
+        }
       }
     })
   },

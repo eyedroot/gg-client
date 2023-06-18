@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col bg-gray-50 justify-center w-full items-center h-full">
+  <section class="flex flex-col justify-center w-full items-center h-fit my-20">
     <div class="text-5xl font-bold">Good Game, Great Code</div>
     <div class="text-2xl">With gg, PHP Debugging is a breeze!</div>
 

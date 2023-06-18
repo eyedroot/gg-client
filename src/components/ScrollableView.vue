@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full full overflow-y-scroll" ref="scrollable">
+  <section class="w-full full overflow-y-scroll bg-gray-50" ref="scrollable">
     <ScrollableOptions
       :options="options"
       :scroll-y="scrollY"
@@ -125,7 +125,6 @@ export default {
     },
     updateScrollY() {
       this.scrollY = this.$refs.scrollable.scrollTop;
-      console.log(this.scrollY)
     },
   },
   computed: {
