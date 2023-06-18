@@ -37,7 +37,7 @@
       </button>
 
       <div v-if="showZoomLayer"
-        class="absolute bottom-4 -right-[60px] inline-flex bg-gray-900 rounded-xl text-white font-bold items-center justify-center p-2.5 z-50 shadow-sm">
+        class="absolute bottom-4 -right-[60px] inline-flex bg-gray-900 rounded-xl text-white font-bold items-center justify-center p-2.5 z-50 shadow-sm opacity-80">
         <span>{{ (currentZoomFactor * 100).toFixed(0) }}%</span>
       </div>
     </div>
