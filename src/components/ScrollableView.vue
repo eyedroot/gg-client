@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full full overflow-y-scroll bg-gray-50 p-0.5" ref="scrollable">
+  <section class="w-full full overflow-x-hidden overflow-y-scroll bg-gray-50 p-0.5 py-1" ref="scrollable">
     <ScrollableOptions
       :options="options"
       :scroll-y="scrollY"

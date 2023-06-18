@@ -1,5 +1,5 @@
 <template>
-  <header class="top-0 flex flex-row space-x-6 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300 shadow-sm -ml-0.5 -mt-0.5" :class="{ fixed: scrollY >= 38 }" style="width: calc(100% + 4px)">
+  <header class="top-1 flex flex-row space-x-6 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300 shadow-sm -ml-0.5 -mt-1" :class="{ fixed: scrollY >= 38 }" style="width: calc(100% + 4px)">
     <button @click="setGrid(1)">
       <img src="/assets/image/icons/columns-1.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 1 }" alt="Column 1">
     </button>
