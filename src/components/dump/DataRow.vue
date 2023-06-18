@@ -12,7 +12,7 @@
           <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
         </div>
 
-        <button class="--backtrace-button button transparent absolute right-1 bottom-0 inline-flex items-center justify-center"
+        <button class="--backtrace-button button transparent absolute right-1.5 bottom-0 inline-flex items-center justify-center"
                 @click="toggleBacktrace">
           <fa-icon icon="code" class="mr-1.5"></fa-icon>
           <span class="text-gray-800">backtrace_{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>

@@ -21,7 +21,7 @@
 
       <span class="h-fit">
         <span class="text-blue-500 mr-0.5">{{ getModifierToCharacter(getModifier(key)) }}</span>
-        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))"></ScalarValue>
+        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))" :is-property-or-key="true"></ScalarValue>
       </span>
 
       <span class="h-fit mr-1.5">:</span>

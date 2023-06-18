@@ -1,5 +1,7 @@
 <template>
-  <span class="--value" :class="textColor">{{ printScalarType }}</span>
+  <span class="--value" :class="textColor">
+    {{ printScalarType }} <span class="text-[9px] tracking-tighter text-gray-400 italic">{{ printNumberType }}</span>
+  </span>
 </template>
 
 <script>
@@ -9,11 +11,19 @@ export default {
     capsuleDto: {
       type: Object,
       required: true
+    },
+    isPropertyOrKey: {
+      type: Boolean,
+      default: false,
+      required: false
     }
   },
   computed: {
     textColor() {
-      return typeof this.capsuleDto.value
+      return {
+        property: this.isPropertyOrKey === true,
+        [typeof this.capsuleDto.value]: this.isPropertyOrKey === false,
+      }
     },
     printScalarType() {
       if (this.capsuleDto.value === null) {
@@ -21,7 +31,14 @@ export default {
       }
 
       return this.capsuleDto.value
-    }
+    },
+    printNumberType() {
+      if (['float', 'integer', 'double'].includes(this.capsuleDto.type)) {
+        return `${this.capsuleDto.type}`
+      }
+
+      return ''
+    },
   }
 }
 </script>
@@ -48,6 +65,9 @@ export default {
   }
   &.object {
     @apply text-gray-400;
+  }
+  &.property {
+    @apply text-gray-600;
   }
 }
 </style>
