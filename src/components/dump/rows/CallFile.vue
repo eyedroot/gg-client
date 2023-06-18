@@ -1,6 +1,6 @@
 <template>
   <div class="text-gray-500 tracking-tighter text-[11px] mb-2.5">
-    <div>// #{{ id }} {{ getCalledFile }} -- {{ getCurrentTime() }}</div>
+    <div>// #<span class="font-bold">{{ id }}</span> {{ getCalledFile }} -- {{ getCurrentTime() }}</div>
   </div>
 </template>
 

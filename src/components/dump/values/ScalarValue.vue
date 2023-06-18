@@ -1,6 +1,9 @@
 <template>
   <span class="--value" :class="textColor">
-    {{ printScalarType }} <span class="text-[9px] tracking-tighter text-gray-400 italic">{{ printNumberType }}</span>
+    <span>{{ printScalarType }}</span>
+    <span
+      v-if="! isPropertyOrKey && ['float', 'integer', 'double'].includes(capsuleDto.type)"
+      class="ml-1.5 text-[9px] tracking-tighter text-gray-400 italic select-none">// {{ getShortType }}</span>
   </span>
 </template>
 
@@ -32,13 +35,9 @@ export default {
 
       return this.capsuleDto.value
     },
-    printNumberType() {
-      if (['float', 'integer', 'double'].includes(this.capsuleDto.type)) {
-        return `${this.capsuleDto.type}`
-      }
-
-      return ''
-    },
+    getShortType() {
+      return this.capsuleDto.type === 'integer' ? 'int' : this.capsuleDto.type
+    }
   }
 }
 </script>
@@ -50,7 +49,7 @@ export default {
     @apply text-blue-700;
   }
   &.string {
-    @apply text-red-950;
+    @apply text-green-600;
     &::before {
       content: '"';
       @apply text-gray-500;
