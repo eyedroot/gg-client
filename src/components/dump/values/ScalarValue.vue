@@ -33,6 +33,7 @@ export default {
     @apply text-blue-700;
   }
   &.string {
+    @apply text-red-950;
     &::before {
       content: '"';
       @apply text-gray-500;
@@ -41,7 +42,6 @@ export default {
       content: '"';
       @apply text-gray-500;
     }
-    @apply text-gray-900;
   }
   &.boolean {
     @apply text-green-600;

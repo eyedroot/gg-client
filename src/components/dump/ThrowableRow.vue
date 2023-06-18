@@ -4,7 +4,9 @@
       <div class="--code throwable">
         <CallFile :backtrace="getNotVendorTrace()" :id="displayId"></CallFile>
 
-        <span>{{ this.messageDto.data.value.message }}</span>
+        <div class="mb-3">
+          <span>{{ this.messageDto.data.value.message }}</span>
+        </div>
 
         <button class="--backtrace-button button transparent absolute right-1 bottom-0 inline-flex items-center justify-center"
                 @click="toggleBacktrace">

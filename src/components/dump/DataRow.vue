@@ -8,7 +8,9 @@
       <div class="--code">
         <CallFile :backtrace="getNotVendorTrace()" :id="displayId"></CallFile>
 
-        <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
+        <div class="mb-3">
+          <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
+        </div>
 
         <button class="--backtrace-button button transparent absolute right-1 bottom-0 inline-flex items-center justify-center"
                 @click="toggleBacktrace">
