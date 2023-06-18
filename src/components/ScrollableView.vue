@@ -6,10 +6,10 @@
       @update:options="handleOptions"
       @clearLogs="handleClearLogs"></ScrollableOptions>
 
-    <div v-if="logs.length"
-      class="grid gap-2.5 p-2.5" :class="getGridColumns()">
-      <template v-for="(messageDto, key) in orderedItems">
-        <DataRow
+    <div v-if="logs.length" class="flex flex-wrap" :class="getReversedClass">
+      <template v-for="(messageDto, key) in logs">
+
+        <DataRow :class="getColumnSize()"
           v-if="isLogMessage(messageDto)"
           :key="`log-${key}`"
           :id="key"
@@ -18,7 +18,7 @@
           :removeItem="removeItem">
         </DataRow>
 
-        <ThrowableRow
+        <ThrowableRow :class="getColumnSize()"
           v-else-if="isThrowableMessage(messageDto)"
           :key="`throwable-${key}`"
           :id="key"
@@ -87,11 +87,11 @@ export default {
         this.scrollToTop()
       }
     },
-    getGridColumns() {
+    getColumnSize() {
       return {
-        'grid-cols-1': this.options.grid === 1,
-        'grid-cols-2': this.options.grid === 2,
-        'grid-cols-3': this.options.grid === 3
+        'w-full': this.options.grid === 1,
+        'w-1/2': this.options.grid === 2,
+        'w-1/3': this.options.grid === 3
       }
     },
     handleClearLogs() {
@@ -128,8 +128,8 @@ export default {
     },
   },
   computed: {
-    orderedItems() {
-      return this.options.reverse ? [...this.logs].reverse() : this.logs
+    getReversedClass() {
+      return this.options.reverse ? 'flex-row-reverse' : ''
     }
   },
   mounted() {

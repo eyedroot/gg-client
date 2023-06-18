@@ -1,5 +1,6 @@
 <template>
-  <div v-if="isLogType()" class="flex h-fit overflow-x-auto" :class="getRowBackgroundColor">
+  <div v-if="isLogType()"
+       class="flex h-fit overflow-x-auto px-0.5 pt-1" :class="getRowBackgroundColor">
     <div class="flex-auto items-center relative">
       <button class="absolute top-1 right-1.5 z-20" @click="removeItem(id)">
         <fa-icon icon="xmark" class="text-gray-800"></fa-icon>

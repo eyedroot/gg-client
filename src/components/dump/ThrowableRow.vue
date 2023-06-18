@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-fit" :class="getRowBackgroundColor">
+  <div class="flex h-fit overflow-x-auto px-0.5 pt-1" :class="getRowBackgroundColor">
     <div class="flex-1 items-center relative">
       <div class="--code throwable">
         <CallFile :backtrace="getNotVendorTrace()" :id="displayId"></CallFile>
