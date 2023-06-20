@@ -29,6 +29,7 @@
         class="nav-button hover:opacity-100" @click="handleZoomInOut(true)">
         <fa-icon icon="magnifying-glass-plus" class="text-sm"></fa-icon>
       </button>
+
       <button
         @mouseover="showZoomLayer = true"
         @mouseleave="showZoomLayer = false"
