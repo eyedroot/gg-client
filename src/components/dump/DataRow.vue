@@ -31,6 +31,7 @@
 
   <SpaceValue
     v-else-if="isLogSpaceType()"
+    :class="this.$emit('getColumnSize')"
     :messageDto="this.messageDto">
   </SpaceValue>
 </template>

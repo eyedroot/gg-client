@@ -15,7 +15,8 @@
           :id="key"
           :display-id="getDisplayId(key)"
           :messageDto="messageDto"
-          :removeItem="removeItem">
+          :removeItem="removeItem"
+          @getColumnSize="getColumnSize">
         </DataRow>
 
         <ThrowableRow :class="getColumnSize()"
