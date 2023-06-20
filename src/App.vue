@@ -14,6 +14,12 @@
       ref="throwableContainer"
       v-show="currentContainer === 'throwableContainer'"
       :data="mediator.throwableContainer"></ScrollableView>
+
+    <ScrollableView
+      ref="shiftContainer"
+      :load-from-local-storage="true"
+      v-if="currentContainer === 'shiftContainer'">
+    </ScrollableView>
   </div>
 </template>
 

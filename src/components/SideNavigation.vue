@@ -20,6 +20,14 @@
           <fa-icon icon="bug" class="text-sm"></fa-icon>
         </button>
       </span>
+
+      <span class="relative inline-flex">
+        <button class="nav-button"
+                :class="{ 'active': selectedContainer === 'shiftContainer' }"
+                @click="emitSelectContainer('shiftContainer')">
+          <fa-icon icon="floppy-disk" class="text-sm"></fa-icon>
+        </button>
+      </span>
     </div>
 
     <div class="relative mt-auto">

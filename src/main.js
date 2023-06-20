@@ -29,6 +29,8 @@ app.config.globalProperties.$convertKeyToCapsuleDto = (key) => {
   }
 }
 
+app.provide('storageName', 'logs')
+
 app.component('FaIcon', FontAwesomeIcon)
 
 app.mount('#app')

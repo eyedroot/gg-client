@@ -29,7 +29,12 @@ name: "ScrollableOptions",
     scrollY: {
       type: Number,
       required: true
-    }
+    },
+    loadFromLocalStorage: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   methods: {
     setGrid(grid) {
@@ -46,7 +51,11 @@ name: "ScrollableOptions",
     },
     clearLogs() {
       if (window.confirm('Do you want to erase all data?')) {
-        this.$emit('clearLogs')
+        if (this.loadFromLocalStorage) {
+          localStorage.removeItem('logs')
+        } else {
+          this.$emit('clearLogs')
+        }
       }
     },
     getSortIcon() {

@@ -3,6 +3,7 @@
     <ScrollableOptions
       :options="options"
       :scroll-y="scrollY"
+      :load-from-local-storage="loadFromLocalStorage"
       @update:options="handleOptions"
       @clearLogs="handleClearLogs"></ScrollableOptions>
 
@@ -10,22 +11,24 @@
       <template v-for="(messageDto, key) in logs">
 
         <DataRow :class="getColumnSize()"
-          v-if="isLogMessage(messageDto)"
-          :key="`log-${key}`"
-          :id="key"
-          :display-id="getDisplayId(key)"
-          :messageDto="messageDto"
-          :removeItem="removeItem"
-          @getColumnSize="getColumnSize">
+                 v-if="isLogMessage(messageDto)"
+                 :key="`log-${key}`"
+                 :id="key"
+                 :display-id="getDisplayId(key)"
+                 :messageDto="messageDto"
+                 :removeItem="removeItem"
+                 :load-from-local-storage="loadFromLocalStorage"
+                 @getColumnSize="getColumnSize">
         </DataRow>
 
         <ThrowableRow :class="getColumnSize()"
-          v-else-if="isThrowableMessage(messageDto)"
-          :key="`throwable-${key}`"
-          :id="key"
-          :display-id="getDisplayId(key)"
-          :messageDto="messageDto"
-          :removeItem="removeItem">
+                      v-if="isThrowableMessage(messageDto)"
+                      :key="`throwable-${key}`"
+                      :id="key"
+                      :display-id="getDisplayId(key)"
+                      :messageDto="messageDto"
+                      :load-from-local-storage="loadFromLocalStorage"
+                      :removeItem="removeItem">
         </ThrowableRow>
       </template>
     </div>
@@ -39,6 +42,7 @@ import DataRow from "@/components/dump/DataRow.vue";
 import HelloDocument from "@/components/HelloDocument.vue";
 import ThrowableRow from "@/components/dump/ThrowableRow.vue";
 import ScrollableOptions from "@/components/ScrollableOptions.vue";
+import {inject} from "vue";
 
 export default {
   name: "ScrollableView",
@@ -48,11 +52,23 @@ export default {
     HelloDocument,
     DataRow
   },
+  setup() {
+    const storageName = inject('storageName') || 'logs'
+
+    return {
+      storageName
+    }
+  },
   props: {
     data: {
       type: Object,
-      required: true
-    }
+      required: false,
+    },
+    loadFromLocalStorage: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {
@@ -123,13 +139,25 @@ export default {
     },
     removeItem(id) {
       this.logs.splice(id, 1)
+
+      if (this.loadFromLocalStorage) {
+        localStorage.setItem(this.storageName, JSON.stringify(this.logs))
+      }
     },
     updateScrollY() {
       this.scrollY = this.$refs.scrollable.scrollTop;
     },
+    loadLogsFromLocalStorage() {
+      const logs = localStorage.getItem(this.storageName) || '[]'
+      this.logs = JSON.parse(logs)
+    }
   },
   mounted() {
     this.$refs.scrollable.addEventListener('scroll', this.updateScrollY)
+
+    if (this.loadFromLocalStorage) {
+      this.loadLogsFromLocalStorage()
+    }
   }
 }
 </script>
