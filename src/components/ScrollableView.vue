@@ -7,7 +7,7 @@
       @update:options="handleOptions"
       @clearLogs="handleClearLogs"></ScrollableOptions>
 
-    <div v-if="logs.length" class="flex flex-wrap" :class="{'flex-row-reverse': options.reverse}">
+    <div v-if="logs.length" class="flex flex-wrap" :class="{'flex-col-reverse': options.reverse}">
       <template v-for="(messageDto, key) in logs">
 
         <DataRow :class="getColumnSize()"
@@ -96,6 +96,11 @@ export default {
   },
   methods: {
     handleOptions(options) {
+      // reverse 환경에서는 grid 옵션을 1로 고정
+      if (options.reverse) {
+        options.grid = 1
+      }
+
       this.options = options
 
       if (this.options.reverse === false) {
