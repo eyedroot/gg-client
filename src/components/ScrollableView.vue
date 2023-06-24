@@ -139,7 +139,7 @@ export default {
 
       if (scrollable) {
         if (bottom) {
-          scrollable.scrollTop = scrsollable.scrollHeight - scrollable.clientHeight // Scroll To Bottom
+          scrollable.scrollTop = scrollable.scrollHeight - scrollable.clientHeight // Scroll To Bottom
         } else {
           scrollable.scrollTop = 0
         }
