@@ -13,18 +13,13 @@
         </div>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
-          <button v-if="loadFromLocalStorage === false"
-                  class="--backtrace-button button transparent inline-flex items-center justify-center"
-                  @click="saveToLocalStorage">
-            <fa-icon icon="floppy-disk" class="mr-1.5"></fa-icon>
-            <span class="text-gray-800">{{ saved ? 'saved!' : 'save' }}</span>
-          </button>
-
-          <button class="--backtrace-button button transparent items-center justify-center"
-                  @click="toggleBacktrace">
-            <fa-icon icon="code" class="mr-1.5"></fa-icon>
-            <span class="text-gray-800">backtrace_{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>
-          </button>
+          <RowExtensions :load-from-local-storage="loadFromLocalStorage"
+                         @saveToLocalStorage="saveToLocalStorage"
+                         @toggleBacktrace="toggleBacktrace">
+            <template v-slot:languageVersion>
+              <span>{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>
+            </template>
+          </RowExtensions>
         </div>
       </div>
 
@@ -42,10 +37,12 @@
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
 import CallFile from "@/components/dump/rows/CallFile.vue";
 import {inject, toRaw} from "vue";
+import RowExtensions from "@/components/dump/RowExtensions.vue";
 
 export default {
   name: "ThrowableRow",
   components: {
+    RowExtensions,
     CallFile,
     BackTrace,
   },
@@ -82,8 +79,6 @@ export default {
   data() {
     return {
       showBacktrace: false,
-      saved: false,
-      copied: false,
     };
   },
   methods: {
@@ -104,10 +99,8 @@ export default {
       logs.push(toRaw(this.messageDto));
 
       localStorage.setItem(this.storageName, JSON.stringify(logs));
-      this.saved = true
     },
     copyToClipboard() {
-      this.copied = true
       this.$emit('copy-to-clipboard', toRaw(this.messageDto))
     }
   },
