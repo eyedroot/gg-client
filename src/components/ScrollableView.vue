@@ -17,11 +17,8 @@
     </div>
 
     <div v-if="logs.length" class="flex flex-wrap" :class="{'flex-col-reverse': options.reverse}">
-      <template v-for="(messageDto, key) in logs">
-
+      <template v-for="(messageDto, key) in logs" :key="key">
         <DataRow :class="getColumnSize()"
-                 v-if="isLogMessage(messageDto)"
-                 :key="`log-${key}`"
                  :id="key"
                  :display-id="getDisplayId(key)"
                  :messageDto="messageDto"
@@ -30,17 +27,6 @@
                  @getColumnSize="getColumnSize"
                  @copyToClipboard="copyToClipboard">
         </DataRow>
-
-        <ThrowableRow :class="getColumnSize()"
-                      v-if="isThrowableMessage(messageDto)"
-                      :key="`throwable-${key}`"
-                      :id="key"
-                      :display-id="getDisplayId(key)"
-                      :messageDto="messageDto"
-                      :load-from-local-storage="loadFromLocalStorage"
-                      :removeItem="removeItem"
-                      @copyToClipboard="copyToClipboard">
-        </ThrowableRow>
       </template>
     </div>
 
@@ -51,7 +37,6 @@
 <script>
 import DataRow from "@/components/dump/DataRow.vue"
 import HelloDocument from "@/components/HelloDocument.vue"
-import ThrowableRow from "@/components/dump/ThrowableRow.vue"
 import ScrollableOptions from "@/components/ScrollableOptions.vue"
 import {inject} from "vue";
 import {clipboard} from "electron"
@@ -62,7 +47,6 @@ export default {
   components: {
     SearchText,
     ScrollableOptions,
-    ThrowableRow,
     HelloDocument,
     DataRow
   },
@@ -164,9 +148,6 @@ export default {
     isLogMessage(messageDto) {
       return messageDto.messageType === 'log' || messageDto.messageType === 'log.space'
     },
-    isThrowableMessage(messageDto) {
-      return messageDto.messageType === 'throwable'
-    },
     scrollToBottom() {
       const scrollable = this.$refs.scrollable;
 
@@ -188,7 +169,7 @@ export default {
         localStorage.setItem(this.storageName, JSON.stringify(this.logs))
       }
     },
-    updateScrollY() {
+    handleScrollY() {
       this.scrollY = this.$refs.scrollable.scrollTop;
     },
     loadLogsFromLocalStorage() {
@@ -289,7 +270,7 @@ export default {
     }
   },
   mounted() {
-    this.$refs.scrollable.addEventListener('scroll', this.updateScrollY)
+    this.$refs.scrollable.addEventListener('scroll', this.handleScrollY)
     window.addEventListener('keydown', this.handleKeydown)
 
     if (this.loadFromLocalStorage) {
@@ -297,7 +278,7 @@ export default {
     }
   },
   beforeUnmount() {
-    this.$refs.scrollable.removeEventListener('scroll', this.updateScrollY)
+    this.$refs.scrollable.removeEventListener('scroll', this.handleScrollY)
     window.removeEventListener('keydown', this.handleKeydown)
   }
 }
