@@ -125,9 +125,6 @@ export default {
 
       localStorage.setItem(this.storageName, JSON.stringify(logs));
     },
-    copyToClipboard() {
-      this.$emit('copy-to-clipboard', '')
-    },
   },
   computed: {
     getRowBackgroundColor() {

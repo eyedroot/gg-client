@@ -4,11 +4,11 @@
       :options="options"
       :scroll-y="scrollY"
       :load-from-local-storage="loadFromLocalStorage"
-      @update:options="handleOptions"
-      @clearLogs="handleClearLogs"></ScrollableOptions>
+      @update:options="updateOptions"
+      @clearLogs="clearLogs"></ScrollableOptions>
 
     <div class="fixed bottom-3 right-8 z-50">
-      <SearchText v-if="searchContext.enabled"
+      <SearchText v-show="searchContext.enabled"
                   ref="searchText"
                   :search-context="searchContext"
                   @findText="findText"
@@ -24,8 +24,7 @@
                  :messageDto="messageDto"
                  :removeItem="removeItem"
                  :load-from-local-storage="loadFromLocalStorage"
-                 @getColumnSize="getColumnSize"
-                 @copyToClipboard="copyToClipboard">
+                 @getColumnSize="getColumnSize">
         </DataRow>
       </template>
     </div>
@@ -39,7 +38,6 @@ import DataRow from "@/components/dump/DataRow.vue"
 import HelloDocument from "@/components/HelloDocument.vue"
 import ScrollableOptions from "@/components/ScrollableOptions.vue"
 import {inject} from "vue";
-import {clipboard} from "electron"
 import SearchText from "@/components/SearchText.vue";
 
 export default {
@@ -96,11 +94,7 @@ export default {
 
       // DOM 업데이트가 완료된 후에 스크롤 위치를 업데이트
       this.$nextTick(() => {
-        if (this.options.reverse === false) {
-          this.scrollToBottom()
-        } else {
-          this.scrollToTop()
-        }
+        this.scrollToEdge(this.options.reverse === true)
 
         if (this.searchContext.lastTerm.length > 0) {
           this.findText(this.searchContext.lastTerm, false)
@@ -114,19 +108,14 @@ export default {
     }
   },
   methods: {
-    handleOptions(options) {
+    updateOptions(options) {
       // reverse 환경에서는 grid 옵션을 1로 고정
       if (options.reverse) {
         options.grid = 1
       }
 
       this.options = options
-
-      if (this.options.reverse === false) {
-        this.scrollToBottom()
-      } else {
-        this.scrollToTop()
-      }
+      this.scrollToEdge(this.options.reverse === true)
     },
     getColumnSize() {
       return {
@@ -135,7 +124,7 @@ export default {
         'w-1/3': this.options.grid === 3
       }
     },
-    handleClearLogs(removeLocalStorage = false) {
+    clearLogs(removeLocalStorage = false) {
       this.logs = []
 
       if (removeLocalStorage) {
@@ -145,21 +134,15 @@ export default {
     getDisplayId(key) {
       return this.options.reverse ? this.logs.length - key : key + 1
     },
-    isLogMessage(messageDto) {
-      return messageDto.messageType === 'log' || messageDto.messageType === 'log.space'
-    },
-    scrollToBottom() {
+    scrollToEdge(bottom = true) {
       const scrollable = this.$refs.scrollable;
 
       if (scrollable) {
-        scrollable.scrollTop = scrollable.scrollHeight - scrollable.clientHeight;
-      }
-    },
-    scrollToTop() {
-      const scrollable = this.$refs.scrollable;
-
-      if (scrollable) {
-        scrollable.scrollTop = 0;
+        if (bottom) {
+          scrollable.scrollTop = scrsollable.scrollHeight - scrollable.clientHeight // Scroll To Bottom
+        } else {
+          scrollable.scrollTop = 0
+        }
       }
     },
     removeItem(id) {
@@ -173,11 +156,7 @@ export default {
       this.scrollY = this.$refs.scrollable.scrollTop;
     },
     loadLogsFromLocalStorage() {
-      const logs = localStorage.getItem(this.storageName) || '[]'
-      this.logs = JSON.parse(logs)
-    },
-    copyToClipboard() {
-      clipboard.writeText('')
+      this.logs = JSON.parse(localStorage.getItem(this.storageName) || '[]')
     },
     handleKeydown(e) {
       if (e.key === 'Escape' && this.searchContext.enabled) {
@@ -185,13 +164,13 @@ export default {
       }
 
       if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
-        if (this.searchContext.enabled) {
+        e.preventDefault()
+        e.stopPropagation()
+        this.searchContext.enabled = ! this.searchContext.enabled
+
+        this.$nextTick(() => {
           this.$refs.searchText.focusInput()
-        } else {
-          e.preventDefault()
-          e.stopPropagation()
-          this.searchContext.enabled = ! this.searchContext.enabled
-        }
+        })
       }
     },
     saveTerm(term) {
