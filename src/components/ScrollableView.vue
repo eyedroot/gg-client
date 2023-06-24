@@ -7,6 +7,14 @@
       @update:options="handleOptions"
       @clearLogs="handleClearLogs"></ScrollableOptions>
 
+    <div class="fixed top-9 right-6 z-50">
+      <SearchText v-if="searchContext.enabled"
+                  ref="searchText"
+                  :search-context="searchContext"
+                  @findText="findText"
+                  @saveTerm="saveTerm"></SearchText>
+    </div>
+
     <div v-if="logs.length" class="flex flex-wrap" :class="{'flex-col-reverse': options.reverse}">
       <template v-for="(messageDto, key) in logs">
 
@@ -40,16 +48,18 @@
 </template>
 
 <script>
-import DataRow from "@/components/dump/DataRow.vue";
-import HelloDocument from "@/components/HelloDocument.vue";
-import ThrowableRow from "@/components/dump/ThrowableRow.vue";
-import ScrollableOptions from "@/components/ScrollableOptions.vue";
+import DataRow from "@/components/dump/DataRow.vue"
+import HelloDocument from "@/components/HelloDocument.vue"
+import ThrowableRow from "@/components/dump/ThrowableRow.vue"
+import ScrollableOptions from "@/components/ScrollableOptions.vue"
 import {inject} from "vue";
 import {clipboard} from "electron"
+import SearchText from "@/components/SearchText.vue";
 
 export default {
   name: "ScrollableView",
   components: {
+    SearchText,
     ScrollableOptions,
     ThrowableRow,
     HelloDocument,
@@ -86,6 +96,11 @@ export default {
         reverse: false,
       },
       scrollY: 0,
+      searchContext: {
+        enabled: false,
+        lastTerm: '',
+        foundCount: 0,
+      }
     }
   },
   watch: {
@@ -172,13 +187,74 @@ export default {
     copyToClipboard() {
       clipboard.writeText('')
     },
+    handleKeydown(e) {
+      if (e.key === 'Escape' && this.searchContext.enabled) {
+        this.searchContext.enabled = false
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
+        e.preventDefault()
+        e.stopPropagation()
+
+        this.searchContext.enabled = ! this.searchContext.enabled
+      }
+    },
+    saveTerm(term) {
+      this.searchContext.lastTerm = term
+    },
+    findText(text) {
+      const scrollableViewElement = this.$refs.scrollable
+      const textNodes = this.getTextNodesIn(scrollableViewElement)
+      const matchingNodes = textNodes.filter(node => node.textContent.includes(text))
+
+      this.searchContext.foundCount = matchingNodes.length
+
+      if (matchingNodes.length > 0) {
+        let currentIndex = matchingNodes.findIndex(node => node.parentElement.classList.contains('--found-text'))
+
+        // 현재 하이라이트된 요소가 없거나, 마지막 요소일 경우 첫 번째 요소로 순환합니다.
+        if (currentIndex === -1 || currentIndex === matchingNodes.length - 1) {
+          currentIndex = 0;
+        } else {
+          currentIndex += 1; // 다음 요소로 이동합니다.
+        }
+
+        matchingNodes[currentIndex].parentElement.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
+
+        const previousHighlightedElement = scrollableViewElement.querySelector('.--found-text');
+
+        if (previousHighlightedElement) {
+          previousHighlightedElement.classList.remove('--found-text');
+        }
+
+        matchingNodes[currentIndex].parentElement.classList.add('--found-text');
+      }
+    },
+    getTextNodesIn(element) {
+      let textNodes = []
+
+      for (let child of element.childNodes) {
+        if (child.nodeType === Node.TEXT_NODE) {
+          textNodes.push(child)
+        } else {
+          textNodes = [...textNodes, ...this.getTextNodesIn(child)]
+        }
+      }
+
+      return textNodes
+    }
   },
   mounted() {
     this.$refs.scrollable.addEventListener('scroll', this.updateScrollY)
+    window.addEventListener('keydown', this.handleKeydown)
 
     if (this.loadFromLocalStorage) {
       this.loadLogsFromLocalStorage()
     }
+  },
+  beforeUnmount() {
+    this.$refs.scrollable.removeEventListener('scroll', this.updateScrollY)
+    window.removeEventListener('keydown', this.handleKeydown)
   }
 }
 </script>
