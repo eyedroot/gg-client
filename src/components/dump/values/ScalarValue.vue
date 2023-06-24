@@ -2,7 +2,7 @@
   <span class="--value" :class="textColor">
     <span>{{ printScalarType }}</span>
     <span
-      v-if="! isPropertyOrKey && ['float', 'integer', 'double'].includes(capsuleDto.type)"
+      v-if="! isPropertyOrKey && ['float', 'integer', 'double', 'boolean'].includes(capsuleDto.type)"
       class="ml-1.5 text-[9px] tracking-tighter text-gray-400 italic select-none">// {{ getShortType }}</span>
   </span>
 </template>
@@ -60,7 +60,7 @@ export default {
     }
   }
   &.boolean {
-    @apply text-green-600;
+    @apply text-orange-600;
   }
   &.object {
     @apply text-gray-400;
