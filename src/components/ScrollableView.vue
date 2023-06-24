@@ -151,8 +151,12 @@ export default {
         'w-1/3': this.options.grid === 3
       }
     },
-    handleClearLogs() {
+    handleClearLogs(removeLocalStorage = false) {
       this.logs = []
+
+      if (removeLocalStorage) {
+        localStorage.removeItem(this.storageName)
+      }
     },
     getDisplayId(key) {
       return this.options.reverse ? this.logs.length - key : key + 1

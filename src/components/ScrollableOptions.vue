@@ -51,11 +51,7 @@ name: "ScrollableOptions",
     },
     clearLogs() {
       if (window.confirm('Do you want to erase all data?')) {
-        if (this.loadFromLocalStorage) {
-          localStorage.removeItem('logs')
-        } else {
-          this.$emit('clearLogs')
-        }
+        this.$emit('clearLogs', this.loadFromLocalStorage)
       }
     },
     getSortIcon() {
