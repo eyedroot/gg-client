@@ -207,6 +207,11 @@ export default {
     },
     saveTerm(term) {
       this.searchContext.lastTerm = term
+
+      if (! term.length) {
+        this.searchContext.foundCount = -1
+        this.searchContext.currentIndex = -1
+      }
     },
     findText(text) {
       const scrollableViewElement = this.$refs.scrollable
