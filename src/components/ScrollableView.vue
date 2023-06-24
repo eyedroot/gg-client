@@ -72,6 +72,11 @@ export default {
       required: false,
       default: false,
     },
+    currentContainer: {
+      type: String,
+      required: false,
+      default: '',
+    },
   },
   data() {
     return {
@@ -96,6 +101,11 @@ export default {
         }
       })
     },
+    currentContainer: function (newContainer) {
+      if (newContainer === 'shiftContainer') {
+        this.loadLogsFromLocalStorage()
+      }
+    }
   },
   methods: {
     handleOptions(options) {

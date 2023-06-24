@@ -18,7 +18,8 @@
     <ScrollableView
       ref="shiftContainer"
       :load-from-local-storage="true"
-      v-if="currentContainer === 'shiftContainer'">
+      :current-container="currentContainer"
+      v-show="currentContainer === 'shiftContainer'">
     </ScrollableView>
   </div>
 </template>
