@@ -19,7 +19,7 @@
     <div v-if="logs.length" class="flex flex-wrap" :class="{'flex-col-reverse': options.reverse}">
       <template v-for="(messageDto, key) in logs" :key="key">
         <DataRow :class="getColumnSize()"
-                 :id="key"
+                 :id="Number(key)"
                  :display-id="getDisplayId(key)"
                  :messageDto="messageDto"
                  :removeItem="removeItem"
