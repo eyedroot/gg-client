@@ -7,12 +7,13 @@
       @update:options="handleOptions"
       @clearLogs="handleClearLogs"></ScrollableOptions>
 
-    <div class="fixed top-9 right-6 z-50">
+    <div class="fixed bottom-3 right-8 z-50">
       <SearchText v-if="searchContext.enabled"
                   ref="searchText"
                   :search-context="searchContext"
                   @findText="findText"
-                  @saveTerm="saveTerm"></SearchText>
+                  @saveTerm="saveTerm"
+                  @closeSearch="searchContext.enabled = false"></SearchText>
     </div>
 
     <div v-if="logs.length" class="flex flex-wrap" :class="{'flex-col-reverse': options.reverse}">
@@ -100,7 +101,8 @@ export default {
       searchContext: {
         enabled: false,
         lastTerm: '',
-        foundCount: 0,
+        foundCount: -1,
+        currentIndex: -1,
       }
     }
   },
@@ -194,10 +196,13 @@ export default {
       }
 
       if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
-        e.preventDefault()
-        e.stopPropagation()
-
-        this.searchContext.enabled = ! this.searchContext.enabled
+        if (this.searchContext.enabled) {
+          this.$refs.searchText.focusInput()
+        } else {
+          e.preventDefault()
+          e.stopPropagation()
+          this.searchContext.enabled = ! this.searchContext.enabled
+        }
       }
     },
     saveTerm(term) {
@@ -219,6 +224,8 @@ export default {
         } else {
           currentIndex += 1; // 다음 요소로 이동합니다.
         }
+
+        this.searchContext.currentIndex = currentIndex
 
         matchingNodes[currentIndex].parentElement.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
 
