@@ -29,8 +29,7 @@
       <component
         :is="this.$getValueComponent(value)"
         :capsule-dto="value"
-        :depth="depth + 1"
-        :force-open-folding="forceOpenFolding">
+        :depth="depth + 1">
       </component>
     </div>
 
@@ -60,11 +59,6 @@ export default {
     capsuleDto: {
       type: Object,
       required: true
-    },
-    forceOpenFolding: {
-      type: Boolean,
-      default: false,
-      required: true,
     },
   },
   data() {
@@ -106,10 +100,6 @@ export default {
       return `brackets-${this.depth % 4}`;
     },
     isCodeFolded() {
-      if (this.forceOpenFolding) {
-        return false
-      }
-
       if (this.shouldBeCodeFolding) {
         return false
       }

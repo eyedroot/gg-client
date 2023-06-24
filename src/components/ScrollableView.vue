@@ -28,7 +28,6 @@
                  :removeItem="removeItem"
                  :load-from-local-storage="loadFromLocalStorage"
                  @getColumnSize="getColumnSize"
-                 :search-context="searchContext"
                  @copyToClipboard="copyToClipboard">
         </DataRow>
 

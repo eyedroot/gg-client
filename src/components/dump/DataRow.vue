@@ -11,8 +11,7 @@
 
         <div class="mb-3" ref="rValue">
           <component :is="this.$getValueComponent(messageDto.data)"
-                     :capsule-dto="messageDto.data"
-                     :force-open-folding="searchContext.enabled"></component>
+                     :capsule-dto="messageDto.data"></component>
         </div>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
@@ -101,10 +100,6 @@ export default {
       type: Boolean,
       required: false,
       default: false
-    },
-    searchContext: {
-      type: Object,
-      required: true,
     },
   },
   data() {
