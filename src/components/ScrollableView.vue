@@ -119,7 +119,7 @@ export default {
         }
 
         if (this.searchContext.lastTerm.length > 0) {
-          this.findText(this.searchContext.lastTerm)
+          this.findText(this.searchContext.lastTerm, false)
         }
       })
     },
@@ -224,7 +224,7 @@ export default {
         element.classList.remove('--found-text', '--found-cursor')
       })
     },
-    findText(text) {
+    findText(text, focus = true) {
       if (text !== this.searchContext.lastSearched) {
         this.clearFoundText()
       }
@@ -240,26 +240,32 @@ export default {
           node.parentElement.classList.add('--found-text')
         })
 
-        let currentIndex = matchingNodes.findIndex(node => node.parentElement.classList.contains('--found-cursor'))
+        if (focus) {
+          let currentIndex = matchingNodes.findIndex(node => node.parentElement.classList.contains('--found-cursor'))
 
-        // 현재 하이라이트된 요소가 없거나, 마지막 요소일 경우 첫 번째 요소로 순환합니다.
-        if (currentIndex === -1 || currentIndex === matchingNodes.length - 1) {
-          currentIndex = 0;
-        } else {
-          currentIndex += 1; // 다음 요소로 이동합니다.
+          // 현재 하이라이트된 요소가 없거나, 마지막 요소일 경우 첫 번째 요소로 순환합니다.
+          if (currentIndex === -1 || currentIndex === matchingNodes.length - 1) {
+            currentIndex = 0;
+          } else {
+            currentIndex += 1; // 다음 요소로 이동합니다.
+          }
+
+          this.searchContext.currentIndex = currentIndex
+
+          matchingNodes[currentIndex].parentElement.scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+          });
+
+          const previousHighlightedElement = scrollableViewElement.querySelector('.--found-cursor');
+
+          if (previousHighlightedElement) {
+            previousHighlightedElement.classList.remove('--found-cursor');
+          }
+
+          matchingNodes[currentIndex].parentElement.classList.add('--found-cursor');
         }
-
-        this.searchContext.currentIndex = currentIndex
-
-        matchingNodes[currentIndex].parentElement.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
-
-        const previousHighlightedElement = scrollableViewElement.querySelector('.--found-cursor');
-
-        if (previousHighlightedElement) {
-          previousHighlightedElement.classList.remove('--found-cursor');
-        }
-
-        matchingNodes[currentIndex].parentElement.classList.add('--found-cursor');
       }
 
       this.searchContext.lastSearched = text

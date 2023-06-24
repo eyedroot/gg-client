@@ -6,7 +6,7 @@
            v-model="term"
            @keyup.enter="findText"
            type="text"
-           class="bg-gray-100 leading-6 px-1 border-[1px] border-gray-300 focus:ring-2 focus:outline-none"
+           class="bg-gray-100 leading-6 px-1 border-[1px] border-gray-300 ring-2 focus:outline-none"
            :class="ringColor"
            placeholder="Enter">
 
@@ -59,7 +59,7 @@ export default {
         return 'focus:ring-gray-500'
       }
 
-      return props.searchContext.foundCount ? 'focus:ring-green-500' : 'focus:ring-red-500'
+      return props.searchContext.foundCount ? 'ring-green-500' : 'ring-red-500'
     })
 
     return {

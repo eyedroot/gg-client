@@ -48,6 +48,6 @@ label {
   animation-iteration-count: 1;
 
   &.--found-cursor {
-    @apply border-[1px] border-green-700;
+    @apply ring-2 ring-green-600;
   }
 }
