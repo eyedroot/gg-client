@@ -116,6 +116,10 @@ export default {
         } else {
           this.scrollToTop()
         }
+
+        if (this.searchContext.lastTerm.length > 0) {
+          this.findText(this.searchContext.lastTerm)
+        }
       })
     },
     currentContainer: function (newContainer) {
@@ -210,6 +214,10 @@ export default {
       if (! term.length) {
         this.searchContext.foundCount = -1
         this.searchContext.currentIndex = -1
+
+        this.$refs.scrollable.querySelectorAll('.--found-text, .--found-cursor').forEach(element => {
+          element.classList.remove('--found-text', '--found-cursor')
+        })
       }
     },
     findText(text) {
@@ -220,7 +228,11 @@ export default {
       this.searchContext.foundCount = matchingNodes.length
 
       if (matchingNodes.length > 0) {
-        let currentIndex = matchingNodes.findIndex(node => node.parentElement.classList.contains('--found-text'))
+        matchingNodes.forEach(node => {
+          node.parentElement.classList.add('--found-text')
+        })
+
+        let currentIndex = matchingNodes.findIndex(node => node.parentElement.classList.contains('--found-cursor'))
 
         // 현재 하이라이트된 요소가 없거나, 마지막 요소일 경우 첫 번째 요소로 순환합니다.
         if (currentIndex === -1 || currentIndex === matchingNodes.length - 1) {
@@ -233,13 +245,13 @@ export default {
 
         matchingNodes[currentIndex].parentElement.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
 
-        const previousHighlightedElement = scrollableViewElement.querySelector('.--found-text');
+        const previousHighlightedElement = scrollableViewElement.querySelector('.--found-cursor');
 
         if (previousHighlightedElement) {
-          previousHighlightedElement.classList.remove('--found-text');
+          previousHighlightedElement.classList.remove('--found-cursor');
         }
 
-        matchingNodes[currentIndex].parentElement.classList.add('--found-text');
+        matchingNodes[currentIndex].parentElement.classList.add('--found-cursor');
       }
     },
     getTextNodesIn(element) {

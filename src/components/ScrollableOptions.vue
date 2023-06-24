@@ -3,10 +3,10 @@
     <button @click="setGrid(1)">
       <img src="/assets/image/icons/columns-1.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 1 }" alt="Column 1">
     </button>
-    <button @click="setGrid(2)" :class="{ 'opacity-20': isPreventGrid23() }">
+    <button @click="setGrid(2)" :class="{ 'opacity-20 cursor-not-allowed': isPreventGrid23() }">
       <img src="/assets/image/icons/columns-2.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 2 }" alt="Column 2">
     </button>
-    <button @click="setGrid(3)" :class="{ 'opacity-20': isPreventGrid23() }">
+    <button @click="setGrid(3)" :class="{ 'opacity-20 cursor-not-allowed': isPreventGrid23() }">
       <img src="/assets/image/icons/columns-3.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 3 }" alt="Column 3">
     </button>
     <button @click="setReverse()">

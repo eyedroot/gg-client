@@ -43,7 +43,11 @@ label {
 }
 
 .--found-text {
-  @apply relative inline-block px-0.5 bg-green-300 animate-pulse;
+  @apply relative inline-block px-0.5 bg-green-200 animate-pulse;
   animation-duration: 0.2s;
   animation-iteration-count: 1;
+
+  &.--found-cursor {
+    @apply border-[1px] border-green-700;
+  }
 }
