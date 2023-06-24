@@ -100,6 +100,7 @@ export default {
       searchContext: {
         enabled: false,
         lastTerm: '',
+        lastSearched: '',
         foundCount: -1,
         currentIndex: -1,
       }
@@ -212,15 +213,22 @@ export default {
       this.searchContext.lastTerm = term
 
       if (! term.length) {
-        this.searchContext.foundCount = -1
-        this.searchContext.currentIndex = -1
-
-        this.$refs.scrollable.querySelectorAll('.--found-text, .--found-cursor').forEach(element => {
-          element.classList.remove('--found-text', '--found-cursor')
-        })
+        this.clearFoundText()
       }
     },
+    clearFoundText() {
+      this.searchContext.foundCount = -1
+      this.searchContext.currentIndex = -1
+
+      this.$refs.scrollable.querySelectorAll('.--found-text, .--found-cursor').forEach(element => {
+        element.classList.remove('--found-text', '--found-cursor')
+      })
+    },
     findText(text) {
+      if (text !== this.searchContext.lastSearched) {
+        this.clearFoundText()
+      }
+
       const scrollableViewElement = this.$refs.scrollable
       const textNodes = this.getTextNodesIn(scrollableViewElement)
       const matchingNodes = textNodes.filter(node => node.textContent.includes(text))
@@ -253,6 +261,8 @@ export default {
 
         matchingNodes[currentIndex].parentElement.classList.add('--found-cursor');
       }
+
+      this.searchContext.lastSearched = text
     },
     getTextNodesIn(element) {
       let textNodes = []
