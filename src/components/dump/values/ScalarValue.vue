@@ -1,12 +1,9 @@
 <template>
   <span class="--value" :class="textColor">
-    <span>
-      <span v-if="capsuleDto.type === 'string'" class="text-gray-500">"</span>
-      <span>{{ printScalarType }}</span>
-      <span v-if="capsuleDto.type === 'string'" class="text-gray-500">"</span>
-    </span>
-    <span v-if="! isProperty && ['float', 'integer', 'double'].includes(capsuleDto.type)"
-      class="ml-1.5 text-[9px] tracking-tighter text-gray-400 italic select-none"></span>
+    <span>{{ printScalarType }}</span>
+    <span
+      v-if="! isPropertyOrKey && ['float', 'integer', 'double'].includes(capsuleDto.type)"
+      class="ml-1.5 text-[9px] tracking-tighter text-gray-400 italic select-none">// {{ getShortType }}</span>
   </span>
 </template>
 
@@ -18,7 +15,7 @@ export default {
       type: Object,
       required: true
     },
-    isProperty: {
+    isPropertyOrKey: {
       type: Boolean,
       default: false,
       required: false
@@ -27,8 +24,8 @@ export default {
   computed: {
     textColor() {
       return {
-        property: this.isProperty === true,
-        [typeof this.capsuleDto.value]: this.isProperty === false,
+        property: this.isPropertyOrKey === true,
+        [typeof this.capsuleDto.value]: this.isPropertyOrKey === false,
       }
     },
     printScalarType() {
@@ -53,6 +50,14 @@ export default {
   }
   &.string {
     @apply text-green-600;
+    &::before {
+      content: '"';
+      @apply text-gray-500;
+    }
+    &::after {
+      content: '"';
+      @apply text-gray-500;
+    }
   }
   &.boolean {
     @apply text-green-600;
