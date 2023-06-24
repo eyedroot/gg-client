@@ -9,11 +9,17 @@
       <div class="--code">
         <CallFile :backtrace="getNotVendorTrace()" :id="displayId"></CallFile>
 
-        <div class="mb-3">
+        <div class="mb-3" ref="rValue">
           <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
         </div>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
+          <button class="--backtrace-button button transparent inline-flex items-center justify-center"
+            @click="copyToClipboard">
+            <fa-icon icon="copy" class="mr-1.5"></fa-icon>
+            <span class="text-gray-800">{{ copied ? 'copied!' : 'copy' }}</span>
+          </button>
+
           <button v-if="loadFromLocalStorage === false"
             class="--backtrace-button button transparent inline-flex items-center justify-center"
             @click="saveToLocalStorage">
@@ -105,6 +111,7 @@ export default {
     return {
       showBacktrace: false,
       saved: false,
+      copied: false,
     }
   },
   methods: {
@@ -132,6 +139,15 @@ export default {
 
       localStorage.setItem(this.storageName, JSON.stringify(logs));
       this.saved = true;
+    },
+    copyToClipboard() {
+      this.copied = true;
+
+      console.log(this.$refs.rValue.innerText)
+      // let text = this.$refs.rValue.value.textContent;
+      // console.log(text)
+
+      this.$emit('copy-to-clipboard', '')
     },
   },
   computed: {

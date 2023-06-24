@@ -18,7 +18,8 @@
                  :messageDto="messageDto"
                  :removeItem="removeItem"
                  :load-from-local-storage="loadFromLocalStorage"
-                 @getColumnSize="getColumnSize">
+                 @getColumnSize="getColumnSize"
+                 @copyToClipboard="copyToClipboard">
         </DataRow>
 
         <ThrowableRow :class="getColumnSize()"
@@ -28,7 +29,8 @@
                       :display-id="getDisplayId(key)"
                       :messageDto="messageDto"
                       :load-from-local-storage="loadFromLocalStorage"
-                      :removeItem="removeItem">
+                      :removeItem="removeItem"
+                      @copyToClipboard="copyToClipboard">
         </ThrowableRow>
       </template>
     </div>
@@ -43,6 +45,7 @@ import HelloDocument from "@/components/HelloDocument.vue";
 import ThrowableRow from "@/components/dump/ThrowableRow.vue";
 import ScrollableOptions from "@/components/ScrollableOptions.vue";
 import {inject} from "vue";
+import {clipboard} from "electron"
 
 export default {
   name: "ScrollableView",
@@ -155,7 +158,10 @@ export default {
     loadLogsFromLocalStorage() {
       const logs = localStorage.getItem(this.storageName) || '[]'
       this.logs = JSON.parse(logs)
-    }
+    },
+    copyToClipboard() {
+      clipboard.writeText('')
+    },
   },
   mounted() {
     this.$refs.scrollable.addEventListener('scroll', this.updateScrollY)

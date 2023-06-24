@@ -11,11 +11,10 @@
   </span>
 
   <div class="relative flex flex-col" :class="{ 'collapsed': isCodeFolded }">
-    <div class="pl-[1.5rem]"
-         v-for="(value, key) in capsuleDto.value"
-         :key="key">
+    <div class="" v-for="(value, key) in capsuleDto.value" :key="key">
 
       <span class="h-fit">
+        <span v-html="getSpace()"></span>
         <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
       </span>
 
@@ -29,7 +28,8 @@
     </div>
 
     <div class="--tail array">
-      <span class="brackets" :class="getBracketsIndex">]</span>
+      <span v-html="getSpace(depth - 1)">
+      </span><span class="brackets" :class="getBracketsIndex">]</span>
     </div>
   </div>
 </template>
@@ -48,13 +48,13 @@ export default {
   props: {
     depth: {
       type: Number,
-      default: 0,
+      default: 1,
       required: false,
     },
     capsuleDto: {
       type: Object,
       required: true
-    }
+    },
   },
   data() {
     return {
@@ -64,6 +64,11 @@ export default {
   methods: {
     toggleCollapsed() {
       this.shouldBeCodeFolding = !this.shouldBeCodeFolding;
+    },
+    getSpace(depth = undefined) {
+      depth = depth !== undefined ? depth : this.depth
+
+      return '&nbsp;'.repeat(depth * 2);
     },
   },
   computed: {

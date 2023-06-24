@@ -13,6 +13,12 @@
         </div>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
+          <button class="--backtrace-button button transparent inline-flex items-center justify-center"
+            @click="copyToClipboard">
+            <fa-icon icon="copy" class="mr-1.5"></fa-icon>
+            <span class="text-gray-800">{{ copied ? 'copied!' : 'copy' }}</span>
+          </button>
+
           <button v-if="loadFromLocalStorage === false"
                   class="--backtrace-button button transparent inline-flex items-center justify-center"
                   @click="saveToLocalStorage">
@@ -83,6 +89,7 @@ export default {
     return {
       showBacktrace: false,
       saved: false,
+      copied: false,
     };
   },
   methods: {
@@ -105,6 +112,10 @@ export default {
       localStorage.setItem(this.storageName, JSON.stringify(logs));
       this.saved = true
     },
+    copyToClipboard() {
+      this.copied = true
+      this.$emit('copy-to-clipboard', toRaw(this.messageDto))
+    }
   },
   computed: {
     getRowBackgroundColor() {

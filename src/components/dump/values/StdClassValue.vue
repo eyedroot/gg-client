@@ -10,18 +10,17 @@
     </CodeFolding>
   </span>
 
-  <div class="--line pl-[1.5rem]" v-if="capsuleDto.pruned">
+  <div class="--line" v-if="capsuleDto.pruned">
     <span class="italic text-gray-500">...pruned properties</span>
   </div>
 
   <div class="relative flex flex-col" :class="{ 'collapsed': isCodeFolded }">
-    <div class="--line pl-[1.5rem]"
-         v-for="(value, key) in capsuleDto.value"
-         :key="key">
+    <div v-for="(value, key) in capsuleDto.value" :key="key">
 
       <span class="h-fit">
+        <span v-html="getSpace()"></span>
         <span class="text-blue-500 mr-0.5">{{ getModifierToCharacter(getModifier(key)) }}</span>
-        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))" :is-property-or-key="true"></ScalarValue>
+        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))" :is-property="true"></ScalarValue>
       </span>
 
       <span class="h-fit mr-1.5">:</span>
@@ -34,6 +33,7 @@
     </div>
 
     <div class="--tail array">
+      <span v-html="getSpace(depth - 1)"></span>
       <span class="brackets" :class="getBracketsIndex">}</span>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
   props: {
     depth: {
       type: Number,
-      default: 0,
+      default: 1,
       required: false,
     },
     capsuleDto: {
@@ -87,6 +87,15 @@ export default {
     },
     getPropertyName(rawKey) {
       return rawKey.split('@')[1];
+    },
+    getSpace(depth = undefined) {
+      depth = depth !== undefined ? depth : this.depth
+
+      if (depth < 0) {
+        depth = 0
+      }
+
+      return '&nbsp;'.repeat(depth * 2);
     },
   },
   computed: {
