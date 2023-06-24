@@ -38,13 +38,13 @@ name: "ScrollableOptions",
   },
   methods: {
     setGrid(grid) {
-      this.$emit('update:options', {
+      this.$emit('updateOptions', {
         grid: grid,
         reverse: this.options.reverse,
       })
     },
     setReverse() {
-      this.$emit('update:options', {
+      this.$emit('updateOptions', {
         grid: this.options.grid,
         reverse: ! this.options.reverse,
       })

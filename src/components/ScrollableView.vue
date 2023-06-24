@@ -4,7 +4,7 @@
       :options="options"
       :scroll-y="scrollY"
       :load-from-local-storage="loadFromLocalStorage"
-      @update:options="updateOptions"
+      @updateOptions="updateOptions"
       @clearLogs="clearLogs"></ScrollableOptions>
 
     <div class="fixed bottom-3 right-8 z-50">
