@@ -15,11 +15,11 @@
         </code>
       </div>
 
-      <div v-if="this.showParametersIndexes.includes(index)" class="--code ml-5 my-2">
-        <component :is="this.$getValueComponent(row?.args)" :capsule-dto="row?.args"></component>
+      <div v-if="showParametersIndexes.includes(index)" class="--code ml-5 my-2">
+        <component :is="$getValueComponent(row?.args)" :capsule-dto="row?.args"></component>
       </div>
 
-      <CodeViewer v-if="true" :source-code="row.sourceCode" :focus-line="row.line"></CodeViewer>
+      <CodeViewer v-if="showCodesIndexes.includes(index)" :source-code="row.sourceCode" :focus-line="row?.line"></CodeViewer>
     </div>
   </div>
 </template>
