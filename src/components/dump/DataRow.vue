@@ -109,7 +109,6 @@ export default {
   },
   methods: {
     toggleBacktrace() {
-      console.log('toggleBacktrace')
       this.showBacktrace = ! this.showBacktrace;
     },
     getNotVendorTrace() {
