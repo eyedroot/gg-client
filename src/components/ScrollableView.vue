@@ -3,7 +3,7 @@
     <ScrollableOptions
       :options="options"
       :scroll-y="scrollY"
-      :load-from-local-storage="loadFromLocalStorage"
+      :is-local-data="isLocalData"
       @updateOptions="updateOptions"
       @clearLogs="clearLogs"></ScrollableOptions>
 
@@ -23,7 +23,7 @@
                  :display-id="getDisplayId(key)"
                  :messageDto="messageDto"
                  :removeItem="removeItem"
-                 :load-from-local-storage="loadFromLocalStorage"
+                 :is-local-data="isLocalData"
                  @getColumnSize="getColumnSize">
         </DataRow>
       </template>
@@ -60,7 +60,7 @@ export default {
       type: Object,
       required: false,
     },
-    loadFromLocalStorage: {
+    isLocalData: {
       type: Boolean,
       required: false,
       default: false,
@@ -148,7 +148,7 @@ export default {
     removeItem(id) {
       this.logs.splice(id, 1)
 
-      if (this.loadFromLocalStorage) {
+      if (this.isLocalData) {
         localStorage.setItem(this.storageName, JSON.stringify(this.logs))
       }
     },
@@ -252,7 +252,7 @@ export default {
     this.$refs.scrollable.addEventListener('scroll', this.handleScrollY)
     window.addEventListener('keydown', this.handleKeydown)
 
-    if (this.loadFromLocalStorage) {
+    if (this.isLocalData) {
       this.loadLogsFromLocalStorage()
     }
   },

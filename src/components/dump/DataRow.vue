@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
-          <RowExtensions :load-from-local-storage="loadFromLocalStorage"
+          <RowExtensions :is-local-data="isLocalData"
                          @saveToLocalStorage="saveToLocalStorage"
                          @toggleBacktrace="toggleBacktrace">
             <template v-slot:languageVersion>
@@ -96,7 +96,7 @@ export default {
       type: Function,
       required: true
     },
-    loadFromLocalStorage: {
+    isLocalData: {
       type: Boolean,
       required: false,
       default: false

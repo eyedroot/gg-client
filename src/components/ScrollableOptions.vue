@@ -30,7 +30,7 @@ name: "ScrollableOptions",
       type: Number,
       required: true
     },
-    loadFromLocalStorage: {
+    isLocalData: {
       type: Boolean,
       required: false,
       default: false,
@@ -51,7 +51,7 @@ name: "ScrollableOptions",
     },
     clearLogs() {
       if (window.confirm('Do you want to erase all data?')) {
-        this.$emit('clearLogs', this.loadFromLocalStorage)
+        this.$emit('clearLogs', this.isLocalData)
       }
     },
     getSortIcon() {
