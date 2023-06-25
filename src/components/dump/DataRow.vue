@@ -2,7 +2,7 @@
   <div v-if="['log', 'throwable'].includes(messageDto.messageType)"
        class="flex h-fit overflow-x-auto px-0.5 pt-1" :class="getRowBackgroundColor">
 
-    <div class="--code-wrap flex-auto items-center relative">
+    <div class="--code-wrap flex-auto items-center relative" ref="code">
       <button class="absolute top-1 right-1.5 z-20" @click="removeItem(id)">
         <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
       </button>
@@ -21,7 +21,8 @@
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
           <RowExtensions :is-local-data="isLocalData"
                          @saveToLocalStorage="saveToLocalStorage"
-                         @toggleBacktrace="toggleBacktrace">
+                         @toggleBacktrace="toggleBacktrace"
+                         @copyImage="copyImage">
             <template v-slot:languageVersion>
               <span>{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>
             </template>
@@ -57,6 +58,7 @@ import BackTrace from "@/components/dump/rows/BackTrace.vue";
 import SpaceValue from "@/components/dump/values/SpaceValue.vue";
 import {inject, toRaw} from "vue";
 import RowExtensions from "@/components/dump/RowExtensions.vue";
+import html2canvas from "html2canvas";
 
 export default {
   name: "DataRow",
@@ -126,6 +128,24 @@ export default {
 
       localStorage.setItem(this.storageName, JSON.stringify(logs));
     },
+    async copyImage() {
+      const canvas = await html2canvas(this.$refs.code)
+      const dataUrl = canvas.toDataURL()
+
+      // Convert dataUrl to Blob
+      const response = await fetch(dataUrl)
+      const blob = await response.blob()
+
+      // Create a new clipboard item
+      const clipboardItem = new ClipboardItem({ 'image/png': blob })
+
+      // Write the clipboard item to the clipboard
+      navigator.clipboard.write([clipboardItem]).then(() => {
+        console.log('Image copied to clipboard.')
+      }).catch(err => {
+        console.error('Failed to copy image to clipboard: ', err)
+      })
+    }
   },
   computed: {
     getRowBackgroundColor() {

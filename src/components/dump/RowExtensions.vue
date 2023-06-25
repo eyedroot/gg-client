@@ -1,15 +1,21 @@
 <template>
   <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
+    <button class="--backtrace-button button transparent inline-flex items-center justify-center"
+      @click="this.$emit('copyImage')">
+      <fa-icon icon="image" class="mr-1"></fa-icon>
+      <span class="text-gray-800">png</span>
+    </button>
+
     <button v-if="isLocalData === false"
             class="--backtrace-button button transparent inline-flex items-center justify-center"
             @click="this.$emit('saveToLocalStorage'); this.saved = true">
-      <fa-icon icon="floppy-disk" class="mr-1.5"></fa-icon>
+      <fa-icon icon="floppy-disk" class="mr-1"></fa-icon>
       <span class="text-gray-800">{{ saved ? 'saved!' : 'save' }}</span>
     </button>
 
     <button class="--backtrace-button button transparent items-center justify-center"
             @click="this.$emit('toggleBacktrace')">
-      <fa-icon icon="code" class="mr-1.5"></fa-icon>
+      <fa-icon icon="code" class="mr-1"></fa-icon>
       <span class="text-gray-800">backtrace_<slot name="languageVersion"></slot></span>
     </button>
   </div>
