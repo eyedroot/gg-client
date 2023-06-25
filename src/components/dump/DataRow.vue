@@ -2,7 +2,7 @@
   <div v-if="['log', 'throwable'].includes(messageDto.messageType)"
        class="flex h-fit overflow-x-auto px-0.5 pt-1" :class="getRowBackgroundColor">
 
-    <div class="flex-auto items-center relative">
+    <div class="--code-wrap flex-auto items-center relative">
       <button class="absolute top-1 right-1.5 z-20" @click="removeItem(id)">
         <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
       </button>
@@ -11,7 +11,8 @@
         <CallFile :backtrace="getNotVendorTrace()" :id="displayId"></CallFile>
 
         <div v-if="messageDto.messageType.startsWith('log')" class="mb-3" ref="rValue">
-          <component :is="this.$getValueComponent(messageDto.data)" :capsule-dto="messageDto.data"></component>
+          <component :is="this.$getValueComponent(messageDto.data)"
+                     :capsule-dto="messageDto.data"></component>
         </div>
         <div v-else class="mb-3">
           <span>{{ this.messageDto.data.value.message }}</span>
@@ -108,6 +109,7 @@ export default {
   },
   methods: {
     toggleBacktrace() {
+      console.log('toggleBacktrace')
       this.showBacktrace = ! this.showBacktrace;
     },
     getNotVendorTrace() {

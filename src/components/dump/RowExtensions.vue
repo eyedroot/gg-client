@@ -8,7 +8,7 @@
     </button>
 
     <button class="--backtrace-button button transparent items-center justify-center"
-            @click="this.$emit('toggleBackTrace')">
+            @click="this.$emit('toggleBacktrace')">
       <fa-icon icon="code" class="mr-1.5"></fa-icon>
       <span class="text-gray-800">backtrace_<slot name="languageVersion"></slot></span>
     </button>

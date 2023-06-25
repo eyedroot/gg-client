@@ -3,14 +3,14 @@
     <span class="text-purple-900 font-bold">Array:{{ getKeysCount }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
 
     <CodeFolding
-      v-if="isCodeFolded"
+      v-if="foldCondition"
       type="array"
       :bracket-index="getBracketsIndex"
       @handleCollapsed="toggleCollapsed">
     </CodeFolding>
   </span>
 
-  <div class="relative flex flex-col" :class="{ 'collapsed': isCodeFolded }">
+  <div class="relative flex flex-col" :class="{ 'collapsed': foldCondition }">
     <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
+import {defineAsyncComponent, ref, watchEffect} from 'vue';
 import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
 
 export default {
@@ -55,30 +55,41 @@ export default {
       type: Object,
       required: true
     },
+    unfoldAll: {
+      type: Boolean,
+      default: false,
+      required: false,
+    }
   },
-  data() {
+  setup(props) {
+    const shouldFold = ref(props.unfoldAll)
+
+    watchEffect(() => {
+      shouldFold.value = props.unfoldAll
+    })
+
     return {
-      shouldBeCodeFolding: false,
+      shouldFold,
     }
   },
   methods: {
     toggleCollapsed() {
-      this.shouldBeCodeFolding = !this.shouldBeCodeFolding;
+      this.shouldFold = ! this.shouldFold
     },
   },
   computed: {
     getKeysCount() {
-      return Object.keys(this.capsuleDto.value).length;
+      return Object.keys(this.capsuleDto.value).length
     },
     getBracketsIndex() {
-      return `brackets-${this.depth % 4}`;
+      return `brackets-${this.depth % 4}`
     },
-    isCodeFolded() {
-      if (this.shouldBeCodeFolding) {
-        return false;
+    foldCondition() {
+      if (this.shouldFold) {
+        return false
       }
 
-      return this.depth >= 2 && this.getKeysCount > 3;
+      return this.depth >= 2 && this.getKeysCount > 3
     },
   },
 }

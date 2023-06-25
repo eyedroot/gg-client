@@ -3,7 +3,7 @@
     <span class="text-purple-900 font-bold">{{ getStdClassName }}</span> <span class="brackets" :class="getBracketsIndex">{</span>
 
     <CodeFolding
-      v-if="isCodeFolded"
+      v-if="foldCondition"
       type="stdClass"
       :bracket-index="getBracketsIndex"
       @handleCollapsed="toggleCollapsed">
@@ -14,7 +14,7 @@
     <span class="italic text-gray-500">...pruned properties</span>
   </div>
 
-  <div class="relative flex flex-col" :class="{ 'collapsed': isCodeFolded }">
+  <div class="relative flex flex-col" :class="{ 'collapsed': foldCondition }">
     <div class="--line pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
+import {defineAsyncComponent, ref, watchEffect} from 'vue';
 import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
 
 export default {
@@ -60,33 +60,43 @@ export default {
       type: Object,
       required: true
     },
+    unfoldAll: {
+      type: Boolean,
+      default: false,
+    },
   },
-  data() {
+  setup(props) {
+    const shouldFold = ref(props.unfoldAll)
+
+    watchEffect(() => {
+      shouldFold.value = props.unfoldAll
+    })
+
     return {
-      shouldBeCodeFolding: false,
+      shouldFold,
     }
   },
   methods: {
     toggleCollapsed() {
-      this.shouldBeCodeFolding = !this.shouldBeCodeFolding;
+      this.shouldFold = !this.shouldFold
     },
     getModifier(rawKey) {
-      return rawKey.split('@')[0];
+      return rawKey.split('@')[0]
     },
     getModifierToCharacter(modifier) {
       switch (modifier) {
         case 'public':
-          return '+';
+          return '+'
         case 'protected':
-          return '#';
+          return '#'
         case 'private':
-          return '-';
+          return '-'
         default:
-          return '';
+          return ''
       }
     },
     getPropertyName(rawKey) {
-      return rawKey.split('@')[1];
+      return rawKey.split('@')[1]
     },
   },
   computed: {
@@ -99,8 +109,8 @@ export default {
     getBracketsIndex() {
       return `brackets-${this.depth % 4}`;
     },
-    isCodeFolded() {
-      if (this.shouldBeCodeFolding) {
+    foldCondition() {
+      if (this.shouldFold) {
         return false
       }
 
