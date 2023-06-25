@@ -94,7 +94,7 @@ export default {
 
       // DOM 업데이트가 완료된 후에 스크롤 위치를 업데이트
       this.$nextTick(() => {
-        this.scrollToEdge(this.options.reverse === true)
+        this.scrollToEdge(this.options.reverse === false)
 
         if (this.searchContext.lastTerm.length > 0) {
           this.findText(this.searchContext.lastTerm, false)
@@ -115,7 +115,7 @@ export default {
       }
 
       this.options = options
-      this.scrollToEdge(this.options.reverse === true)
+      this.scrollToEdge(this.options.reverse === false)
     },
     getColumnSize() {
       return {
