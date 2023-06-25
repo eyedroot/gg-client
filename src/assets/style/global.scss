@@ -46,8 +46,8 @@ label {
   @apply relative inline-block px-0.5 bg-green-200 animate-pulse;
   animation-duration: 0.2s;
   animation-iteration-count: 1;
+}
 
-  &.--found-cursor {
-    @apply ring-2 ring-green-600;
-  }
+.--found-cursor {
+  @apply ring-2 ring-green-600;
 }
