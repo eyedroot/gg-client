@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'TimeAgo',
   data() {
     return {
       timerId: null,

@@ -9,7 +9,6 @@
 
 <script>
 export default {
-  name: 'ScalarValue',
   props: {
     capsuleDto: {
       type: Object,

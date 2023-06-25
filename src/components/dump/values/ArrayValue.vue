@@ -39,7 +39,6 @@ import {defineAsyncComponent, ref, watchEffect} from 'vue';
 import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
 
 export default {
-  name: 'ArrayValue',
   components: {
     CodeFolding,
     ScalarValue: defineAsyncComponent(() => import('@/components/dump/values/ScalarValue.vue')),

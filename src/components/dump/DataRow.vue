@@ -33,7 +33,7 @@
       <div v-if="showBacktrace">
         <BackTrace
           :backtrace="messageDto.backtrace"
-          :highlighted-file="getNotVendorTrace()">
+          :focus-file="getNotVendorTrace()">
         </BackTrace>
       </div>
     </div>
@@ -61,7 +61,6 @@ import RowExtensions from "@/components/dump/RowExtensions.vue";
 import html2canvas from "html2canvas";
 
 export default {
-  name: "DataRow",
   components: {
     RowExtensions,
     SpaceValue,

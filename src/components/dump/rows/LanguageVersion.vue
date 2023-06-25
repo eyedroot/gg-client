@@ -4,7 +4,6 @@
 
 <script>
 export default {
-  name: 'LanguageVersion',
   props: {
     language: {
       type: String,

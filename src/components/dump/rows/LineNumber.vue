@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'LineNumber',
   props: {
     line: {
       type: Number,

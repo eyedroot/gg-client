@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'CallFile',
   props: {
     backtrace: {
       type: Object,
