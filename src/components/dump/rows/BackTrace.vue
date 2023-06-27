@@ -10,8 +10,8 @@
 
         <code class="ml-1.5 text-blue-600 font-bold">
           {{ row?.function }}(<span
-          class="inline-flex bg-gray-300 rounded-sm px-0.5 cursor-pointer text-black select-none"
-          @click="toggleParameters(index)">...</span>)
+          class="inline-flex bg-gray-300 rounded-sm px-0.5 cursor-pointer text-black select-none min-w-[23.88px] items-center justify-center text-gray-700"
+          @click="toggleParameters(index)">{{ showParametersIndexes.includes(index) ? '▼' : '...' }}</span>)
         </code>
       </div>
 
