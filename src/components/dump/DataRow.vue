@@ -40,8 +40,8 @@
   </div>
 
   <SpaceValue v-else-if="messageDto.messageType === 'log.space'"
-    :class="this.$emit('getColumnSize')"
-    :messageDto="this.messageDto">
+              :class="this.$emit('getColumnSize')"
+              :messageDto="this.messageDto">
   </SpaceValue>
 </template>
 
@@ -110,13 +110,13 @@ export default {
   },
   methods: {
     toggleBacktrace() {
-      this.showBacktrace = ! this.showBacktrace;
+      this.showBacktrace = !this.showBacktrace;
     },
     getNotVendorTrace() {
       for (let i = 0; i < this.messageDto.backtrace.length; i++) {
         const row = this.messageDto.backtrace[i];
 
-        if (row.file && ! row.file.includes('/vendor/')) {
+        if (row.file && !row.file.includes('/vendor/')) {
           return row;
         }
       }
@@ -128,7 +128,12 @@ export default {
       localStorage.setItem(this.storageName, JSON.stringify(logs));
     },
     async copyImage() {
-      const canvas = await html2canvas(this.$refs.code)
+      const canvas = await html2canvas(this.$refs.code, {
+        scale: 2, // 더 높은 해상도를 생성하고, 텍스트 시각 품질 향상
+        backgroundColor: null, // 배경을 투명하게 만듭니다.
+        useCORS: true, // 외부 이미지 렌더링에 필요하다면 CORS 대응을 사용하십시오
+      })
+
       const dataUrl = canvas.toDataURL()
 
       // Convert dataUrl to Blob
@@ -136,7 +141,7 @@ export default {
       const blob = await response.blob()
 
       // Create a new clipboard item
-      const clipboardItem = new ClipboardItem({ 'image/png': blob })
+      const clipboardItem = new ClipboardItem({'image/png': blob})
 
       // Write the clipboard item to the clipboard
       navigator.clipboard.write([clipboardItem]).then(() => {
@@ -144,7 +149,7 @@ export default {
       }).catch(err => {
         console.error('Failed to copy image to clipboard: ', err)
       })
-    }
+    },
   },
   computed: {
     getRowBackgroundColor() {
