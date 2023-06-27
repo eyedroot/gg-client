@@ -1,12 +1,12 @@
 <template>
   <span class="--header stdclass">
-    <span class="text-purple-900 font-bold">{{ getStdClassName }}</span> <span class="brackets" :class="getBracketsIndex">{</span>
+    <span class="text-purple-900 font-bold">{{ this.capsuleDto.className }}</span> <span class="brackets" :class="getBracketsIndex">{</span>
 
     <CodeFolding
-      v-if="foldCondition"
       type="stdClass"
       :bracket-index="getBracketsIndex"
-      @handleCollapsed="toggleCollapsed">
+      :is-fold="isFold"
+      @handleCollapsed="isFold = ! isFold">
     </CodeFolding>
   </span>
 
@@ -14,14 +14,15 @@
     <span class="italic text-gray-500">...pruned properties</span>
   </div>
 
-  <div class="relative flex flex-col" :class="{ 'collapsed': foldCondition }">
+  <div class="relative flex flex-col" :class="{ 'collapsed': isFold }">
     <div class="--line pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
 
       <span class="h-fit">
         <span class="text-blue-500 mr-0.5">{{ getModifierToCharacter(getModifier(key)) }}</span>
-        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))" :is-property-or-key="true"></ScalarValue>
+        <ScalarValue
+          :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))" :is-property-or-key="true"></ScalarValue>
       </span>
 
       <span class="h-fit mr-1.5">:</span>
@@ -40,7 +41,7 @@
 </template>
 
 <script>
-import {defineAsyncComponent, ref, watchEffect} from 'vue';
+import {defineAsyncComponent, ref} from 'vue';
 import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
 
 export default {
@@ -60,26 +61,19 @@ export default {
       type: Object,
       required: true
     },
-    unfoldAll: {
-      type: Boolean,
-      default: false,
-    },
   },
   setup(props) {
-    const shouldFold = ref(props.unfoldAll)
+    const isFold = ref(false)
 
-    watchEffect(() => {
-      shouldFold.value = props.unfoldAll
-    })
+    if (props.depth >= 2 && Object.keys(props.capsuleDto.value).length > 3) {
+      isFold.value = true
+    }
 
     return {
-      shouldFold,
+      isFold,
     }
   },
   methods: {
-    toggleCollapsed() {
-      this.shouldFold = !this.shouldFold
-    },
     getModifier(rawKey) {
       return rawKey.split('@')[0]
     },
@@ -100,21 +94,8 @@ export default {
     },
   },
   computed: {
-    getStdClassName() {
-      return this.capsuleDto.className
-    },
-    getKeysCount() {
-      return Object.keys(this.capsuleDto.value).length;
-    },
     getBracketsIndex() {
       return `brackets-${this.depth % 4}`;
-    },
-    foldCondition() {
-      if (this.shouldFold) {
-        return false
-      }
-
-      return this.depth >= 2 && this.getKeysCount > 3
     },
   },
 }

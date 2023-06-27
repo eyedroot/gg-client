@@ -1,16 +1,16 @@
 <template>
   <span class="--header array">
-    <span class="text-purple-900 font-bold">Array:{{ getKeysCount }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
+    <span class="text-purple-900 font-bold">Array:{{ Object.keys(this.capsuleDto.value).length }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
 
     <CodeFolding
-      v-if="foldCondition"
       type="array"
       :bracket-index="getBracketsIndex"
-      @handleCollapsed="toggleCollapsed">
+      :is-fold="isFold"
+      @handleCollapsed="isFold = ! isFold">
     </CodeFolding>
   </span>
 
-  <div class="relative flex flex-col" :class="{ 'collapsed': foldCondition }">
+  <div class="relative flex flex-col" :class="{ 'collapsed': isFold }">
     <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {defineAsyncComponent, ref, watchEffect} from 'vue';
+import {defineAsyncComponent, ref} from 'vue';
 import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
 
 export default {
@@ -55,41 +55,21 @@ export default {
       type: Object,
       required: true
     },
-    unfoldAll: {
-      type: Boolean,
-      default: false,
-      required: false,
-    }
   },
   setup(props) {
-    const shouldFold = ref(props.unfoldAll)
+    const isFold = ref(false)
 
-    watchEffect(() => {
-      shouldFold.value = props.unfoldAll
-    })
+    if (props.depth >= 2 && Object.keys(props.capsuleDto.value).length > 3) {
+      isFold.value = true
+    }
 
     return {
-      shouldFold,
+      isFold,
     }
   },
-  methods: {
-    toggleCollapsed() {
-      this.shouldFold = ! this.shouldFold
-    },
-  },
   computed: {
-    getKeysCount() {
-      return Object.keys(this.capsuleDto.value).length
-    },
     getBracketsIndex() {
       return `brackets-${this.depth % 4}`
-    },
-    foldCondition() {
-      if (this.shouldFold) {
-        return false
-      }
-
-      return this.depth >= 2 && this.getKeysCount > 3
     },
   },
 }
