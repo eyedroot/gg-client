@@ -5,6 +5,7 @@
 
 <script>
 export default {
+  name: 'CodeFoldingTail',
   emits: ['handleCollapsed'],
   props: {
     type: {
