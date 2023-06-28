@@ -40,13 +40,15 @@
   </div>
 
   <UsageValue v-else-if="messageDto.messageType === 'log.usage'"
+              @removeItem="removeItem(id)"
               :message-dto="this.messageDto">
   </UsageValue>
 
-  <SpaceValue v-else-if="messageDto.messageType === 'log.space'"
-              :class="this.$emit('getColumnSize')"
-              :messageDto="this.messageDto">
-  </SpaceValue>
+  <NoteValue v-else-if="messageDto.messageType === 'log.note'"
+             :class="this.$emit('getColumnSize')"
+             @removeItem="removeItem(id)"
+             :messageDto="this.messageDto">
+  </NoteValue>
 </template>
 
 <script>
@@ -59,7 +61,7 @@ import ScalarValue from "@/components/dump/values/ScalarValue.vue";
 import StdClassValue from "@/components/dump/values/StdClassValue.vue";
 import CallFile from "@/components/dump/rows/CallFile.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
-import SpaceValue from "@/components/dump/values/SpaceValue.vue";
+import SpaceValue from "@/components/dump/values/NoteValue.vue";
 import {inject, toRaw} from "vue";
 import RowExtensions from "@/components/dump/RowExtensions.vue";
 import html2canvas from "html2canvas";
@@ -69,7 +71,7 @@ export default {
   components: {
     UsageValue,
     RowExtensions,
-    SpaceValue,
+    NoteValue: SpaceValue,
     BackTrace,
     CallFile,
     LanguageVersion,

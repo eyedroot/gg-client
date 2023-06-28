@@ -1,5 +1,9 @@
 <template>
-  <div class="flex p-3">
+  <div class="flex relative px-0.5 pt-1">
+    <button class="absolute top-3 right-2.5 z-20" @click="$emit('removeItem')">
+      <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
+    </button>
+
     <table class="w-full h-fit divide-y divide-gray-200 border border-gray-200">
       <thead class="bg-gray-100">
         <tr>
