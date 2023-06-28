@@ -1,6 +1,6 @@
 <template>
   <div v-if="['log', 'throwable'].includes(messageDto.messageType)"
-       class="flex h-fit overflow-x-auto px-0.5 pt-1" :class="getRowBackgroundColor">
+       class="flex h-fit overflow-x-auto px-0.5 pt-1">
 
     <div class="--code-wrap flex-auto items-center relative" ref="code">
       <button class="absolute top-1 right-1.5 z-20" @click="removeItem(id)">
@@ -39,6 +39,9 @@
     </div>
   </div>
 
+  <UsageValue v-else-if="messageDto.messageType === 'log.usage'"
+              :message-dto="this.messageDto"></UsageValue>
+
   <SpaceValue v-else-if="messageDto.messageType === 'log.space'"
               :class="this.$emit('getColumnSize')"
               :messageDto="this.messageDto">
@@ -59,9 +62,11 @@ import SpaceValue from "@/components/dump/values/SpaceValue.vue";
 import {inject, toRaw} from "vue";
 import RowExtensions from "@/components/dump/RowExtensions.vue";
 import html2canvas from "html2canvas";
+import UsageValue from "@/components/dump/values/UsageValue.vue";
 
 export default {
   components: {
+    UsageValue,
     RowExtensions,
     SpaceValue,
     BackTrace,
@@ -149,11 +154,6 @@ export default {
       }).catch(err => {
         console.error('Failed to copy image to clipboard: ', err)
       })
-    },
-  },
-  computed: {
-    getRowBackgroundColor() {
-      return this.id % 2 === 0 ? 'bg-white' : 'bg-white'
     },
   },
 }
