@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
-          <RowExtensions :is-local-data="isLocalData"
+          <RowExtensions :is-trunk="isTrunk"
                          @saveToLocalStorage="saveToLocalStorage"
                          @toggleBacktrace="toggleBacktrace"
                          @copyImage="copyImage">
@@ -40,7 +40,8 @@
   </div>
 
   <UsageValue v-else-if="messageDto.messageType === 'log.usage'"
-              :message-dto="this.messageDto"></UsageValue>
+              :message-dto="this.messageDto">
+  </UsageValue>
 
   <SpaceValue v-else-if="messageDto.messageType === 'log.space'"
               :class="this.$emit('getColumnSize')"
@@ -102,7 +103,7 @@ export default {
       type: Function,
       required: true
     },
-    isLocalData: {
+    isTrunk: {
       type: Boolean,
       required: false,
       default: false

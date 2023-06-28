@@ -34,6 +34,7 @@
         </tr>
       </tbody>
     </table>
+    <slot></slot>
   </div>
 </template>
 
