@@ -10,7 +10,7 @@
     </CodeFolding>
   </span>
 
-  <div class="relative flex flex-col" :class="{ 'collapsed': isFold }">
+  <div class="relative flex flex-col" v-if="! isFold">
     <div class="pl-[1.5rem]"
          v-for="(value, key) in capsuleDto.value"
          :key="key">

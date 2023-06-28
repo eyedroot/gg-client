@@ -1,6 +1,6 @@
 <template>
-  <div class="flex border-b-[1px] border-gray-200 p-5 items-center">
-    <table class="min-w-full divide-y divide-gray-200 border border-gray-200">
+  <div class="flex p-3">
+    <table class="w-full h-fit divide-y divide-gray-200 border border-gray-200">
       <thead class="bg-gray-100">
         <tr>
           <th class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
