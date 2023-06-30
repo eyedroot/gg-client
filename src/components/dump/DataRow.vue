@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
-          <RowExtensions :is-trunk="isTrunk"
+          <RowExtensions :is-local-data="isLocalData"
                          @saveToLocalStorage="saveToLocalStorage"
                          @toggleBacktrace="toggleBacktrace"
                          @copyImage="copyImage">
@@ -105,7 +105,7 @@ export default {
       type: Function,
       required: true
     },
-    isTrunk: {
+    isLocalData: {
       type: Boolean,
       required: false,
       default: false

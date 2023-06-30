@@ -6,7 +6,7 @@
       <span class="text-gray-800 uppercase">png</span>
     </button>
 
-    <button v-if="isTrunk === false"
+    <button v-if="isLocalData === false"
             class="--backtrace-button button transparent inline-flex items-center justify-center"
             @click="this.$emit('saveToLocalStorage'); this.saved = true">
       <fa-icon icon="floppy-disk" class="mr-1"></fa-icon>
@@ -26,7 +26,7 @@ import {ref} from "vue";
 
 export default {
   props: {
-    isTrunk: {
+    isLocalData: {
       type: Boolean,
       required: true
     },
