@@ -8,7 +8,7 @@
       </button>
 
       <div class="--code" :class="{ throwable: messageDto.messageType === 'throwable' }">
-        <CallFile :backtrace="getNotVendorTrace()" :id="displayId"></CallFile>
+        <CallFile :backtrace="guessCallFile()" :id="displayId"></CallFile>
 
         <div v-if="messageDto.messageType.startsWith('log')" class="mb-3" ref="rValue">
           <component :is="this.$getValueComponent(messageDto.data)"
@@ -33,7 +33,7 @@
       <div v-if="showBacktrace">
         <BackTrace
           :backtrace="messageDto.backtrace"
-          :focus-file="getNotVendorTrace()">
+          :focus-file="guessCallFile()">
         </BackTrace>
       </div>
     </div>
@@ -120,14 +120,19 @@ export default {
     toggleBacktrace() {
       this.showBacktrace = !this.showBacktrace;
     },
-    getNotVendorTrace() {
-      for (let i = 0; i < this.messageDto.backtrace.length; i++) {
-        const row = this.messageDto.backtrace[i];
+    guessCallFile() {
+      if (this.messageDto.language === 'PHP') {
+        for (let i = 0; i < this.messageDto.backtrace.length; i++) {
+          let row = this.messageDto.backtrace[i];
 
-        if (row.file && !row.file.includes('/vendor/')) {
-          return row;
+          console.log(row.file, i, !row.file.includes('gg/src/Gg.php'), !row.file.includes('gg/src/helpers/helper.php'))
+          if (row.file && (!row.file.includes('gg/src/Gg.php') && !row.file.includes('gg/src/helpers/helper.php') && !row.file.includes('/vendor/'))) {
+            return row;
+          }
         }
       }
+
+      return ''
     },
     saveToLocalStorage() {
       const logs = JSON.parse(localStorage.getItem(this.storageName)) || [];
