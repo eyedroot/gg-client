@@ -6,21 +6,21 @@
     <div class="flex flex-col space-y-10 mt-12">
       <div class="">
         <h3 class="mb-1 text-lg">Laravel Framework</h3>
-        <div class="p-5 bg-gray-200 rounded fira-code">
+        <div class="p-5 bg-gray-200 rounded">
           $ composer require --dev beaverlabs/laravel-gg
         </div>
       </div>
 
       <div class="">
         <h3 class="mb-1 text-lg">Vanilla PHP</h3>
-        <div class="p-5 bg-gray-200 rounded fira-code">
+        <div class="p-5 bg-gray-200 rounded">
           $ composer require global beaverlabs/gg
         </div>
       </div>
 
       <div class="">
         <h3 class="mb-1 text-lg">If using docker container, set to .env</h3>
-        <div class="p-5 bg-gray-200 rounded fira-code">
+        <div class="p-5 bg-gray-200 rounded">
           GG_HOST=host.docker.internal
         </div>
       </div>

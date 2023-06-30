@@ -4,7 +4,7 @@
       <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
     </button>
 
-    <table class="w-full h-fit divide-y divide-gray-200 border border-gray-200">
+    <table class="w-full h-fit divide-y divide-gray-200 border border-gray-200 box-border">
       <thead class="bg-gray-100">
         <tr>
           <th class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">

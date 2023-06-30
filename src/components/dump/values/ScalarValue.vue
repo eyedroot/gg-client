@@ -49,7 +49,7 @@ export default {
     @apply text-blue-700;
   }
   &.string {
-    @apply text-green-600;
+    @apply text-green-700;
     &::before {
       content: '"';
       @apply text-gray-500;

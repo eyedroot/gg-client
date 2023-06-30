@@ -125,7 +125,6 @@ export default {
         for (let i = 0; i < this.messageDto.backtrace.length; i++) {
           let row = this.messageDto.backtrace[i];
 
-          console.log(row.file, i, !row.file.includes('gg/src/Gg.php'), !row.file.includes('gg/src/helpers/helper.php'))
           if (row.file && (!row.file.includes('gg/src/Gg.php') && !row.file.includes('gg/src/helpers/helper.php') && !row.file.includes('/vendor/'))) {
             return row;
           }
