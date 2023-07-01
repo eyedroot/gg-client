@@ -35,7 +35,7 @@ export default {
     },
     multilineOrDoubleQuote() {
       if (this.capsuleDto.type === 'string') {
-        return this.capsuleDto.value.includes('\n') ? '--multiline' : 'double-quote'
+        return this.capsuleDto.value.includes('\n') ? '--multiline' : '--double-quote'
       }
 
       return {}
@@ -72,6 +72,10 @@ export default {
       @apply text-gray-500;
     }
     .--double-quote::before {
+      content: '"';
+      @apply text-gray-500;
+    }
+    .--double-quote::after {
       content: '"';
       @apply text-gray-500;
     }
