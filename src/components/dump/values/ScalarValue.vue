@@ -1,6 +1,6 @@
 <template>
   <span class="--value" :class="textColor">
-    <span>{{ printScalarType }}</span>
+    <span :class="multilineOrDoubleQuote" v-html="printScalarType"></span>
     <span
       v-if="! isPropertyOrKey && ['float', 'integer', 'double', 'boolean'].includes(capsuleDto.type)"
       class="ml-1.5 text-[9px] tracking-tighter text-gray-400 italic select-none">// {{ getShortType }}</span>
@@ -21,6 +21,11 @@ export default {
       required: false
     }
   },
+  methods: {
+    nl2br(str) {
+      return str.replace(/\r\n|\r|\n/g, '<span class="select-none bg-gray-200 text-gray-400 p-0.5">\\n</span><br>')
+    }
+  },
   computed: {
     textColor() {
       return {
@@ -28,12 +33,19 @@ export default {
         [typeof this.capsuleDto.value]: this.isPropertyOrKey === false,
       }
     },
+    multilineOrDoubleQuote() {
+      if (this.capsuleDto.type === 'string') {
+        return this.capsuleDto.value.includes('\n') ? '--multiline' : 'double-quote'
+      }
+
+      return {}
+    },
     printScalarType() {
       if (this.capsuleDto.value === null) {
         return 'null'
       }
 
-      return this.capsuleDto.value
+      return (this.capsuleDto.type === 'string') ? this.nl2br(this.capsuleDto.value) : this.capsuleDto.value
     },
     getShortType() {
       return this.capsuleDto.type === 'integer' ? 'int' : this.capsuleDto.type
@@ -49,12 +61,17 @@ export default {
     @apply text-blue-700;
   }
   &.string {
-    @apply text-green-700;
-    &::before {
-      content: '"';
+    @apply text-gray-900;
+    .--multiline::before {
+      content: '"""\A';
+      white-space: pre;
       @apply text-gray-500;
     }
-    &::after {
+    .--multiline::after {
+      content: '"""';
+      @apply text-gray-500;
+    }
+    .--double-quote::before {
       content: '"';
       @apply text-gray-500;
     }
