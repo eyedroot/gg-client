@@ -8,7 +8,8 @@ import express from 'express'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const server = express()
 
-server.use(express.json())
+server.use(express.json({ limit: Infinity }));
+server.use(express.urlencoded({ limit: Infinity, extended: true }));
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
