@@ -29,7 +29,6 @@ label {
   .--backtrace-button { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
   &.throwable {
-    @apply bg-red-100 border-[1px] border-red-700 hover:border-red-400 hover:shadow text-red-900;
   }
 
   .keyword {

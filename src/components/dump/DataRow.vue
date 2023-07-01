@@ -8,7 +8,7 @@
       </button>
 
       <div class="--code" :class="{ throwable: messageDto.messageType === 'throwable' }">
-        <CallFile :backtrace="guessCallFile()" :id="displayId"></CallFile>
+        <CallFile :focusFile="focusFile()" :id="displayId"></CallFile>
 
         <div v-if="messageDto.messageType.startsWith('log')" class="mb-3" ref="rValue">
           <component :is="this.$getValueComponent(messageDto.data)"
@@ -33,7 +33,7 @@
       <div v-if="showBacktrace">
         <BackTrace
           :backtrace="messageDto.backtrace"
-          :focus-file="guessCallFile()">
+          :focus-file="focusFile()">
         </BackTrace>
       </div>
     </div>
@@ -120,8 +120,12 @@ export default {
     toggleBacktrace() {
       this.showBacktrace = !this.showBacktrace;
     },
-    guessCallFile() {
+    focusFile() {
       if (this.messageDto.language === 'PHP') {
+        if (this.messageDto.messageType === 'throwable') {
+          return this.messageDto.data.value
+        }
+
         for (let i = 0; i < this.messageDto.backtrace.length; i++) {
           let row = this.messageDto.backtrace[i];
 
@@ -131,7 +135,7 @@ export default {
         }
       }
 
-      return ''
+      return { file: '', line: -1 }
     },
     saveToLocalStorage() {
       const logs = JSON.parse(localStorage.getItem(this.storageName)) || [];
@@ -163,5 +167,10 @@ export default {
       })
     },
   },
+  mounted() {
+    if (this.messageDto.messageType === 'throwable') {
+      this.showBacktrace = true
+    }
+  }
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
-  <div class="text-green-700 mb-0.5">/** #{{ id }} {{ getCalledFile }} -- {{ getCurrentTime() }} */</div>
+  <div class="text-green-700 mb-0.5">/** #{{ id }} {{ printFocusFile }} -- {{ getCurrentTime() }} */</div>
 </template>
 
 <script>
 export default {
   props: {
-    backtrace: {
+    focusFile: {
       type: Object,
       required: true
     },
@@ -16,11 +16,11 @@ export default {
     },
   },
   computed: {
-    getCalledFile() {
-      let fileName = `${this.backtrace.file}:${this.backtrace.line}`;
+    printFocusFile() {
+      let fileName = `${this.focusFile.file}:${this.focusFile.line}`;
 
-      if ('code' in this.backtrace) {
-        fileName += ` (CODE: ${this.backtrace.code})`
+      if ('code' in this.focusFile) {
+        fileName += ` (CODE: ${this.focusFile.code})`
       }
 
       return fileName

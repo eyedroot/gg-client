@@ -1,7 +1,7 @@
 <template>
-  <div class="--backtrace flex flex-col px-1.5 pt-1 overflow-x-auto">
+  <div class="--backtrace flex flex-col px-1.5 py-3 overflow-x-auto">
     <div :key="index" v-for="(row, index) in backtrace" class="flex flex-col">
-      <div class="flex flex-row items-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 pl-2 leading-6">
+      <div class="flex flex-row items-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 pl-2 leading-7">
         <span class="inline-flex items-center justify-center w-4 h-4 bg-gray-300 hover:bg-gray-500 mr-1.5 text-white cursor-pointer" @click="toggleCodes(index)">{{ showCodesIndexes.includes(index) ? '-' : '+' }}</span>
 
         <span class="text-gray-900" :class="{ 'text-gray-700 font-bold': row.file === this.focusFile.file }">
