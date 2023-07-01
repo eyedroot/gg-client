@@ -17,7 +17,7 @@ label {
 .--code {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 
-  @apply relative p-2 bg-gray-100 border-[1px] border-gray-200 hover:border-gray-400 hover:shadow box-border leading-5 text-[100%];
+  @apply relative p-2 bg-gray-100 border-[1px] border-gray-200 hover:border-gray-400 hover:shadow box-border leading-5;
 
   .brackets { @apply font-semibold; }
   .brackets-0 { @apply text-red-700 }
@@ -50,7 +50,7 @@ label {
 }
 
 .--backtrace {
-  font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .--found-text {

@@ -1,14 +1,14 @@
 <template>
-  <div class="--backtrace flex flex-col px-1.5 pt-1 tracking-tighter overflow-x-auto">
+  <div class="--backtrace flex flex-col px-1.5 pt-1 overflow-x-auto">
     <div :key="index" v-for="(row, index) in backtrace" class="flex flex-col">
       <div class="flex flex-row items-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 pl-2 leading-6">
-        <span class="inline-flex items-center justify-center w-4 h-4 bg-emerald-600 hover:bg-emerald-700 transition rounded mr-1.5 text-white cursor-pointer" @click="toggleCodes(index)">{{ showCodesIndexes.includes(index) ? '-' : '+' }}</span>
+        <span class="inline-flex items-center justify-center w-4 h-4 bg-gray-300 hover:bg-gray-500 mr-1.5 text-white cursor-pointer" @click="toggleCodes(index)">{{ showCodesIndexes.includes(index) ? '-' : '+' }}</span>
 
-        <span :class="{ 'text-gray-700 font-bold': row.file === this.focusFile.file }">
+        <span class="text-gray-900" :class="{ 'text-gray-700 font-bold': row.file === this.focusFile.file }">
           {{ row.file ? row.file : row.class }}:<strong>{{ row.line }}</strong>
         </span>
 
-        <code class="ml-1.5 text-blue-600 font-bold">
+        <code class="ml-1.5 text-blue-600 tracking-tight font-bold">
           {{ row?.function }}(<span
           class="inline-flex bg-gray-300 rounded-sm px-0.5 cursor-pointer text-black select-none min-w-[23.88px] items-center justify-center text-gray-700"
           @click="toggleParameters(index)">{{ showParametersIndexes.includes(index) ? '▼' : '...' }}</span>)

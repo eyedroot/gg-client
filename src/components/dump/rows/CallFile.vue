@@ -1,7 +1,5 @@
 <template>
-  <div class="text-gray-500 tracking-normal text-[12px] mb-2.5">
-    <div class="text-green-700">/** #{{ id }} {{ getCalledFile }} -- {{ getCurrentTime() }} */</div>
-  </div>
+  <div class="text-green-700 mb-0.5">/** #{{ id }} {{ getCalledFile }} -- {{ getCurrentTime() }} */</div>
 </template>
 
 <script>
