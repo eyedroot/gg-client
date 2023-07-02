@@ -8,15 +8,18 @@
       </button>
 
       <div class="--code" :class="{ throwable: messageDto.messageType === 'throwable' }">
-        <CallFile :focusFile="focusFile()" :id="displayId"></CallFile>
-
-        <div v-if="messageDto.messageType.startsWith('log')" class="mb-3" ref="rValue">
-          <component :is="this.$getValueComponent(messageDto.data)"
-                     :capsule-dto="messageDto.data"></component>
-        </div>
-        <div v-else class="mb-3">
-          <span>{{ this.messageDto.data.value.message }}</span>
-        </div>
+        <template v-if="messageDto.messageType.startsWith('log')">
+          <CallFile :focusFile="focusFile()" :id="displayId"></CallFile>
+          <div class="mb-3" ref="rValue">
+            <component :is="this.$getValueComponent(messageDto.data)"
+                       :capsule-dto="messageDto.data"></component>
+          </div>
+        </template>
+        <template v-else-if="messageDto.messageType === 'throwable'">
+          <div class="mb-3">
+            <span>{{ this.messageDto.data.value.message }}</span>
+          </div>
+        </template>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
           <RowExtensions :is-local-data="isLocalData"
@@ -32,7 +35,7 @@
 
       <div v-if="showBacktrace">
         <BackTrace
-          :backtrace="messageDto.backtrace"
+          :backtrace="getBacktrace"
           :focus-file="focusFile()">
         </BackTrace>
       </div>
@@ -126,8 +129,10 @@ export default {
           return this.messageDto.data.value
         }
 
-        for (let i = 0; i < this.messageDto.backtrace.length; i++) {
-          let row = this.messageDto.backtrace[i];
+        const backtrace = this.getBacktrace
+
+        for (let i = 0; i < backtrace.length; i++) {
+          let row = backtrace[i];
 
           if (row.file && (!row.file.includes('gg/src/Gg.php') && !row.file.includes('gg/src/helpers/helper.php') && !row.file.includes('/vendor/'))) {
             return row;
@@ -166,6 +171,15 @@ export default {
         console.error('Failed to copy image to clipboard: ', err)
       })
     },
+  },
+  computed: {
+    getBacktrace() {
+      if (this.messageDto.messageType === 'throwable') {
+        return this.messageDto.data.value.trace
+      }
+
+      return this.messageDto.backtrace
+    }
   },
   mounted() {
     if (this.messageDto.messageType === 'throwable') {

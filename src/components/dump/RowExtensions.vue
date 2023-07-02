@@ -1,6 +1,6 @@
 <template>
   <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
-    <button class="--backtrace-button button transparent inline-flex items-center justify-center"
+    <button v-if="false" class="--backtrace-button button transparent inline-flex items-center justify-center"
             @click="this.$emit('copyImage')">
       <fa-icon icon="image" class="mr-1"></fa-icon>
       <span class="text-gray-500">png</span>
