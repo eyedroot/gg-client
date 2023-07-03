@@ -10,7 +10,7 @@
     </CodeFolding>
   </span>
 
-  <div class="--line pl-[1.5rem]" v-if="capsuleDto.pruned">
+  <div class="--line pl-[1.5rem]" v-if="capsuleDto.pruned && !isFold">
     <span class="italic text-gray-500">...pruned properties</span>
   </div>
 

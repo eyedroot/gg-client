@@ -35,7 +35,7 @@
 
       <div v-if="showBacktrace">
         <BackTrace
-          :backtrace="getBacktrace"
+          :backtrace="this.messageDto.backtrace"
           :focus-file="focusFile()">
         </BackTrace>
       </div>
@@ -129,10 +129,8 @@ export default {
           return this.messageDto.data.value
         }
 
-        const backtrace = this.getBacktrace
-
-        for (let i = 0; i < backtrace.length; i++) {
-          let row = backtrace[i];
+        for (let i = 0; i < this.messageDto.backtrace.length; i++) {
+          let row = this.messageDto.backtrace[i];
 
           if (row.file && (!row.file.includes('gg/src/Gg.php') && !row.file.includes('gg/src/helpers/helper.php') && !row.file.includes('/vendor/'))) {
             return row;
@@ -171,15 +169,6 @@ export default {
         console.error('Failed to copy image to clipboard: ', err)
       })
     },
-  },
-  computed: {
-    getBacktrace() {
-      if (this.messageDto.messageType === 'throwable') {
-        return this.messageDto.data.value.trace
-      }
-
-      return this.messageDto.backtrace
-    }
   },
   mounted() {
     if (this.messageDto.messageType === 'throwable') {
