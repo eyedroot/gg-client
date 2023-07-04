@@ -10,7 +10,7 @@
         </span>
 
         <code class="ml-1.5 text-blue-600 tracking-tight font-bold">
-          {{ row?.function }}(<span v-if="row?.args.type !== 'NULL'"
+          {{ row?.function }}(<span v-if="row?.args?.type !== 'NULL'"
           class="inline-flex bg-gray-300 rounded-sm px-0.5 cursor-pointer text-black select-none min-w-[23.88px] items-center justify-center text-gray-700"
           @click="toggleParameters(index)">{{ showParametersIndexes.includes(index) ? '▼' : '...' }}</span>)
         </code>
