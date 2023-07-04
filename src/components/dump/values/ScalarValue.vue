@@ -87,7 +87,15 @@ export default {
     @apply text-gray-400;
   }
   &.property {
-    @apply text-gray-600;
+    @apply text-green-700 font-semibold;
+    .--double-quote::before {
+      content: '"';
+      @apply text-gray-500;
+    }
+    .--double-quote::after {
+      content: '"';
+      @apply text-gray-500;
+    }
   }
 }
 </style>

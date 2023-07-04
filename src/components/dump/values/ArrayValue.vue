@@ -16,7 +16,7 @@
          :key="key">
 
       <span class="h-fit">
-        <ScalarValue :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
+        <ScalarValue :is-property-or-key="true" :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
       </span>
 
       <span class="h-fit mx-1.5">=></span>

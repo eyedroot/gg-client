@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col bg-gray-100 border-[1px] border-gray-200 p-3 hover:border-gray-400 hover:shadow">
+  <div class="--code throwable">
     <div class="flex flex-row space-x-5">
       <span class="--title">Class</span>
       <span class="--value">{{ messageDto.data.className }}</span>

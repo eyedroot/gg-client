@@ -1,5 +1,5 @@
 <template>
-  <div class="--code ml-5 my-2">
+  <div class="--code viewer">
     <div class="flex flex-col">
       <div v-for="(row, idx) in sourceCode" :key="idx" class="flex flex-row">
         <div class="flex select-none justify-end min-w-[20px] text-gray-400 mr-3">{{ row.line }}</div>

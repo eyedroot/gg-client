@@ -17,7 +17,7 @@ label {
 .--code {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 
-  @apply relative p-2 bg-gray-100 border-[1px] border-gray-200 hover:border-gray-400 hover:shadow box-border leading-5;
+  @apply relative p-2 bg-gray-100 border-[1px] border-gray-300 hover:border-gray-400 hover:shadow box-border leading-5;
 
   .brackets { @apply font-semibold; }
   .brackets-0 { @apply text-red-700 }
@@ -28,7 +28,12 @@ label {
   .collapsed { @apply hidden; }
   .--backtrace-button { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
+  &.viewer {
+    @apply ml-5 my-2;
+  }
+
   &.throwable {
+    @apply p-3;
   }
 
   .keyword {
