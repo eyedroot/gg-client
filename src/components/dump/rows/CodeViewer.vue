@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'CodeViewer',
   props: {
     sourceCode: {
       type: Array,

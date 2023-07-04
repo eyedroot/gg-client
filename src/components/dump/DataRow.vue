@@ -7,19 +7,14 @@
         <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
       </button>
 
-      <div class="--code" :class="{ throwable: messageDto.messageType === 'throwable' }">
-        <template v-if="messageDto.messageType.startsWith('log')">
-          <CallFile :focusFile="focusFile()" :id="displayId"></CallFile>
-          <div class="mb-3" ref="rValue">
-            <component :is="this.$getValueComponent(messageDto.data)"
-                       :capsule-dto="messageDto.data"></component>
-          </div>
-        </template>
-        <template v-else-if="messageDto.messageType === 'throwable'">
-          <div class="mb-3">
-            <span>{{ this.messageDto.data.value.message }}</span>
-          </div>
-        </template>
+      <div v-if="messageDto.messageType.startsWith('log')"
+           class="--code" :class="{ throwable: messageDto.messageType === 'throwable' }">
+        <CallFile :focusFile="focusFile()" :id="displayId"></CallFile>
+
+        <div class="mb-3" ref="rValue">
+          <component :is="this.$getValueComponent(messageDto.data)"
+                     :capsule-dto="messageDto.data"></component>
+        </div>
 
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
           <RowExtensions :is-local-data="isLocalData"
@@ -32,6 +27,20 @@
           </RowExtensions>
         </div>
       </div>
+
+      <ThrowableValue v-else-if="messageDto.messageType === 'throwable'"
+        :message-dto="messageDto">
+        <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
+          <RowExtensions :is-local-data="isLocalData"
+                         @saveToLocalStorage="saveToLocalStorage"
+                         @toggleBacktrace="toggleBacktrace"
+                         @copyImage="copyImage">
+            <template v-slot:languageVersion>
+              <span>{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>
+            </template>
+          </RowExtensions>
+        </div>
+      </ThrowableValue>
 
       <div v-if="showBacktrace">
         <BackTrace
@@ -69,9 +78,11 @@ import {inject, toRaw} from "vue";
 import RowExtensions from "@/components/dump/RowExtensions.vue";
 import html2canvas from "html2canvas";
 import UsageValue from "@/components/dump/values/UsageValue.vue";
+import ThrowableValue from "@/components/dump/values/ThrowableValue.vue";
 
 export default {
   components: {
+    ThrowableValue,
     UsageValue,
     RowExtensions,
     NoteValue: SpaceValue,
@@ -170,10 +181,5 @@ export default {
       })
     },
   },
-  mounted() {
-    if (this.messageDto.messageType === 'throwable') {
-      this.showBacktrace = true
-    }
-  }
 }
 </script>
