@@ -63,6 +63,10 @@ export default {
       isFold.value = true
     }
 
+    if (Object.keys(props.capsuleDto.value).length === 0) {
+      isFold.value = false
+    }
+
     return {
       isFold,
     }
