@@ -16,30 +16,26 @@
                      :capsule-dto="messageDto.data"></component>
         </div>
 
-        <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
-          <RowExtensions :is-local-data="isLocalData"
-                         @saveToLocalStorage="saveToLocalStorage"
-                         @toggleBacktrace="toggleBacktrace"
-                         @copyImage="copyImage">
-            <template v-slot:languageVersion>
-              <span>{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>
-            </template>
-          </RowExtensions>
-        </div>
+        <RowExtensions :is-local-data="isLocalData"
+                       @saveToLocalStorage="saveToLocalStorage"
+                       @toggleBacktrace="toggleBacktrace"
+                       @copyImage="copyImage">
+          <template v-slot:languageVersion>
+            <span>{{ messageDto.language.toLowerCase() }} {{ messageDto.version }}</span>
+          </template>
+        </RowExtensions>
       </div>
 
       <ThrowableValue v-else-if="messageDto.type === 'throwable'"
         :message-dto="messageDto">
-        <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
-          <RowExtensions :is-local-data="isLocalData"
-                         @saveToLocalStorage="saveToLocalStorage"
-                         @toggleBacktrace="toggleBacktrace"
-                         @copyImage="copyImage">
-            <template v-slot:languageVersion>
-              <span>{{ messageDto.language.toLowerCase() }}_{{ messageDto.version }}</span>
-            </template>
-          </RowExtensions>
-        </div>
+        <RowExtensions :is-local-data="isLocalData"
+                       @saveToLocalStorage="saveToLocalStorage"
+                       @toggleBacktrace="toggleBacktrace"
+                       @copyImage="copyImage">
+          <template v-slot:languageVersion>
+            <span>{{ messageDto.language.toLowerCase() }} {{ messageDto.version }}</span>
+          </template>
+        </RowExtensions>
       </ThrowableValue>
 
       <div v-if="showBacktrace">
