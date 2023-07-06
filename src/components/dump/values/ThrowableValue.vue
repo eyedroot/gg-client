@@ -10,7 +10,7 @@
     </div>
     <div class="flex flex-row space-x-5">
       <span class="--title">Message</span>
-      <span class="--value font-bold">{{ messageDto.data.value.message }} (CODE: {{ messageDto.data.value.code }})</span>
+      <span class="--value text-orange-600">{{ messageDto.data.value.message }} (CODE: {{ messageDto.data.value.code }})</span>
     </div>
 
     <CodeViewer :focus-line="codeViewerFile.line" :source-code="codeViewerFile.sourceCode"></CodeViewer>

@@ -1,5 +1,9 @@
 <template>
   <div class="--backtrace flex flex-col px-1.5 py-3 overflow-x-auto">
+    <div v-if="backtrace.length === 0">
+      <div class="text-gray-600 text-center">No backtrace available. <code>\gtrace($data);</code></div>
+    </div>
+
     <div :key="index" v-for="(row, index) in backtrace" class="flex flex-col">
       <div class="flex flex-row items-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 pl-2 leading-7">
         <button class="inline-flex items-center justify-center w-4 h-4 bg-gray-300 hover:bg-gray-500 mr-1.5 text-white cursor-pointer select-none"

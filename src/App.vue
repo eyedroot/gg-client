@@ -39,8 +39,8 @@ export default {
     return {
       logMediator: {},
       mediator: {
-        logContainer: {},
-        throwableContainer: {},
+        logContainer: [],
+        throwableContainer: [],
       },
       currentContainer: 'logContainer', // logContainer or throwableContainer
       noticeCount: {
@@ -67,17 +67,22 @@ export default {
     ipcRenderer.on("gg", (event, message) => {
       console.log(message)
 
-      if (message.messageType === 'throwable') {
-        this.mediator.throwableContainer = message
+      const logItems = message.filter(item => item.messageType.startsWith('log'))
+      const throwableItems = message.filter(item => item.messageType === 'throwable')
+
+      if (throwableItems.length > 0) {
+        this.mediator.throwableContainer = throwableItems
 
         if (this.currentContainer !== 'throwableContainer') {
-          this.noticeCount.throwableContainer += 1
+          this.noticeCount.throwableContainer += throwableItems.length
         }
-      } else {
-        this.mediator.logContainer = message
+      }
+
+      if (logItems.length > 0) {
+        this.mediator.logContainer = logItems
 
         if (this.currentContainer !== 'logContainer') {
-          this.noticeCount.logContainer += 1
+          this.noticeCount.logContainer += logItems.length
         }
       }
     })

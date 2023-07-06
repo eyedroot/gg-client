@@ -83,6 +83,8 @@ export default {
           return '+'
         case 'protected':
           return '#'
+        case 'protected static':
+          return '#static'
         case 'private':
           return '-'
         default:

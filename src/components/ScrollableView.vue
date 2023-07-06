@@ -57,7 +57,7 @@ export default {
   },
   props: {
     data: {
-      type: Object,
+      type: [Array],
       required: false,
     },
     isLocalData: {
@@ -90,7 +90,7 @@ export default {
   },
   watch: {
     data: function (newData) {
-      this.logs.push(newData)
+      this.logs = this.logs.concat(newData)
 
       // DOM 업데이트가 완료된 후에 스크롤 위치를 업데이트
       this.$nextTick(() => {
