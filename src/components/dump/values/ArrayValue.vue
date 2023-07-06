@@ -59,6 +59,10 @@ export default {
   setup(props) {
     const isFold = ref(false)
 
+    if (props.depth === 0 && Object.keys(props.capsuleDto.value).length >= 30) {
+      isFold.value = true
+    }
+
     if (props.depth >= 1) {
       isFold.value = true
     }
