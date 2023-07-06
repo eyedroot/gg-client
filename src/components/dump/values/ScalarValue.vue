@@ -26,7 +26,7 @@ export default {
       return str.replace(/\r\n|\r|\n/g, '<span class="select-none bg-gray-200 text-gray-400 p-0.5">\\n</span><br>')
     },
     text2link(str) {
-      return str.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')
+      return str.replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>')
     },
   },
   computed: {
