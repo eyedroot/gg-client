@@ -1,5 +1,5 @@
 <template>
-  <div v-if="['log', 'throwable'].includes(messageDto.messageType)"
+  <div v-if="['log', 'throwable'].includes(messageDto.type)"
        class="flex h-fit overflow-x-auto px-0.5 pt-1">
 
     <div class="--code-wrap flex-auto items-center relative" ref="code">
@@ -7,8 +7,8 @@
         <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
       </button>
 
-      <div v-if="messageDto.messageType.startsWith('log')"
-           class="--code" :class="{ throwable: messageDto.messageType === 'throwable' }">
+      <div v-if="messageDto.type.startsWith('log')"
+           class="--code" :class="{ throwable: messageDto.type === 'throwable' }">
         <CallFile :focusFile="focusFile()" :id="displayId"></CallFile>
 
         <div class="mb-3" ref="rValue">
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <ThrowableValue v-else-if="messageDto.messageType === 'throwable'"
+      <ThrowableValue v-else-if="messageDto.type === 'throwable'"
         :message-dto="messageDto">
         <div class="flex absolute right-1.5 bottom-0 space-x-1.5">
           <RowExtensions :is-local-data="isLocalData"
@@ -44,19 +44,19 @@
 
       <div v-if="showBacktrace">
         <BackTrace
-          :backtrace="this.messageDto.backtrace"
+          :backtrace="this.messageDto.trace"
           :focus-file="focusFile()">
         </BackTrace>
       </div>
     </div>
   </div>
 
-  <UsageValue v-else-if="messageDto.messageType === 'log.usage'"
+  <UsageValue v-else-if="messageDto.type === 'log.usage'"
               @removeItem="removeItem(id)"
               :message-dto="this.messageDto">
   </UsageValue>
 
-  <NoteValue v-else-if="messageDto.messageType === 'log.note'"
+  <NoteValue v-else-if="messageDto.type === 'log.note'"
              :class="this.$emit('getColumnSize')"
              @removeItem="removeItem(id)"
              :messageDto="this.messageDto">
@@ -136,12 +136,12 @@ export default {
     },
     focusFile() {
       if (this.messageDto.language === 'PHP') {
-        if (this.messageDto.messageType === 'throwable') {
+        if (this.messageDto.type === 'throwable') {
           return this.messageDto.data.value
         }
 
-        for (let i = 0; i < this.messageDto.backtrace.length; i++) {
-          let row = this.messageDto.backtrace[i];
+        for (let i = 0; i < this.messageDto.trace.length; i++) {
+          let row = this.messageDto.trace[i];
 
           if (row.file && (!row.file.includes('gg/src/Gg.php') && !row.file.includes('gg/src/helpers/helper.php') && !row.file.includes('/vendor/'))) {
             return row;

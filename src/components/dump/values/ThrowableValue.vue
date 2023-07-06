@@ -34,7 +34,7 @@ export default {
   },
   setup(props) {
     const codeViewerFile = computed(() => {
-      return props.messageDto.backtrace.find((trace) => trace.file === props.messageDto.data.value.file)
+      return props.messageDto.trace.find((trace) => trace.file === props.messageDto.data.value.file)
     })
 
     return {

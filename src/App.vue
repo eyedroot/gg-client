@@ -67,8 +67,8 @@ export default {
     ipcRenderer.on("gg", (event, message) => {
       console.log(message)
 
-      const logItems = message.filter(item => item.messageType.startsWith('log'))
-      const throwableItems = message.filter(item => item.messageType === 'throwable')
+      const logItems = message.filter(item => item.type.startsWith('log'))
+      const throwableItems = message.filter(item => item.type === 'throwable')
 
       if (throwableItems.length > 0) {
         this.mediator.throwableContainer = throwableItems
