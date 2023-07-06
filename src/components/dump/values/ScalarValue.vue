@@ -24,7 +24,10 @@ export default {
   methods: {
     nl2br(str) {
       return str.replace(/\r\n|\r|\n/g, '<span class="select-none bg-gray-200 text-gray-400 p-0.5">\\n</span><br>')
-    }
+    },
+    text2link(str) {
+      return str.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')
+    },
   },
   computed: {
     textColor() {
@@ -45,7 +48,11 @@ export default {
         return 'null'
       }
 
-      return (this.capsuleDto.type === 'string') ? this.nl2br(this.capsuleDto.value) : this.capsuleDto.value
+      if (this.capsuleDto.type === 'string') {
+        return this.text2link(this.nl2br(this.capsuleDto.value))
+      }
+
+      return this.capsuleDto.value
     },
     getShortType() {
       return this.capsuleDto.type === 'integer' ? 'int' : this.capsuleDto.type
@@ -78,6 +85,12 @@ export default {
     .--double-quote::after {
       content: '"';
       @apply text-gray-500;
+    }
+    a {
+      @apply text-blue-600 underline;
+      &:visited {
+        @apply text-purple-600 underline;
+      }
     }
   }
   &.boolean {

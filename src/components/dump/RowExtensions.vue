@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-start items-center">
-    <span class="text-gray-500 text-[80%] mr-3">
+  <div class="flex flex-row space-x-2.5 justify-start items-center">
+    <span class="text-gray-500 text-[80%]">
       <slot name="languageVersion"></slot>
     </span>
 
