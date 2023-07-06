@@ -17,6 +17,10 @@ export default {
   },
   computed: {
     printFocusFile() {
+      if (!this.focusFile.file || !this.focusFile.line) {
+        return ''
+      }
+
       let fileName = `${this.focusFile.file}:${this.focusFile.line}`;
 
       if ('code' in this.focusFile) {
