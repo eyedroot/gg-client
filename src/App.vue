@@ -42,7 +42,7 @@ export default {
         logContainer: [],
         throwableContainer: [],
       },
-      currentContainer: 'logContainer', // logContainer or throwableContainer
+      currentContainer: 'logContainer', // logContainer or throwableContainer or shiftContainer
       noticeCount: {
         logContainer: 0,
         throwableContainer: 0,
@@ -62,8 +62,23 @@ export default {
     handleSelectContainer(container) {
       this.currentContainer = container
     },
+    handleKeydown(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === '1') {
+        this.currentContainer = 'logContainer'
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key === '2') {
+        this.currentContainer = 'throwableContainer'
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key === '3') {
+        this.currentContainer = 'shiftContainer'
+      }
+    },
   },
   mounted() {
+    window.addEventListener('keydown', this.handleKeydown)
+
     ipcRenderer.on("gg", (event, message) => {
       console.log(message)
 
@@ -87,5 +102,8 @@ export default {
       }
     })
   },
+  beforeUnmount() {
+    window.removeEventListener('keydown', this.handleKeydown)
+  }
 }
 </script>

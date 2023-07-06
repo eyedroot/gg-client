@@ -172,6 +172,12 @@ export default {
           this.$refs.searchText.focusInput()
         })
       }
+
+      if ((e.metaKey || e.ctrlKey) && e.key === 'r') {
+        e.preventDefault()
+        e.stopPropagation()
+        this.options.reverse = ! this.options.reverse
+      }
     },
     saveTerm(term) {
       this.searchContext.lastTerm = term
