@@ -2,7 +2,7 @@
   <div class="--code throwable">
     <div class="flex flex-row space-x-5">
       <span class="--title">Class</span>
-      <span class="--value">{{ messageDto.data.className }}</span>
+      <span class="--value">{{ messageDto.data.class }}</span>
     </div>
     <div class="flex flex-row space-x-5">
       <span class="--title">File</span>
