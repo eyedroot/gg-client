@@ -66,3 +66,14 @@ label {
 .--found-cursor {
   @apply ring-2 ring-green-600;
 }
+
+@keyframes fade {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.--dimmed {
+  @apply opacity-50;
+  animation: fade 0.5s infinite;
+}

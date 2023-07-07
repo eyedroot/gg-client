@@ -2,20 +2,20 @@
   <template v-if="isFold">
     <span
       class="inline-flex bg-gray-300 rounded-sm mx-0.5 cursor-pointer"
-      @click="$emit('handleCollapsed')">...</span>
+      @click="$emit('handleFold')">...</span>
     <span class="brackets" :class="bracketIndex">{{ getCollapsedTail }}</span>
   </template>
   <template v-else>
     <span
       class="inline-flex rounded-sm mx-0.5 cursor-pointer text-gray-700"
-      @click="$emit('handleCollapsed')">▼</span>
+      @click="$emit('handleFold')">▼</span>
   </template>
 </template>
 
 <script>
 export default {
   name: 'CodeFoldingTail',
-  emits: ['handleCollapsed'],
+  emits: ['handleFold'],
   props: {
     type: {
       type: String,

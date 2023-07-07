@@ -1,12 +1,12 @@
 <template>
-  <span class="--header stdclass">
+  <span class="--header stdclass" :class="{ '--dimmed': isDimmed }">
     <span class="text-purple-900 font-bold">{{ this.capsuleDto.class }}</span> <span class="brackets" :class="getBracketsIndex">{</span>
 
     <CodeFolding
       type="stdClass"
       :bracket-index="getBracketsIndex"
       :is-fold="isFold"
-      @handleCollapsed="isFold = ! isFold">
+      @handleFold="handleFold">
     </CodeFolding>
   </span>
 
@@ -43,6 +43,7 @@
 <script>
 import {defineAsyncComponent, ref} from 'vue';
 import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
+import useDimmed from "@/components/utilities/dimmed";
 
 export default {
   name: 'StdClassValue',
@@ -64,6 +65,11 @@ export default {
   },
   setup(props) {
     const isFold = ref(false)
+    const { isDimmed, dimmed } = useDimmed()
+
+    const handleFold = () => {
+      dimmed(() => isFold.value = ! isFold.value)
+    }
 
     if (props.depth >= 1) {
       isFold.value = true
@@ -71,6 +77,8 @@ export default {
 
     return {
       isFold,
+      isDimmed,
+      handleFold,
     }
   },
   methods: {
