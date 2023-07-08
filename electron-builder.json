@@ -1,0 +1,16 @@
+{
+  "appId": "com.example.yourapp",
+  "productName": "PHPgg",
+  "directories": {
+    "buildResources": "resources"
+  },
+  "mac": {
+    "icon": "resources/icon-512.png"
+  },
+  "win": {
+    "icon": "resources/icon-512.png"
+  },
+  "linux": {
+    "icon": "resources/icons-512.png"
+  }
+}
