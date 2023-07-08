@@ -80,8 +80,6 @@ export default {
     window.addEventListener('keydown', this.handleKeydown)
 
     ipcRenderer.on("gg", (event, message) => {
-      console.log(message)
-
       const logItems = message.filter(item => item.type.startsWith('log'))
       const throwableItems = message.filter(item => item.type === 'throwable')
 
