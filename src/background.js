@@ -84,9 +84,6 @@ app.on('ready', async () => {
   await createWindow()
 })
 
-// Electron 애플리케이션의 메인 프로세서에서 로컬호스트만 접근 가능하도록 설정
-// app.commandLine.appendSwitch('host-rules', 'MAP * 127.0.0.1')
-
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
   if (process.platform === 'win32') {
