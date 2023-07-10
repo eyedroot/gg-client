@@ -1,6 +1,6 @@
 {
-  "appId": "com.example.yourapp",
-  "productName": "PHPgg",
+  "appId": "kr.phpgg",
+  "productName": "GG Client",
   "directories": {
     "buildResources": "resources"
   },
