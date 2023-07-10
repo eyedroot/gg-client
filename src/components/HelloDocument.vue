@@ -14,7 +14,7 @@
       <div class="">
         <h3 class="mb-1 text-lg">Vanilla PHP</h3>
         <div class="p-5 bg-gray-200 rounded">
-          $ composer require global beaverlabs/gg
+          $ composer global require beaverlabs/gg
         </div>
       </div>
 

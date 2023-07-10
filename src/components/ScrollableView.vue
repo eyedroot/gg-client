@@ -20,7 +20,7 @@
       <template v-for="(messageDto, key) in logs" :key="key">
         <DataRow :class="getColumnSize()"
                  :id="Number(key)"
-                 :display-id="getDisplayId(key)"
+                 :display-id="(key + 1)"
                  :messageDto="messageDto"
                  :removeItem="removeItem"
                  :is-local-data="isLocalData"
@@ -130,9 +130,6 @@ export default {
       if (removeLocalStorage) {
         localStorage.removeItem(this.storageName)
       }
-    },
-    getDisplayId(key) {
-      return this.options.reverse ? this.logs.length - key : key + 1
     },
     scrollToEdge(bottom = true) {
       const scrollable = this.$refs.scrollable;
