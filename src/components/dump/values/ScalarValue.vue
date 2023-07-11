@@ -22,8 +22,11 @@ export default {
     }
   },
   methods: {
+    space2nbsp(str) {
+      return str.replace(/ /g, '&nbsp;')
+    },
     nl2br(str) {
-      return str.replace(/\r\n|\r|\n/g, '<span class="select-none bg-gray-200 text-gray-400 p-0.5">\\n</span><br>')
+      return str.replace(/\r\n|\r|\n/g, '<br>')
     },
     text2link(str) {
       return str.replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>')
@@ -49,7 +52,7 @@ export default {
       }
 
       if (this.capsuleDto.type === 'string') {
-        return this.text2link(this.nl2br(this.capsuleDto.value))
+        return this.space2nbsp(this.text2link(this.nl2br(this.capsuleDto.value)))
       }
 
       return this.capsuleDto.value
