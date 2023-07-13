@@ -31,6 +31,9 @@ export default {
     text2link(str) {
       return str.replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>')
     },
+    numberFormat(str) {
+      return String(str).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1<span class="select-none">,</span>')
+    },
   },
   computed: {
     textColor() {
@@ -53,6 +56,10 @@ export default {
 
       if (this.capsuleDto.type === 'string') {
         return this.space2nbsp(this.text2link(this.nl2br(this.capsuleDto.value)))
+      }
+
+      if (this.capsuleDto.type === 'integer') {
+        return this.numberFormat(this.capsuleDto.value)
       }
 
       return this.capsuleDto.value
