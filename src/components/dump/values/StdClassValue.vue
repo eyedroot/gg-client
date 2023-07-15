@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import {defineAsyncComponent, ref} from 'vue';
-import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
-import useDimmed from "@/components/utilities/dimmed";
+import {defineAsyncComponent, ref} from 'vue'
+import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue"
+import useDimmed from "@/utilities/dimmed"
 
 export default {
   name: 'StdClassValue',

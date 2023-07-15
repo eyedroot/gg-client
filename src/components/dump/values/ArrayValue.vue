@@ -37,7 +37,7 @@
 <script>
 import {defineAsyncComponent, ref} from 'vue';
 import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
-import useDimmed from "@/components/utilities/dimmed";
+import useDimmed from "@/utilities/dimmed"
 
 export default {
   name: 'ArrayValue',

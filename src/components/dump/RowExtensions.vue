@@ -26,21 +26,21 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {ref} from "vue"
 
 export default {
   props: {
     isLocalData: {
       type: Boolean,
-      required: true
+      required: true,
     },
   },
   setup() {
     const saved = ref(false)
 
     return {
-      saved
+      saved,
     }
-  }
+  },
 }
 </script>

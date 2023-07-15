@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full flex flex-row">
+  <div class="h-full flex flex-row relative">
     <SideNavigation
       :selectedContainer="currentContainer"
       :notice-count="noticeCount"
@@ -21,19 +21,25 @@
       :current-container="currentContainer"
       v-show="currentContainer === 'shiftContainer'">
     </ScrollableView>
+
+    <NewVersion v-if="meta !== undefined" :meta="meta"></NewVersion>
   </div>
 </template>
 
 <script>
-import SideNavigation from "@/components/SideNavigation.vue";
-import ScrollableView from "@/components/ScrollableView.vue";
-import { ipcRenderer } from "electron";
+import SideNavigation from "@/components/SideNavigation.vue"
+import ScrollableView from "@/components/ScrollableView.vue"
+import NewVersion from "@/components/fragments/NewVersion.vue"
+import http from "@/utilities/http"
+
+import {ipcRenderer} from "electron"
 
 export default {
   name: "App",
   components: {
     SideNavigation,
     ScrollableView,
+    NewVersion,
   },
   data() {
     return {
@@ -46,7 +52,8 @@ export default {
       noticeCount: {
         logContainer: 0,
         throwableContainer: 0,
-      }
+      },
+      meta: undefined,
     }
   },
   watch: {
@@ -75,8 +82,20 @@ export default {
         this.currentContainer = 'shiftContainer'
       }
     },
+    getMeta() {
+      http.get('/v1/meta/version').then(response => {
+        this.meta = response.data.data
+
+        const packageJson = require('../package.json')
+        this.meta.clientVersion = packageJson.version
+      })
+    },
   },
   mounted() {
+    this.getMeta()
+
+    setInterval(this.getMeta, 1000 * 60 * 60)
+
     window.addEventListener('keydown', this.handleKeydown)
 
     ipcRenderer.on("gg", (event, message) => {
