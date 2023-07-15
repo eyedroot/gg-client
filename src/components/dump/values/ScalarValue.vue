@@ -28,6 +28,7 @@ export default {
     nl2br(str) {
       return str.replace(/\r\n|\r|\n/g, '<br>')
     },
+    // noinspection JSUnresolvedVariable
     text2link(str) {
       return str.replace(/(https?:\/\/\S+?)(&nbsp;|\s|$)/g, '<a href="$1" target="_blank">$1</a>$2')
     },
