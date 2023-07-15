@@ -29,7 +29,7 @@ export default {
       return str.replace(/\r\n|\r|\n/g, '<br>')
     },
     text2link(str) {
-      return str.replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>')
+      return str.replace(/(https?:\/\/\S+?)(&nbsp;|\s|$)/g, '<a href="$1" target="_blank">$1</a>$2')
     },
     numberFormat(str) {
       return String(str).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1<span class="select-none">,</span>')
@@ -55,7 +55,7 @@ export default {
       }
 
       if (this.capsuleDto.type === 'string') {
-        return this.space2nbsp(this.text2link(this.nl2br(this.capsuleDto.value)))
+        return this.text2link(this.space2nbsp(this.nl2br(this.capsuleDto.value)))
       }
 
       if (this.capsuleDto.type === 'integer') {
