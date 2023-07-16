@@ -4,7 +4,7 @@
       <fa-icon icon="lightbulb" class="text-2xl text-yellow-100"></fa-icon>
 
       <div class="text-white text-base">
-        <BrowserAnchor :href="meta.publicRepositoryUrl" title="New version is available!"></BrowserAnchor>
+        <AnchorShell :href="meta.publicRepositoryUrl" title="New version is available!"></AnchorShell>
       </div>
 
       <fa-icon @click="showFlag = false" class="text-white cursor-pointer" icon="close"></fa-icon>
@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import BrowserAnchor from '@/components/fragments/BrowserAnchor.vue'
+import AnchorShell from '@/components/fragments/AnchorShell.vue'
 import {ref} from 'vue'
 
 export default {
   name: "NewVersion",
-  components: { BrowserAnchor },
+  components: { AnchorShell },
   props: {
     meta: {
       type: Object,

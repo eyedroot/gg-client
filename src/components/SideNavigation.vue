@@ -1,6 +1,12 @@
 <template>
   <aside class="flex flex-col w-[45px] bg-gray-200 border-r-[1px] border-gray-300 py-5 px-1.5 items-center justify-center select-none">
     <div class="flex flex-col w-full space-y-3.5">
+      <span class="inline-flex">
+        <AnchorText href="https://phpgg.kr">
+          <img src="/assets/image/icons/logo.png" alt="PHPgg">
+        </AnchorText>
+      </span>
+
       <span class="relative inline-flex">
         <SideNavigationBalloon :notice-count="noticeCount.logContainer"></SideNavigationBalloon>
 
@@ -57,10 +63,12 @@
 import SideNavigationBalloon from "@/components/SideNavigationBalloon.vue";
 
 import { webFrame } from "electron";
+import AnchorText from "@/components/fragments/AnchorShell.vue";
 
 export default {
   name: "SideNavigation",
   components: {
+    AnchorText,
     SideNavigationBalloon
   },
   props: {

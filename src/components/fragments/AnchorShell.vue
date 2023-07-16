@@ -1,12 +1,14 @@
 <template>
-  <a class="cursor-pointer underline" @click="handleOpenExternal">{{ title }}</a>
+  <a class="cursor-pointer underline" @click="handleOpenExternal">
+    <slot></slot><span>{{ title }}</span>
+  </a>
 </template>
 
 <script>
 import { shell } from 'electron'
 
 export default {
-  name: "BrowserAnchor",
+  name: "AnchorShell",
   props: {
     href: {
       type: String,
@@ -14,7 +16,8 @@ export default {
     },
     title: {
       type: String,
-      required: true,
+      required: false,
+      default: '',
     },
   },
   setup(props) {

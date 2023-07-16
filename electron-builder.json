@@ -5,12 +5,12 @@
     "buildResources": "resources"
   },
   "mac": {
-    "icon": "resources/icon-512.png"
+    "icon": "./src/assets/icons/icon-512.png"
   },
   "win": {
-    "icon": "resources/icon-512.png"
+    "icon": "./src/assets/icons/icon-512.png"
   },
   "linux": {
-    "icon": "resources/icons-512.png"
+    "icon": "./src/assets/icons/icons-512.png"
   }
 }
