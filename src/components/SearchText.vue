@@ -1,17 +1,20 @@
 <template>
-  <div class="flex flex-row items-center justify-center bg-gray-200 border-[1px] border-gray-300 py-1 px-2.5 shadow-md z-50 space-x-1">
-    <div class="text-[12px] text-gray-500 pr-1">{{ textCountText() }}</div>
+  <div class="flex flex-row items-center justify-center bg-gray-200 border-[1px] border-gray-300 py-1 px-2.5 shadow-md z-50 space-x-1
+    dark:bg-gray-800 dark:border-gray-900">
+    <div class="text-[12px] text-gray-500 pr-1 dark:text-gray-200">{{ textCountText() }}</div>
 
-    <input ref="inputText"
-           v-model="term"
-           @keyup.enter="findText"
-           type="text"
-           class="bg-gray-100 leading-6 px-1 border-[1px] border-gray-300 ring-2 focus:outline-none"
-           :class="ringColor"
-           placeholder="Enter">
+    <input
+      ref="inputText"
+       v-model="term"
+       @keyup.enter="findText"
+       type="text"
+       class="bg-gray-100 leading-6 px-1 border-[1px] border-gray-300 ring-2 focus:outline-none
+        dark:bg-gray-900 dark:text-gray-200 dark:border-black"
+       :class="ringColor"
+       placeholder="Enter">
 
     <button class="pl-1" @click="this.$emit('closeSearch')">
-      <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
+      <fa-icon icon="xmark" class="text-gray-800 dark:text-gray-300"></fa-icon>
     </button>
   </div>
 </template>
@@ -59,7 +62,7 @@ export default {
         return 'focus:ring-gray-500'
       }
 
-      return props.searchContext.foundCount ? 'ring-green-500' : 'ring-red-500'
+      return props.searchContext.foundCount ? 'ring-green-500 dark:ring-green-700' : 'ring-red-500 dark:ring-red-700'
     })
 
     return {

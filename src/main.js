@@ -11,7 +11,7 @@ import '@/assets/style/global.scss'
 const app = createApp(App);
 
 app.config.globalProperties.$getValueComponent = (capsuleDto) => {
-  if (capsuleDto.isScalar) {
+  if (capsuleDto?.isScalar) {
     return 'ScalarValue'
   }
 

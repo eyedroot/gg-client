@@ -11,23 +11,25 @@
       @clearLogs="clearLogs"></ScrollableOptions>
 
     <div class="fixed bottom-3 right-8 z-50">
-      <SearchText v-show="searchContext.enabled"
-                  ref="searchText"
-                  :search-context="searchContext"
-                  @findText="findText"
-                  @saveTerm="saveTerm"
-                  @closeSearch="searchContext.enabled = false"></SearchText>
+      <SearchText
+        v-show="searchContext.enabled"
+        ref="searchText"
+        :search-context="searchContext"
+        @findText="findText"
+        @saveTerm="saveTerm"
+        @closeSearch="searchContext.enabled = false"></SearchText>
     </div>
 
     <div v-if="logs.length" class="flex flex-wrap" :class="{'flex-col-reverse': options.reverse}">
       <template v-for="(messageDto, key) in logs" :key="key">
-        <DataRow :class="getColumnSize()"
-                 :id="Number(key)"
-                 :display-id="(key + 1)"
-                 :messageDto="messageDto"
-                 :removeItem="removeItem"
-                 :is-local-data="isLocalData"
-                 @getColumnSize="getColumnSize">
+        <DataRow
+          :class="getColumnSize()"
+           :id="Number(key)"
+           :display-id="(key + 1)"
+           :messageDto="messageDto"
+           :removeItem="removeItem"
+           :is-local-data="isLocalData"
+           @getColumnSize="getColumnSize">
         </DataRow>
       </template>
     </div>

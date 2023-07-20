@@ -1,7 +1,7 @@
 <template>
   <div class="--backtrace flex flex-col px-1.5 py-3 overflow-x-auto">
     <div v-if="backtrace.length === 0">
-      <div class="text-gray-600 text-center">No backtrace available. <code>\gtrace($data);</code></div>
+      <div class="text-gray-600 text-center dark:text-gray-300">No backtrace available. <code>\gtrace($data);</code></div>
     </div>
 
     <div :key="index" v-for="(row, index) in backtrace" class="flex flex-col">
@@ -10,10 +10,10 @@
           dark:hover:bg-gray-800">
         <button
           class="inline-flex items-center justify-center w-4 h-4 bg-gray-300 hover:bg-gray-500 mr-1.5 text-white cursor-pointer select-none rounded
-            dark:bg-gray-800"
+            dark:bg-gray-900"
           @click="toggleCodes(index)">{{ showCodesIndexes.includes(index) ? '-' : '+' }}</button>
 
-        <span class="text-gray-900 dark:text-gray-200" :class="{ 'text-gray-700 font-bold': row.file === this.focusFile.file }">
+        <span class="text-[14px] text-gray-900 dark:text-gray-400" :class="{ 'text-gray-700 font-bold': row.file === this.focusFile.file }">
           {{ row.file ? row.file : row.class }}:<strong>{{ row.line }}</strong>
         </span>
 

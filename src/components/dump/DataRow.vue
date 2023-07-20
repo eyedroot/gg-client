@@ -26,12 +26,14 @@
         </RowExtensions>
       </div>
 
-      <ThrowableValue v-else-if="messageDto.type === 'throwable'"
+      <ThrowableValue
+        v-else-if="messageDto.type === 'throwable'"
         :message-dto="messageDto">
-        <RowExtensions :is-local-data="isLocalData"
-                       @saveToLocalStorage="saveToLocalStorage"
-                       @toggleBacktrace="toggleBacktrace"
-                       @copyImage="copyImage">
+        <RowExtensions
+          :is-local-data="isLocalData"
+           @saveToLocalStorage="saveToLocalStorage"
+           @toggleBacktrace="toggleBacktrace"
+           @copyImage="copyImage">
           <template v-slot:languageVersion>
             <span>{{ messageDto.language.toLowerCase() }} {{ messageDto.version }}</span>
           </template>
@@ -131,7 +133,7 @@ export default {
       this.showBacktrace = !this.showBacktrace;
     },
     focusFile() {
-      if (this.messageDto.language === 'PHP') {
+      if (this.messageDto.language.toUpperCase() === 'PHP') {
         if (this.messageDto.type === 'throwable') {
           return this.messageDto.data.value
         }

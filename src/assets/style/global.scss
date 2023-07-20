@@ -59,7 +59,7 @@ label {
 }
 
 .--found-text {
-  @apply relative inline-block px-0.5 bg-green-200 animate-pulse;
+  @apply relative inline-block px-0.5 bg-green-200 animate-pulse dark:bg-green-800;
   animation-duration: 0.2s;
   animation-iteration-count: 1;
 }
