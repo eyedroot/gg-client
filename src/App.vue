@@ -1,9 +1,10 @@
 <template>
-  <div class="h-full flex flex-row relative">
+  <div class="h-full flex flex-row relative" :class="{ 'dark': isDarkMode }">
     <SideNavigation
       :selectedContainer="currentContainer"
       :notice-count="noticeCount"
-      @selectContainer="handleSelectContainer"></SideNavigation>
+      @selectContainer="handleSelectContainer"
+      @toggleDarkMode="toggleDarkMode"></SideNavigation>
 
     <ScrollableView
       ref="logContainer"
@@ -33,6 +34,7 @@ import NewVersion from "@/components/fragments/NewVersion.vue"
 import http from "@/utilities/http"
 
 import {ipcRenderer} from "electron"
+import {inject, reactive, ref} from "vue";
 
 export default {
   name: "App",
@@ -41,19 +43,28 @@ export default {
     ScrollableView,
     NewVersion,
   },
-  data() {
+  setup() {
+    const logMediator = reactive({})
+    const mediator = reactive({
+      logContainer: [],
+      throwableContainer: [],
+    })
+    const currentContainer = ref('logContainer')
+    const noticeCount = reactive({
+      logContainer: 0,
+      throwableContainer: 0,
+    })
+    const meta = ref(undefined)
+
+    const isDarkMode = inject('isDarkMode')
+
     return {
-      logMediator: {},
-      mediator: {
-        logContainer: [],
-        throwableContainer: [],
-      },
-      currentContainer: 'logContainer', // logContainer or throwableContainer or shiftContainer
-      noticeCount: {
-        logContainer: 0,
-        throwableContainer: 0,
-      },
-      meta: undefined,
+      logMediator,
+      mediator,
+      currentContainer, // logContainer or throwableContainer or shiftContainer
+      noticeCount,
+      meta,
+      isDarkMode,
     }
   },
   watch: {
@@ -81,6 +92,9 @@ export default {
       if ((e.metaKey || e.ctrlKey) && e.key === '3') {
         this.currentContainer = 'shiftContainer'
       }
+    },
+    toggleDarkMode() {
+      this.isDarkMode = !this.isDarkMode
     },
     getMeta() {
       http.get('/v1/meta/version').then(response => {

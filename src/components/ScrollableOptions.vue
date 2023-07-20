@@ -1,24 +1,47 @@
 <template>
-  <header class="top-1 flex flex-row space-x-6 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300 shadow-sm -ml-0.5 -mt-1 select-none" :class="{ fixed: scrollY >= 38 }" style="width: calc(100% + 4px)">
+  <header
+    class="top-1 flex flex-row space-x-6 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300 shadow-sm -ml-0.5 -mt-1 select-none
+      dark:bg-gray-800 dark:border-gray-900"
+    :class="{ fixed: scrollY >= 38 }"
+    style="width: calc(100% + 4px)">
+
     <button @click="setGrid(1)">
-      <img src="/assets/image/icons/columns-1.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 1 }" alt="Column 1">
+      <img
+        :src="isDarkMode ? '/assets/image/icons/columns-1-dark.svg' : '/assets/image/icons/columns-1.svg'"
+        class="w-5 opacity-50"
+        :class="{ '!opacity-100': options.grid === 1 }"
+        alt="Column 1">
     </button>
+
     <button @click="setGrid(2)" :class="{ 'opacity-20 cursor-not-allowed': isPreventGrid23() }">
-      <img src="/assets/image/icons/columns-2.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 2 }" alt="Column 2">
+      <img
+        :src="isDarkMode ? '/assets/image/icons/columns-2-dark.svg' : '/assets/image/icons/columns-2.svg'"
+        class="w-5 opacity-50"
+        :class="{ '!opacity-100': options.grid === 2 }"
+        alt="Column 2">
     </button>
+
     <button @click="setGrid(3)" :class="{ 'opacity-20 cursor-not-allowed': isPreventGrid23() }">
-      <img src="/assets/image/icons/columns-3.png" class="w-5 opacity-50" :class="{ '!opacity-100': options.grid === 3 }" alt="Column 3">
+      <img
+        :src="isDarkMode ? '/assets/image/icons/columns-3-dark.svg' : '/assets/image/icons/columns-3.svg'"
+        class="w-5 opacity-50"
+        :class="{ '!opacity-100': options.grid === 3 }"
+        alt="Column 3">
     </button>
+
     <button @click="setReverse()">
-      <fa-icon :icon="getSortIcon()" class="text-gray-800"></fa-icon>
+      <fa-icon :icon="getSortIcon()" class="text-gray-800 dark:text-gray-300"></fa-icon>
     </button>
+
     <button @click="clearLogs()">
-      <fa-icon icon="eraser" class="text-gray-800"></fa-icon>
+      <fa-icon icon="eraser" class="text-gray-800 dark:text-gray-300"></fa-icon>
     </button>
   </header>
 </template>
 
 <script>
+import {inject} from "vue";
+
 export default {
   name: "ScrollableOptions",
   props: {
@@ -35,6 +58,13 @@ export default {
       required: false,
       default: false,
     },
+  },
+  setup() {
+    const isDarkMode = inject('isDarkMode')
+
+    return {
+      isDarkMode,
+    }
   },
   methods: {
     setGrid(grid) {

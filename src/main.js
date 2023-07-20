@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import {createApp, ref} from 'vue'
 import App from './App.vue'
 
 import FontAwesomeIcon from '@/fontawsome_icon'
@@ -29,6 +29,7 @@ app.config.globalProperties.$convertKeyToCapsuleDto = (key) => {
 }
 
 app.provide('storageName', 'logs')
+app.provide('isDarkMode', ref(true))
 
 app.component('FaIcon', FontAwesomeIcon)
 

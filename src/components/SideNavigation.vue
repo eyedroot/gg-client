@@ -1,5 +1,7 @@
 <template>
-  <aside class="flex flex-col w-[45px] bg-gray-200 border-r-[1px] border-gray-300 py-5 px-1.5 items-center justify-center select-none">
+  <aside
+    class="flex flex-col w-[45px] bg-gray-200 border-r-[1px] border-gray-300 py-5 px-1.5 items-center justify-center select-none
+      dark:bg-gray-800 dark:border-gray-900">
     <div class="flex flex-col w-full space-y-3.5">
       <span class="inline-flex">
         <AnchorText href="https://phpgg.kr">
@@ -10,7 +12,8 @@
       <span class="relative inline-flex">
         <SideNavigationBalloon :notice-count="noticeCount.logContainer"></SideNavigationBalloon>
 
-        <button class="nav-button"
+        <button
+          class="nav-button"
           :class="{ 'active': selectedContainer === 'logContainer' }"
           @click="emitSelectContainer('logContainer')">
           <fa-icon icon="code" class="text-sm"></fa-icon>
@@ -20,7 +23,8 @@
       <span class="relative inline-flex">
         <SideNavigationBalloon :notice-count="noticeCount.throwableContainer"></SideNavigationBalloon>
 
-        <button class="nav-button"
+        <button
+          class="nav-button"
           :class="{ 'active': selectedContainer === 'throwableContainer' }"
           @click="emitSelectContainer('throwableContainer')">
           <fa-icon icon="bug" class="text-sm"></fa-icon>
@@ -28,9 +32,10 @@
       </span>
 
       <span class="relative inline-flex">
-        <button class="nav-button"
-                :class="{ 'active': selectedContainer === 'shiftContainer' }"
-                @click="emitSelectContainer('shiftContainer')">
+        <button
+          class="nav-button"
+          :class="{ 'active': selectedContainer === 'shiftContainer' }"
+          @click="emitSelectContainer('shiftContainer')">
           <fa-icon icon="floppy-disk" class="text-sm"></fa-icon>
         </button>
       </span>
@@ -52,9 +57,17 @@
       </button>
 
       <div v-if="showZoomLayer"
-        class="absolute bottom-4 -right-[60px] inline-flex bg-gray-900 rounded-xl text-white font-bold items-center justify-center p-2.5 z-50 shadow-sm opacity-80">
+        class="absolute bottom-16 -right-[65px] inline-flex bg-gray-900 rounded-xl text-white font-bold items-center justify-center p-2.5 z-50 shadow-sm opacity-80">
         <span>{{ (currentZoomFactor * 100).toFixed(0) }}%</span>
       </div>
+
+      <div class="-divider"></div>
+
+      <button
+        @click="this.$emit('toggleDarkMode')"
+        class="nav-button !opacity-100">
+        <fa-icon icon="sun"></fa-icon>
+      </button>
     </div>
   </aside>
 </template>
@@ -110,3 +123,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.-divider {
+  @apply border-b-[1px] border-gray-400 my-2;
+}
+</style>
