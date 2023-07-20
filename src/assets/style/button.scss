@@ -1,5 +1,5 @@
 .button {
-  @apply inline-flex px-1 py-0.5 shadow-sm font-medium text-gray-700 bg-white text-[80%] hover:bg-gray-50;
+  @apply inline-flex px-1 py-0.5 shadow-sm font-medium text-gray-700 bg-white text-[90%] hover:bg-gray-50 select-none;
 
   &.transparent {
     @apply text-gray-500 bg-transparent hover:bg-transparent shadow-none;

@@ -1,11 +1,15 @@
 <template>
   <div class="flex flex-row space-x-2.5 justify-start items-center">
     <div class="flex items-center space-x-1.5">
-      <span class="rounded-full bg-pink-600 w-2 h-2 animate-pulse transition-opacity" :class="{ 'invisible': noticeCircle === false }"></span>
+      <span v-if="props.isLocalData === false"
+        class="rounded-full bg-pink-600 w-2 h-2 animate-pulse transition-opacity"
+        :class="{ 'invisible': noticeCircle === false }">
+      </span>
+
       <span class="text-gray-500 tracking-tight">{{ currentDateTime }}</span>
     </div>
 
-    <span class="text-gray-500 text-[80%]">
+    <span class="text-gray-500 text-[90%]">
       <slot name="languageVersion"></slot>
     </span>
 
@@ -17,7 +21,7 @@
 
     <button v-if="props.isLocalData === false"
             class="--backtrace-button button transparent inline-flex items-center justify-center"
-            @click="this.$emit('saveToLocalStorage'); this.saved = true">
+            @click="this.$emit('saveToLocalStorage'); saved = true">
       <fa-icon icon="floppy-disk" class="mr-1"></fa-icon>
       <span class="text-gray-500">{{ saved ? 'saved!' : 'save' }}</span>
     </button>
