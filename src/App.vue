@@ -121,6 +121,6 @@ export default {
   },
   beforeUnmount() {
     window.removeEventListener('keydown', this.handleKeydown)
-  }
+  },
 }
 </script>
