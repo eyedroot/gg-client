@@ -41,16 +41,16 @@ label {
     @apply font-bold;
   }
   .variable {
-    @apply text-purple-950 font-bold;
+    @apply text-purple-950 font-bold dark:text-purple-400;
   }
   .method {
     @apply text-green-600 font-bold;
   }
   .function {
-    @apply text-orange-600;
+    @apply text-orange-600 font-bold dark:text-orange-400;
   }
   .double-colon {
-    @apply text-amber-950 tracking-tighter
+    @apply text-amber-950 tracking-tighter dark:text-amber-400;
   }
 }
 

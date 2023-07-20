@@ -3,7 +3,10 @@
     <div class="flex flex-col">
       <div v-for="(row, idx) in sourceCode" :key="idx" class="flex flex-row">
         <div class="flex select-none justify-end min-w-[20px] text-gray-400 mr-3">{{ row.line }}</div>
-        <code class="flex-1 whitespace-pre text-gray-700" :class="{ 'bg-gray-200': row.line === focusLine }" v-html="highlightCode(row.code)"></code>
+        <code
+          class="flex-1 whitespace-pre text-gray-700 dark:text-gray-200"
+          :class="{ 'bg-gray-200 dark:bg-gray-900': row.line === focusLine }"
+          v-html="highlightCode(row.code)"></code>
       </div>
     </div>
   </div>
