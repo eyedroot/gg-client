@@ -1,6 +1,6 @@
 <template>
   <span class="--header array" :class="{ '--dimmed': isDimmed }">
-    <span class="text-purple-900 font-bold">Array:{{ Object.keys(this.capsuleDto.value).length }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
+    <span class="text-purple-900 font-bold dark:text-purple-400">Array:{{ Object.keys(this.capsuleDto.value).length }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
 
     <CodeFolding
       type="array"
@@ -19,7 +19,7 @@
         <ScalarValue :is-property-or-key="true" :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
       </span>
 
-      <span class="h-fit mx-1.5">=></span>
+      <span class="h-fit mx-1.5 dark:text-gray-300">=></span>
 
       <component
         :is="this.$getValueComponent(value)"

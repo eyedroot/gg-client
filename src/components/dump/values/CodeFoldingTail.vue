@@ -1,7 +1,7 @@
 <template>
   <template v-if="isFold">
     <span
-      class="inline-flex bg-gray-300 rounded-sm mx-0.5 cursor-pointer"
+      class="inline-flex bg-gray-300 rounded-sm mx-0.5 px-0.5 cursor-pointer dark:bg-gray-600 dark:text-gray-300"
       @click="$emit('handleFold')">...</span>
     <span class="brackets" :class="bracketIndex">{{ getCollapsedTail }}</span>
   </template>

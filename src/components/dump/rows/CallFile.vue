@@ -1,5 +1,5 @@
 <template>
-  <div class="text-green-700 mb-0.5">/** #{{ id }} {{ printFocusFile }} */</div>
+  <div class="text-green-700 dark:text-green-500 mb-1.5">/** #{{ id }} {{ printFocusFile }} */</div>
 </template>
 
 <script>

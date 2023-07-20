@@ -75,10 +75,10 @@ export default {
 .--value {
   @apply font-medium;
   &.number {
-    @apply text-blue-700;
+    @apply text-blue-700 dark:text-blue-300;
   }
   &.string {
-    @apply text-gray-900;
+    @apply text-gray-900 dark:text-gray-300;
     .--multiline::before {
       content: '"""\A';
       white-space: pre;
@@ -97,20 +97,20 @@ export default {
       @apply text-gray-500;
     }
     a {
-      @apply text-blue-600 underline;
+      @apply text-blue-600 underline dark:text-blue-300;
       &:visited {
-        @apply text-purple-600 underline;
+        @apply text-purple-600 underline dark:text-purple-300;
       }
     }
   }
   &.boolean {
-    @apply text-orange-600;
+    @apply text-orange-600 dark:text-orange-300;
   }
   &.object {
     @apply text-gray-400;
   }
   &.property {
-    @apply text-green-700 font-semibold;
+    @apply text-green-700 font-semibold dark:text-green-400;
     .--double-quote::before {
       content: '"';
       @apply text-gray-500;

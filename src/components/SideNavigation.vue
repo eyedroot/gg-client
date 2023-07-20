@@ -1,7 +1,7 @@
 <template>
   <aside
     class="flex flex-col w-[45px] bg-gray-200 border-r-[1px] border-gray-300 py-5 px-1.5 items-center justify-center select-none
-      dark:bg-gray-800 dark:border-gray-900">
+      dark:bg-gray-900 dark:border-gray-900">
     <div class="flex flex-col w-full space-y-3.5">
       <span class="inline-flex">
         <AnchorText href="https://phpgg.kr">

@@ -1,6 +1,6 @@
 <template>
   <span class="--header stdclass" :class="{ '--dimmed': isDimmed }">
-    <span class="text-purple-900 font-bold">{{ this.capsuleDto.class }}</span> <span class="brackets" :class="getBracketsIndex">{</span>
+    <span class="text-purple-900 font-bold dark:text-purple-400">{{ this.capsuleDto.class }}</span> <span class="brackets" :class="getBracketsIndex">{</span>
 
     <CodeFolding
       type="stdClass"
@@ -20,12 +20,12 @@
          :key="key">
 
       <span class="h-fit">
-        <span class="text-blue-500 mr-0.5">{{ getModifierToCharacter(getModifier(key)) }}</span>
+        <span class="text-blue-500 mr-0.5 dark:text-blue-200">{{ getModifierToCharacter(getModifier(key)) }}</span>
         <ScalarValue
           :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))" :is-property-or-key="true"></ScalarValue>
       </span>
 
-      <span class="h-fit mr-1.5">:</span>
+      <span class="h-fit mr-1.5 dark:text-gray-300">:</span>
 
       <component
         :is="this.$getValueComponent(value)"

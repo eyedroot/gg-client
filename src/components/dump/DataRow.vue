@@ -4,7 +4,7 @@
 
     <div class="--code-wrap flex-auto items-center relative" ref="code">
       <button class="absolute top-1 right-1.5 z-20" @click="removeItem(id)">
-        <fa-icon icon="xmark" class="text-gray-800"></fa-icon>
+        <fa-icon icon="xmark" class="text-gray-800 dark:text-gray-300"></fa-icon>
       </button>
 
       <div v-if="messageDto.type.startsWith('log')"

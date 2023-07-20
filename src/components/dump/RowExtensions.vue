@@ -6,30 +6,30 @@
         :class="{ 'invisible': noticeCircle === false }">
       </span>
 
-      <span class="text-gray-500 tracking-tight">{{ currentDateTime }}</span>
+      <span class="text-gray-500 tracking-tight dark:text-gray-300">{{ currentDateTime }}</span>
     </div>
 
-    <span class="text-gray-500 text-[90%]">
+    <span class="text-gray-500 text-[90%] dark:text-gray-300">
       <slot name="languageVersion"></slot>
     </span>
 
     <button v-if="false" class="--backtrace-button button transparent inline-flex items-center justify-center"
             @click="this.$emit('copyImage')">
       <fa-icon icon="image" class="mr-1"></fa-icon>
-      <span class="text-gray-500">png</span>
+      <span class="text-gray-500 dark:text-gray-300">png</span>
     </button>
 
     <button v-if="props.isLocalData === false"
             class="--backtrace-button button transparent inline-flex items-center justify-center"
             @click="this.$emit('saveToLocalStorage'); saved = true">
       <fa-icon icon="floppy-disk" class="mr-1"></fa-icon>
-      <span class="text-gray-500">{{ saved ? 'saved!' : 'save' }}</span>
+      <span class="text-gray-500 dark:text-gray-300">{{ saved ? 'saved!' : 'save' }}</span>
     </button>
 
     <button class="--backtrace-button button transparent items-center justify-center"
             @click="this.$emit('toggleBacktrace')">
       <fa-icon icon="code" class="mr-1"></fa-icon>
-      <span class="text-gray-500">backtrace</span>
+      <span class="text-gray-500 dark:text-gray-300">backtrace</span>
     </button>
   </div>
 </template>
