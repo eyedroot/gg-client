@@ -84,7 +84,7 @@ export default {
   data() {
     return {
       showZoomLayer: false,
-      currentZoomFactor: webFrame.getZoomFactor(),
+      currentZoomFactor: 1.1,
     }
   },
   methods: {
@@ -104,6 +104,9 @@ export default {
 
       webFrame.setZoomFactor(this.currentZoomFactor);
     },
+  },
+  mounted() {
+    webFrame.setZoomFactor(this.currentZoomFactor)
   },
 }
 </script>
