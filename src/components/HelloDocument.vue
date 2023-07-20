@@ -6,21 +6,21 @@
     <div class="flex flex-col space-y-10 mt-12">
       <div class="">
         <h3 class="mb-1 text-lg">Laravel Framework</h3>
-        <div class="p-5 text-lg bg-gray-200 rounded dark:bg-gray-800">
+        <div class="p-5 text-base bg-gray-200 rounded dark:bg-gray-800">
           $ composer require --dev <AnchorShell href="https://github.com/binbyz/laravel-gg">beaverlabs/laravel-gg</AnchorShell>
         </div>
       </div>
 
       <div class="">
         <h3 class="mb-1 text-lg">Vanilla PHP</h3>
-        <div class="p-5 text-lg bg-gray-200 rounded dark:bg-gray-800">
+        <div class="p-5 text-base bg-gray-200 rounded dark:bg-gray-800">
           $ composer global require <AnchorShell href="https://github.com/binbyz/gg">beaverlabs/gg</AnchorShell>
         </div>
       </div>
 
       <div class="">
         <h3 class="mb-1 text-lg">If using docker container, set to .env</h3>
-        <div class="p-5 text-lg bg-gray-200 rounded dark:bg-gray-800">
+        <div class="p-5 text-base bg-gray-200 rounded dark:bg-gray-800">
           GG_HOST=host.docker.internal
         </div>
       </div>
