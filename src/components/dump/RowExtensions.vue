@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-row space-x-2.5 justify-start items-center">
-    <div class="flex items-center space-x-2">
-      <span class="rounded-full bg-blue-700 w-2 h-2 fade-out"></span>
-      <span class="text-gray-800">{{ currentDateTime }}</span>
+    <div class="flex items-center space-x-1">
+      <span class="rounded-full bg-blue-600 w-2 h-2 fade-out"></span>
+      <span class="text-gray-500 tracking-tight">{{ currentDateTime }}</span>
     </div>
 
     <span class="text-gray-500 text-[80%]">
