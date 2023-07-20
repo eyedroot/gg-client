@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row space-x-2.5 justify-start items-center">
-    <div class="flex items-center space-x-1">
-      <span class="rounded-full bg-blue-600 w-2 h-2 fade-out"></span>
+    <div class="flex items-center space-x-1.5">
+      <span class="rounded-full bg-pink-600 w-2 h-2 animate-pulse transition-opacity" :class="{ 'invisible': noticeCircle === false }"></span>
       <span class="text-gray-500 tracking-tight">{{ currentDateTime }}</span>
     </div>
 
@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue"
+import {computed, onMounted, onUnmounted, ref} from "vue"
 
 const props = defineProps({
   isLocalData: {
@@ -42,33 +42,26 @@ const props = defineProps({
 
 const saved = ref(false)
 
+const noticeCircle = ref(true)
+let timerId = undefined
+
 const currentDateTime = computed(() => {
   const date = new Date()
-
-  const year = date.getFullYear()
-  const month = ('0' + (date.getMonth() + 1)).slice(-2)
-  const day = ('0' + (date.getDate())).slice(-2)
 
   const hour = ('0' + (date.getHours())).slice(-2)
   const minute = ('0' + (date.getMinutes())).slice(-2)
   const second = ('0' + (date.getSeconds())).slice(-2)
 
-  return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+  return `${hour}:${minute}:${second}`
+})
+
+onMounted(() => {
+  timerId = setTimeout(() => noticeCircle.value = false, 1000 * 15)
+})
+
+onUnmounted(() => {
+  if (timerId !== undefined) {
+    clearTimeout(timerId)
+  }
 })
 </script>
-
-<style lang="scss">
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-.fade-out {
-  animation: fadeOut 30s forwards;
-}
-</style>
