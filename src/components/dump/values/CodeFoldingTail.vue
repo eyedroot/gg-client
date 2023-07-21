@@ -7,7 +7,7 @@
   </template>
   <template v-else>
     <span
-      class="inline-flex rounded-sm mx-0.5 cursor-pointer text-gray-700"
+      class="inline-flex rounded-sm mx-0.5 cursor-pointer text-gray-700 dark:text-gray-300"
       @click="$emit('handleFold')">▼</span>
   </template>
 </template>
