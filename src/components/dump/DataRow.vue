@@ -12,14 +12,17 @@
         <CallFile :focusFile="focusFile()" :id="displayId"></CallFile>
 
         <div class="mb-3" ref="rValue">
-          <component :is="this.$getValueComponent(messageDto.data)"
-                     :capsule-dto="messageDto.data"></component>
+          <component
+              :is="this.$getValueComponent(messageDto.data)"
+              :capsule-dto="messageDto.data"></component>
         </div>
 
-        <RowExtensions :is-local-data="isLocalData"
-                       @saveToLocalStorage="saveToLocalStorage"
-                       @toggleBacktrace="toggleBacktrace"
-                       @copyImage="copyImage">
+        <RowExtensions
+            :is-local-data="isLocalData"
+            :created-at="messageDto?.__createdAt"
+           @saveToLocalStorage="saveToLocalStorage"
+           @toggleBacktrace="toggleBacktrace"
+           @copyImage="copyImage">
           <template v-slot:languageVersion>
             <span>{{ messageDto.language.toLowerCase() }} {{ messageDto.version }}</span>
           </template>
@@ -31,6 +34,7 @@
         :message-dto="messageDto">
         <RowExtensions
           :is-local-data="isLocalData"
+          :created-at="messageDto?.__createdAt"
            @saveToLocalStorage="saveToLocalStorage"
            @toggleBacktrace="toggleBacktrace"
            @copyImage="copyImage">
@@ -49,15 +53,17 @@
     </div>
   </div>
 
-  <UsageValue v-else-if="messageDto.type === 'log.usage'"
-              @removeItem="removeItem(id)"
-              :message-dto="this.messageDto">
+  <UsageValue
+      v-else-if="messageDto.type === 'log.usage'"
+      @removeItem="removeItem(id)"
+      :message-dto="this.messageDto">
   </UsageValue>
 
-  <NoteValue v-else-if="messageDto.type === 'log.note'"
-             :class="this.$emit('getColumnSize')"
-             @removeItem="removeItem(id)"
-             :messageDto="this.messageDto">
+  <NoteValue
+      v-else-if="messageDto.type === 'log.note'"
+     :class="this.$emit('getColumnSize')"
+     @removeItem="removeItem(id)"
+     :messageDto="this.messageDto">
   </NoteValue>
 </template>
 
@@ -72,7 +78,7 @@ import StdClassValue from "@/components/dump/values/StdClassValue.vue";
 import CallFile from "@/components/dump/rows/CallFile.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
 import SpaceValue from "@/components/dump/values/NoteValue.vue";
-import {inject, toRaw} from "vue";
+import {inject, ref, toRaw} from "vue";
 import RowExtensions from "@/components/dump/RowExtensions.vue";
 import html2canvas from "html2canvas";
 import UsageValue from "@/components/dump/values/UsageValue.vue";
@@ -92,13 +98,6 @@ export default {
     ArrayValue,
     ScalarValue,
     StdClassValue
-  },
-  setup() {
-    const storageName = inject('storageName') || 'logs'
-
-    return {
-      storageName
-    }
   },
   props: {
     id: {
@@ -123,9 +122,16 @@ export default {
       default: false
     },
   },
-  data() {
+  setup() {
+    const storageName = inject('storageName') || 'logs'
+    const showBacktrace = ref(false)
+
+    const createdAt = new Date()
+
     return {
-      showBacktrace: false
+      storageName,
+      showBacktrace,
+      createdAt,
     }
   },
   methods: {
@@ -139,10 +145,10 @@ export default {
         }
 
         for (let i = 0; i < this.messageDto.trace.length; i++) {
-          let row = this.messageDto.trace[i];
+          let row = this.messageDto.trace[i]
 
           if (row.file && (!row.file.includes('gg/src/Gg.php') && !row.file.includes('gg/src/helpers/helper.php') && !row.file.includes('/vendor/'))) {
-            return row;
+            return row
           }
         }
       }
@@ -150,10 +156,14 @@ export default {
       return { file: '', line: -1 }
     },
     saveToLocalStorage() {
-      const logs = JSON.parse(localStorage.getItem(this.storageName)) || [];
-      logs.push(toRaw(this.messageDto));
+      const logs = JSON.parse(localStorage.getItem(this.storageName)) || []
 
-      localStorage.setItem(this.storageName, JSON.stringify(logs));
+      logs.push({
+        ...toRaw(this.messageDto),
+        __createdAt: this.createdAt,
+      })
+
+      localStorage.setItem(this.storageName, JSON.stringify(logs))
     },
     async copyImage() {
       const canvas = await html2canvas(this.$refs.code, {
