@@ -58,6 +58,8 @@ export default {
 
     const isDarkMode = inject('isDarkMode')
 
+    const isDataListening = inject('isDataListening')
+
     return {
       logMediator,
       mediator,
@@ -65,6 +67,7 @@ export default {
       noticeCount,
       meta,
       isDarkMode,
+      isDataListening,
     }
   },
   watch: {
@@ -113,6 +116,10 @@ export default {
     window.addEventListener('keydown', this.handleKeydown)
 
     ipcRenderer.on("gg", (event, message) => {
+      if (! this.isDataListening) {
+        return
+      }
+
       const logItems = message.filter(item => item.type.startsWith('log'))
       const throwableItems = message.filter(item => item.type === 'throwable')
 

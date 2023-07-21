@@ -43,6 +43,12 @@
 
     <div class="relative mt-auto">
       <button
+        class="nav-button"
+        @click="isDataListening = !isDataListening">
+        <fa-icon :icon="isDataListening ? 'pause' : 'play'"></fa-icon>
+      </button>
+
+      <button
         @mouseover="showZoomLayer = true"
         @mouseleave="showZoomLayer = false"
         class="nav-button hover:opacity-100" @click="handleZoomInOut(true)">
@@ -77,6 +83,7 @@ import SideNavigationBalloon from "@/components/SideNavigationBalloon.vue";
 
 import { webFrame } from "electron";
 import AnchorText from "@/components/fragments/AnchorShell.vue";
+import {inject, ref} from "vue";
 
 export default {
   name: "SideNavigation",
@@ -94,10 +101,16 @@ export default {
       required: true,
     }
   },
-  data() {
+  setup() {
+    const currentZoomFactor = ref(1.1)
+    const showZoomLayer = ref(false)
+
+    const isDataListening = inject('isDataListening')
+
     return {
-      showZoomLayer: false,
-      currentZoomFactor: 1.1,
+      currentZoomFactor,
+      showZoomLayer,
+      isDataListening,
     }
   },
   methods: {
@@ -126,6 +139,6 @@ export default {
 
 <style lang="scss">
 .-divider {
-  @apply border-b-[1px] border-gray-400 my-2;
+  @apply border-b-[1px] border-gray-400 my-2 dark:border-gray-700;
 }
 </style>

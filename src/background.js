@@ -38,6 +38,10 @@ async function createWindow() {
     res.status(200).send('gg')
   })
 
+  server.get('/api/ping', (req, res) => {
+    res.status(200).send('pong')
+  })
+
   server.listen(21868, '0.0.0.0', () => {
     console.log('server started at http://0.0.0.0:21868')
   })
