@@ -5,7 +5,7 @@
     <div class="flex flex-col w-full space-y-3.5">
       <span class="inline-flex">
         <AnchorText href="https://phpgg.kr">
-          <img src="/assets/image/icons/logo.png" alt="PHPgg">
+          <img :src="logo" alt="PHPgg">
         </AnchorText>
       </span>
 
@@ -79,11 +79,11 @@
 </template>
 
 <script>
-import SideNavigationBalloon from "@/components/SideNavigationBalloon.vue";
-
-import { webFrame } from "electron";
-import AnchorText from "@/components/fragments/AnchorShell.vue";
-import {inject, ref} from "vue";
+import SideNavigationBalloon from "@/components/SideNavigationBalloon.vue"
+import AnchorText from "@/components/fragments/AnchorShell.vue"
+import { webFrame } from "electron"
+import {inject, ref} from "vue"
+import Logo from "@/assets/icons/icon-192.png"
 
 export default {
   name: "SideNavigation",
@@ -102,12 +102,15 @@ export default {
     }
   },
   setup() {
+    const logo = ref(Logo)
+
     const currentZoomFactor = ref(1.1)
     const showZoomLayer = ref(false)
 
     const isDataListening = inject('isDataListening')
 
     return {
+      logo,
       currentZoomFactor,
       showZoomLayer,
       isDataListening,
