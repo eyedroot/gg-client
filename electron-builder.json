@@ -5,10 +5,23 @@
     "buildResources": "resources"
   },
   "mac": {
-    "icon": "./src/assets/icons/icon-512.png"
+    "icon": "./src/assets/icons/icon-512.png",
+    "target": {
+      "target": "dmg",
+      "arch": [
+        "x64",
+        "arm64"
+      ]
+    }
   },
   "win": {
-    "icon": "./src/assets/icons/icon-512.png"
+    "icon": "./src/assets/icons/icon-512.png",
+    "target": {
+      "target": "nsis",
+      "arch": [
+        "x64"
+      ]
+    }
   },
   "linux": {
     "icon": "./src/assets/icons/icons-512.png"
