@@ -18,7 +18,7 @@
 
     <button
         v-if="false" class="--backtrace-button button transparent inline-flex items-center justify-center"
-        @click="this.$emit('copyImage')">
+        @click="emit('copyImage')">
       <fa-icon icon="image" class="mr-1"></fa-icon>
       <span class="text-gray-500 dark:text-gray-300">png</span>
     </button>
@@ -26,14 +26,14 @@
     <button
         v-if="props.isLocalData === false"
         class="--backtrace-button button transparent inline-flex items-center justify-center"
-        @click="this.$emit('saveToLocalStorage'); saved = true">
+        @click="emit('saveToLocalStorage'); saved = true">
       <fa-icon icon="floppy-disk" class="mr-1"></fa-icon>
       <span class="text-gray-500 dark:text-gray-300">{{ saved ? 'saved!' : 'save' }}</span>
     </button>
 
     <button
         class="--backtrace-button button transparent items-center justify-center"
-        @click="this.$emit('toggleBacktrace')">
+        @click="emit('toggleBacktrace')">
       <fa-icon icon="code" class="mr-1"></fa-icon>
       <span class="text-gray-500 dark:text-gray-300">backtrace</span>
     </button>
@@ -42,6 +42,8 @@
 
 <script setup>
 import {computed, onMounted, onUnmounted, ref} from "vue"
+
+const emit = defineEmits(['toggleBacktrace', 'saveToLocalStorage', 'copyImage'])
 
 const props = defineProps({
   isLocalData: {
