@@ -2,8 +2,11 @@
   <div class="flex flex-row space-x-2.5 justify-start items-center">
     <div class="flex items-center space-x-1.5">
       <span v-if="props.isLocalData === false"
-        class="rounded-full bg-pink-600 w-2 h-2 animate-pulse transition-opacity"
-        :class="{ 'invisible': noticeCircle === false }">
+        class="rounded-full w-2 h-2 transition-opacity"
+        :class="{
+          'bg-gray-200 dark:bg-gray-900': noticeCircle === false,
+          'bg-purple-600 animate-pulse': noticeCircle === true,
+        }">
       </span>
 
       <span class="text-gray-500 tracking-tight dark:text-gray-300">{{ currentDateTime }}</span>
