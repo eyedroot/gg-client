@@ -13,7 +13,7 @@
         <SideNavigationBalloon :notice-count="noticeCount.logContainer"></SideNavigationBalloon>
 
         <button
-          class="nav-button"
+          class="--nav-button"
           :class="{ 'active': selectedContainer === 'logContainer' }"
           @click="emitSelectContainer('logContainer')">
           <fa-icon icon="code" class="text-sm"></fa-icon>
@@ -24,7 +24,7 @@
         <SideNavigationBalloon :notice-count="noticeCount.throwableContainer"></SideNavigationBalloon>
 
         <button
-          class="nav-button"
+          class="--nav-button"
           :class="{ 'active': selectedContainer === 'throwableContainer' }"
           @click="emitSelectContainer('throwableContainer')">
           <fa-icon icon="bug" class="text-sm"></fa-icon>
@@ -33,7 +33,7 @@
 
       <span class="relative inline-flex">
         <button
-          class="nav-button"
+          class="--nav-button"
           :class="{ 'active': selectedContainer === 'shiftContainer' }"
           @click="emitSelectContainer('shiftContainer')">
           <fa-icon icon="floppy-disk" class="text-sm"></fa-icon>
@@ -43,22 +43,22 @@
 
     <div class="relative mt-auto">
       <button
-        class="nav-button"
+        class="--nav-button"
         @click="isDataListening = !isDataListening">
         <fa-icon :icon="isDataListening ? 'pause' : 'play'"></fa-icon>
       </button>
 
       <button
-        @mouseover="showZoomLayer = true"
-        @mouseleave="showZoomLayer = false"
-        class="nav-button hover:opacity-100" @click="handleZoomInOut(true)">
+          @mouseover="showZoomLayer = true"
+          @mouseleave="showZoomLayer = false"
+          class="--nav-button hover:opacity-100" @click="handleZoomInOut(true)">
         <fa-icon icon="magnifying-glass-plus" class="text-sm"></fa-icon>
       </button>
 
       <button
-        @mouseover="showZoomLayer = true"
-        @mouseleave="showZoomLayer = false"
-        class="nav-button hover:opacity-100" @click="handleZoomInOut(false)">
+          @mouseover="showZoomLayer = true"
+          @mouseleave="showZoomLayer = false"
+          class="--nav-button hover:opacity-100" @click="handleZoomInOut(false)">
         <fa-icon icon="magnifying-glass-minus" class="text-sm"></fa-icon>
       </button>
 
@@ -71,7 +71,7 @@
 
       <button
         @click="this.$emit('toggleDarkMode')"
-        class="nav-button !opacity-100">
+        class="--nav-button !opacity-100">
         <fa-icon icon="sun"></fa-icon>
       </button>
     </div>

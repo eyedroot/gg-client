@@ -188,6 +188,10 @@ export default {
         console.error('Failed to copy image to clipboard: ', err)
       })
     },
+    copyAsJson() {
+      console.log('copyAsJson')
+
+    },
   },
 }
 </script>

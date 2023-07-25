@@ -27,7 +27,6 @@ label {
   .brackets-3 { @apply text-pink-700 dark:text-pink-400; }
 
   .collapsed { @apply hidden; }
-  .--backtrace-button { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
   &.viewer {
     @apply ml-5 my-2;
