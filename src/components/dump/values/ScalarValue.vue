@@ -68,11 +68,7 @@ export default {
       }
 
       if (this.capsuleDto.type === 'string') {
-        return this.text2link(
-          this.space2nbsp(
-            this.escapeHtml(this.nl2br(this.capsuleDto.value))
-          )
-        )
+        return this.text2link(this.space2nbsp(this.escapeHtml(this.nl2br(this.capsuleDto.value))))
       }
 
       if (this.capsuleDto.type === 'integer') {

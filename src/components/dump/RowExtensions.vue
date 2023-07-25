@@ -49,7 +49,7 @@
       class="--backtrace --button --transparent"
       @click="emit('copyAssocArray')">
       <fa-icon icon="copy" class="mr-1"></fa-icon>
-      <span class="text-gray-500 dark:text-gray-300">Copy Assoc []</span>
+      <span class="text-gray-500 dark:text-gray-300">Copy Assoc</span>
     </button>
   </div>
 </template>
