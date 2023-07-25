@@ -39,8 +39,17 @@
     </button>
 
     <button
-      class="--backtrace --button --transparent">
+      class="--backtrace --button --transparent"
+      @click="emit('copyJson')">
+      <fa-icon icon="copy" class="mr-1"></fa-icon>
+      <span class="text-gray-500 dark:text-gray-300">Copy Json</span>
+    </button>
 
+    <button
+      class="--backtrace --button --transparent"
+      @click="emit('copyAssocArray')">
+      <fa-icon icon="copy" class="mr-1"></fa-icon>
+      <span class="text-gray-500 dark:text-gray-300">Copy Assoc []</span>
     </button>
   </div>
 </template>
@@ -48,7 +57,7 @@
 <script setup>
 import {computed, onMounted, onUnmounted, ref} from "vue"
 
-const emit = defineEmits(['toggleBacktrace', 'saveToLocalStorage', 'copyImage'])
+const emit = defineEmits(['toggleBacktrace', 'saveToLocalStorage', 'copyImage', 'copyJson', 'copyAssocArray'])
 
 const props = defineProps({
   isLocalData: {

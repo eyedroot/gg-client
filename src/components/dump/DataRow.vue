@@ -22,7 +22,9 @@
             :created-at="messageDto?.__createdAt"
            @saveToLocalStorage="saveToLocalStorage"
            @toggleBacktrace="toggleBacktrace"
-           @copyImage="copyImage">
+           @copyImage="copyImage"
+           @copyJson="copyJson"
+           @copyAssocArray="copyAssocArray">
           <template v-slot:languageVersion>
             <span>{{ messageDto.language.toLowerCase() }} {{ messageDto.version }}</span>
           </template>
@@ -83,6 +85,8 @@ import RowExtensions from "@/components/dump/RowExtensions.vue";
 import html2canvas from "html2canvas";
 import UsageValue from "@/components/dump/values/UsageValue.vue";
 import ThrowableValue from "@/components/dump/values/ThrowableValue.vue";
+import copyJson from "@/utilities/copy_json";
+import clipboardFromObject from "@/utilities/clipboard";
 
 export default {
   components: {
@@ -182,16 +186,16 @@ export default {
       const clipboardItem = new ClipboardItem({'image/png': blob})
 
       // Write the clipboard item to the clipboard
-      navigator.clipboard.write([clipboardItem]).then(() => {
-        console.log('Image copied to clipboard.')
-      }).catch(err => {
-        console.error('Failed to copy image to clipboard: ', err)
-      })
+      clipboardFromObject([clipboardItem])
     },
-    copyAsJson() {
-      console.log('copyAsJson')
-
+    copyJson() {
+      const result = copyJson(this.messageDto.data)
+      
+      clipboardFromObject(JSON.stringify(result, null, 2))
     },
+    copyAssocArray() {
+      console.log('copyAsAssocArray')
+    }
   },
 }
 </script>
