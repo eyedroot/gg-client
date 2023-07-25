@@ -52,7 +52,5 @@ function unpack(data) {
 export default function copyJson(data) {
   const clone = toRaw(data)
 
-  console.log(clone)
-
   return unpack(clone)
 }

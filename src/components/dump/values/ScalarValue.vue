@@ -34,6 +34,19 @@ export default {
     numberFormat(str) {
       return String(str).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1<span class="select-none">,</span>')
     },
+    escapeHtml(str) {
+      return str.replace(/[&<>'"]/g, function (tag) {
+        const charsToReplace = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#039;',
+          '"': '&quot;',
+        }
+
+        return charsToReplace[tag] || tag
+      })
+    }
   },
   computed: {
     textColor() {
@@ -55,7 +68,11 @@ export default {
       }
 
       if (this.capsuleDto.type === 'string') {
-        return this.text2link(this.space2nbsp(this.nl2br(this.capsuleDto.value)))
+        return this.text2link(
+          this.space2nbsp(
+            this.escapeHtml(this.nl2br(this.capsuleDto.value))
+          )
+        )
       }
 
       if (this.capsuleDto.type === 'integer') {
