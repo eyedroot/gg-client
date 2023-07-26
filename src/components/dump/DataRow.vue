@@ -86,7 +86,8 @@ import html2canvas from "html2canvas";
 import UsageValue from "@/components/dump/values/UsageValue.vue";
 import ThrowableValue from "@/components/dump/values/ThrowableValue.vue";
 import copyJson from "@/utilities/copy_json";
-import clipboardFromObject from "@/utilities/clipboard";
+import clipboardFromString from "@/utilities/clipboard";
+import copyAssoc from "@/utilities/copy_assoc";
 
 export default {
   components: {
@@ -186,15 +187,17 @@ export default {
       const clipboardItem = new ClipboardItem({'image/png': blob})
 
       // Write the clipboard item to the clipboard
-      clipboardFromObject([clipboardItem])
+      clipboardFromString([clipboardItem])
     },
     copyJson() {
       const result = copyJson(this.messageDto.data)
-      
-      clipboardFromObject(JSON.stringify(result, null, 2))
+
+      clipboardFromString(JSON.stringify(result, null, 2))
     },
     copyAssocArray() {
-      console.log('copyAsAssocArray')
+      const result = copyAssoc(this.messageDto.data)
+
+      clipboardFromString(result)
     }
   },
 }
