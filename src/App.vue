@@ -105,7 +105,12 @@ export default {
 
         const packageJson = require('../package.json')
         this.meta.clientVersion = packageJson.version
+
+        this.setDocumentTitle(this.meta.clientVersion)
       })
+    },
+    setDocumentTitle(clientVersion) {
+      document.title = `GG Client v${clientVersion}`
     },
   },
   mounted() {
