@@ -29,7 +29,7 @@ app.config.globalProperties.$convertKeyToCapsuleDto = (key) => {
 }
 
 app.provide('storageName', 'logs')
-app.provide('isDarkMode', ref(true))
+app.provide('isDarkMode', ref(false))
 app.provide('isDataListening', ref(true))
 
 app.component('FaIcon', FontAwesomeIcon)
