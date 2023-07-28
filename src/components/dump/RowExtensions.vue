@@ -77,10 +77,6 @@ let timerId = undefined
 const currentDateTime = computed(() => {
   const date = props.createdAt ? new Date(props.createdAt) : new Date()
 
-  if (! props.isLocalData) {
-    console.log(props.createdAt)
-  }
-
   const year = date.getFullYear()
   const month = ('0' + (date.getMonth() + 1)).slice(-2)
   const day = ('0' + (date.getDate())).slice(-2)
