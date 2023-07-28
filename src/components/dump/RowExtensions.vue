@@ -26,9 +26,9 @@
     <button
         v-if="props.isLocalData === false"
         class="--backtrace --button --transparent"
-        @click="emit('saveToLocalStorage'); saved = true">
+        @click="emit('saveToLocalStorage');">
       <fa-icon icon="floppy-disk" class="mr-1"></fa-icon>
-      <span class="text-gray-500 dark:text-gray-300">{{ saved ? 'saved!' : 'save' }}</span>
+      <span class="text-gray-500 dark:text-gray-300">save</span>
     </button>
 
     <button
@@ -68,8 +68,6 @@ const props = defineProps({
     required: false,
   }
 })
-
-const saved = ref(false)
 
 const noticeCircle = ref(true)
 let timerId = undefined

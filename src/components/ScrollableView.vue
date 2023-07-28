@@ -1,14 +1,17 @@
 <template>
   <section
-    class="w-full full overflow-x-hidden overflow-y-scroll bg-gray-50 p-0.5 py-1
+    class="relative w-full full overflow-x-hidden overflow-y-scroll bg-gray-50 p-0.5 py-1
         dark:bg-gray-700"
     ref="scrollable">
+
     <ScrollableOptions
       :options="options"
       :scroll-y="scrollY"
       :is-local-data="isLocalData"
       @updateOptions="updateOptions"
       @clearLogs="clearLogs"></ScrollableOptions>
+
+    <FeedbackBalloon :context="balloon"></FeedbackBalloon>
 
     <div class="fixed bottom-3 right-8 z-50">
       <SearchText
@@ -29,7 +32,8 @@
            :messageDto="messageDto"
            :removeItem="removeItem"
            :is-local-data="isLocalData"
-           @getColumnSize="getColumnSize">
+           @getColumnSize="getColumnSize"
+           @showBalloon="showBalloon">
         </DataRow>
       </template>
     </div>
@@ -44,10 +48,12 @@ import HelloDocument from "@/components/HelloDocument.vue"
 import ScrollableOptions from "@/components/ScrollableOptions.vue"
 import {inject} from "vue";
 import SearchText from "@/components/SearchText.vue";
+import FeedbackBalloon from "@/components/fragments/FeedbackBalloon.vue";
 
 export default {
   name: "ScrollableView",
   components: {
+    FeedbackBalloon,
     SearchText,
     ScrollableOptions,
     HelloDocument,
@@ -57,7 +63,7 @@ export default {
     const storageName = inject('storageName') || 'logs'
 
     return {
-      storageName
+      storageName,
     }
   },
   props: {
@@ -90,7 +96,12 @@ export default {
         lastSearched: '',
         foundCount: -1,
         currentIndex: -1,
-      }
+      },
+      balloon: {
+        timer: null,
+        enabled: false,
+        message: '',
+      },
     }
   },
   watch: {
@@ -254,7 +265,21 @@ export default {
       }
 
       return textNodes
-    }
+    },
+    showBalloon(message) {
+      if (this.balloon.timer) {
+        clearTimeout(this.balloon.timer)
+      }
+
+      this.balloon.enabled = true
+      this.balloon.message = message
+
+      if (this.balloon.enabled) {
+        this.balloon.timer = setTimeout(() => {
+          this.balloon.enabled = false
+        }, 1500)
+      }
+    },
   },
   mounted() {
     this.$refs.scrollable.addEventListener('scroll', this.handleScrollY)

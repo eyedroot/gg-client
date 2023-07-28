@@ -169,6 +169,8 @@ export default {
       })
 
       localStorage.setItem(this.storageName, JSON.stringify(logs))
+
+      this.$emit('showBalloon', 'Saved to local storage')
     },
     async copyImage() {
       const canvas = await html2canvas(this.$refs.code, {
@@ -192,12 +194,15 @@ export default {
     copyJson() {
       const result = copyJson(this.messageDto.data)
 
-      clipboardFromString(JSON.stringify(result, null, 2))
+      clipboardFromString(
+        JSON.stringify(result, null, 2),
+        () => this.$emit('showBalloon', 'Copied Json'),
+      )
     },
     copyAssocArray() {
       const result = copyAssoc(this.messageDto.data)
 
-      clipboardFromString(result)
+      clipboardFromString(result, () => this.$emit('showBalloon', 'Copied Assoc'))
     }
   },
 }
