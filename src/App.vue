@@ -54,7 +54,8 @@ export default {
       logContainer: 0,
       throwableContainer: 0,
     })
-    const meta = ref(undefined)
+
+    const meta = inject('meta')
 
     const isDarkMode = inject('isDarkMode')
 
@@ -101,9 +102,12 @@ export default {
     },
     getMeta() {
       http.get('/v1/meta/version').then(response => {
-        this.meta = response.data.data
-
+        const { latestVersion, publicRepositoryUrl, releaseNotes } = response.data.data
         const packageJson = require('../package.json')
+
+        this.meta.latestVersion = latestVersion
+        this.meta.publicRepositoryUrl = publicRepositoryUrl
+        this.meta.releaseNotes = releaseNotes
         this.meta.clientVersion = packageJson.version
 
         this.setDocumentTitle(this.meta.clientVersion)

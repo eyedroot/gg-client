@@ -1,4 +1,4 @@
-import {createApp, ref} from 'vue'
+import {createApp, reactive, ref} from 'vue'
 import App from './App.vue'
 
 import FontAwesomeIcon from '@/fontawsome_icon'
@@ -27,6 +27,12 @@ app.config.globalProperties.$convertKeyToCapsuleDto = (key) => {
     "value": key
   }
 }
+
+app.provide('meta', reactive({
+  'latestVersion': '',
+  'publicRepositoryUrl': '',
+  'releaseNotes': {},
+}))
 
 app.provide('storageName', 'logs')
 app.provide('isDarkMode', ref(false))
