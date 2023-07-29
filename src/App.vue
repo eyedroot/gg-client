@@ -23,7 +23,7 @@
       v-show="currentContainer === 'shiftContainer'">
     </ScrollableView>
 
-    <NewVersion v-if="meta !== undefined" :meta="meta"></NewVersion>
+    <NewVersion :meta="meta"></NewVersion>
   </div>
 </template>
 

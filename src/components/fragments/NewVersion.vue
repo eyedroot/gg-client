@@ -28,12 +28,33 @@ export default {
   setup(props) {
     const showFlag = ref(false)
 
-    const versionChecker = () => props.meta.latestVersion !== props.meta.clientVersion
+    const versionChecker = (latestVersion, currentVersion) => {
+      if (! latestVersion || ! currentVersion) {
+        return false
+      }
 
-    showFlag.value = versionChecker()
+      const latestVersionArray = latestVersion.split('.')
+      const currentVersionArray = currentVersion.split('.')
+
+      if (latestVersionArray[0] > currentVersionArray[0]) {
+        return true
+      }
+
+      if (latestVersionArray[1] > currentVersionArray[1]) {
+        return true
+      }
+
+      if (latestVersionArray[2] > currentVersionArray[2]) {
+        return true
+      }
+
+      return false
+    }
+
+    showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion)
 
     setInterval(() => {
-      showFlag.value = versionChecker()
+      showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion)
     }, 1000 * 60 * 60 * 24)
 
     return {
