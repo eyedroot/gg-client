@@ -7,7 +7,7 @@
 
       <section>
         <article
-            class="prose dark:prose-invert"
+            class="mb-5 last:mb-0 prose dark:prose-invert"
             v-for="(patchNote, idx) in meta.releaseNotes"
             :key="idx"
             v-html="patchNote">
