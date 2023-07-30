@@ -17,16 +17,9 @@
       <hr>
 
       <section>
-        <h3 class="mb-1 text-lg">Laravel Framework</h3>
+        <h3 class="mb-1 text-lg">Installation</h3>
         <div class="p-5 text-base bg-gray-200 rounded dark:bg-gray-800">
-          <span class="text-gray-400 select-none">$</span> composer require --dev <AnchorShell href="https://github.com/binbyz/laravel-gg">beaverlabs/laravel-gg</AnchorShell>
-        </div>
-      </section>
-
-      <section>
-        <h3 class="mb-1 text-lg">Vanilla PHP</h3>
-        <div class="p-5 text-base bg-gray-200 rounded dark:bg-gray-800">
-          <span class="text-gray-400 select-none">$</span> composer global require <AnchorShell href="https://github.com/binbyz/gg">beaverlabs/gg</AnchorShell>
+          <span class="text-gray-400 select-none">$</span> composer require --dev <AnchorShell href="https://github.com/binbyz/gg">beaverlabs/gg</AnchorShell>
         </div>
       </section>
 
