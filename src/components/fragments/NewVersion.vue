@@ -51,11 +51,13 @@ export default {
       return false
     }
 
-    showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion)
+    setTimeout(() => {
+      showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion)
+    }, 1000 * 5)
 
     setInterval(() => {
       showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion)
-    }, 1000 * 60 * 60 * 24)
+    }, 1000 * 60 * 60)
 
     return {
       showFlag,
