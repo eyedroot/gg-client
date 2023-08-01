@@ -39,7 +39,9 @@
           :created-at="messageDto?.__createdAt"
            @saveToLocalStorage="saveToLocalStorage"
            @toggleBacktrace="toggleBacktrace"
-           @copyImage="copyImage">
+           @copyImage="copyImage"
+           @copyJson="copyJson"
+           @copyAssocArray="copyAssocArray">
           <template v-slot:languageVersion>
             <span>{{ messageDto.language.toLowerCase() }} {{ messageDto.version }}</span>
           </template>

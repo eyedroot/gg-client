@@ -1,3 +1,7 @@
+export function isExceptionData(data) {
+  return data === null || typeof data !== "object"
+}
+
 export function typeScalar(data) {
   return data?.isScalar === true
     || data.type === 'null'

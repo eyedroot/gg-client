@@ -1,5 +1,5 @@
 import {toRaw} from "vue"
-import {typeArray, typeObject, typeScalar} from "@/utilities/data_type"
+import {isExceptionData, typeArray, typeObject, typeScalar} from "@/utilities/data_type"
 
 function __toArray(data, depth = 1) {
   const space = depth * 4
@@ -40,7 +40,10 @@ function __toScalar(data) {
 }
 
 function unpack(data, depth = 1) {
-  if (typeScalar(data)) {
+  if (isExceptionData(data)) {
+    return __toScalar(data)
+  }
+  else if (typeScalar(data)) {
     return __toScalar(data.value)
   }
   else if (typeArray(data)) {
