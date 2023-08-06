@@ -2,7 +2,7 @@
   <div class="--code flex flex-col space-y-1">
     <div class="text-green-700 dark:text-green-500 mb-1.5">/** #{{ displayId }} */</div>
 
-    <div class="--request">
+    <div class="ml-2.5">
       <div class="flex flex-row items-center space-x-3">
         <fa-icon icon="arrow-up" class="text-blue-500"></fa-icon>
         <span class="text-[11px] tracking-tighter font-bold" :class="httpMethodColor">{{ request.method.value }}</span>
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div class="--response">
+    <div class="ml-2.5">
       <div class="flex flex-row items-center space-x-3">
         <fa-icon icon="arrow-down" class="text-red-500"></fa-icon>
         <span class="text-[11px] tracking-tighter font-bold" :class="responseStatusColor">{{ response.status.value }}</span>
@@ -63,7 +63,7 @@ const response = computed(() => {
 const httpMethodColor = computed(() => {
   switch (request.value.method.value) {
     case 'GET':
-      return 'text-green-700'
+      return 'text-cyan-700'
     case 'POST':
       return 'text-blue-700'
     case 'PUT':
