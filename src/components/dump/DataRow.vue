@@ -1,5 +1,5 @@
 <template>
-  <div v-if="['log', 'throwable'].includes(messageDto.type)"
+  <div v-if="['log', 'throwable', 'http.request'].includes(messageDto.type)"
        class="flex h-fit overflow-x-auto px-0.5 pt-1">
 
     <div class="--code-wrap flex-auto items-center relative" ref="code">
@@ -48,6 +48,12 @@
         </RowExtensions>
       </ThrowableValue>
 
+      <HttpValue
+        v-else-if="messageDto.type === 'http.request'"
+        :message-dto="messageDto"
+        :display-id="displayId">
+      </HttpValue>
+
       <div v-if="showBacktrace">
         <BackTrace
           :backtrace="this.messageDto.trace"
@@ -79,9 +85,10 @@ import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
 import ArrayValue from "@/components/dump/values/ArrayValue.vue";
 import ScalarValue from "@/components/dump/values/ScalarValue.vue";
 import StdClassValue from "@/components/dump/values/StdClassValue.vue";
+
 import CallFile from "@/components/dump/rows/CallFile.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
-import SpaceValue from "@/components/dump/values/NoteValue.vue";
+import NoteValue from "@/components/dump/values/NoteValue.vue";
 import {inject, ref, toRaw} from "vue";
 import RowExtensions from "@/components/dump/RowExtensions.vue";
 import html2canvas from "html2canvas";
@@ -90,13 +97,15 @@ import ThrowableValue from "@/components/dump/values/ThrowableValue.vue";
 import copyJson from "@/utilities/copy_json";
 import clipboardFromString from "@/utilities/clipboard";
 import copyAssoc from "@/utilities/copy_assoc";
+import HttpValue from "@/components/dump/values/HttpValue.vue";
 
 export default {
   components: {
+    HttpValue,
     ThrowableValue,
     UsageValue,
     RowExtensions,
-    NoteValue: SpaceValue,
+    NoteValue,
     BackTrace,
     CallFile,
     LanguageVersion,

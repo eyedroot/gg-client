@@ -47,7 +47,7 @@
           class="--nav-button"
           :class="{ 'active': selectedContainer === 'httpContainer' }"
           @click="emitSelectContainer('httpContainer')">
-          <img :src="httpIcon" alt="HTTP" class="w-6">
+          <img :src="httpIcon" alt="HTTP" class="w-5">
         </button>
       </span>
     </div>

@@ -163,6 +163,8 @@ export default {
       if (httpItems.length > 0) {
         this.mediator.httpContainer = httpItems
 
+        console.log(httpItems[0])
+
         if (this.currentContainer !== 'httpContainer') {
           this.noticeCount.httpContainer += httpItems.length
         }
