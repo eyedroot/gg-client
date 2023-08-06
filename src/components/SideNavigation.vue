@@ -39,6 +39,17 @@
           <fa-icon icon="floppy-disk" class="text-sm"></fa-icon>
         </button>
       </span>
+
+      <span class="relative inline-flex">
+        <SideNavigationBalloon :notice-count="noticeCount.httpContainer"></SideNavigationBalloon>
+
+        <button
+          class="--nav-button"
+          :class="{ 'active': selectedContainer === 'httpContainer' }"
+          @click="emitSelectContainer('httpContainer')">
+          <img :src="httpIcon" alt="HTTP" class="w-6">
+        </button>
+      </span>
     </div>
 
     <div class="relative mt-auto">
@@ -83,7 +94,8 @@ import SideNavigationBalloon from "@/components/SideNavigationBalloon.vue"
 import AnchorText from "@/components/fragments/AnchorShell.vue"
 import { webFrame } from "electron"
 import {inject, ref} from "vue"
-import Logo from "@/assets/icons/icon-192.png"
+import Logo from "@/assets/appIcons/icon-192.png"
+import HttpIcon from "@/assets/icons/http_9518033.png"
 
 export default {
   name: "SideNavigation",
@@ -103,6 +115,7 @@ export default {
   },
   setup() {
     const logo = ref(Logo)
+    const httpIcon = ref(HttpIcon)
 
     const currentZoomFactor = ref(1.1)
     const showZoomLayer = ref(false)
@@ -111,6 +124,7 @@ export default {
 
     return {
       logo,
+      httpIcon,
       currentZoomFactor,
       showZoomLayer,
       isDataListening,

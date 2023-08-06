@@ -23,6 +23,11 @@
       v-show="currentContainer === 'shiftContainer'">
     </ScrollableView>
 
+    <ScrollableView
+      ref="httpContainer"
+      v-show="currentContainer === 'httpContainer'"
+      :data="mediator.httpContainer"></ScrollableView>
+
     <NewVersion :meta="meta"></NewVersion>
   </div>
 </template>
@@ -48,11 +53,13 @@ export default {
     const mediator = reactive({
       logContainer: [],
       throwableContainer: [],
+      httpContainer: [],
     })
     const currentContainer = ref('logContainer')
     const noticeCount = reactive({
       logContainer: 0,
       throwableContainer: 0,
+      httpContainer: 0,
     })
 
     const meta = inject('meta')
@@ -96,6 +103,10 @@ export default {
       if ((e.metaKey || e.ctrlKey) && e.key === '3') {
         this.currentContainer = 'shiftContainer'
       }
+
+      if ((e.metaKey || e.ctrlKey) && e.key === '4') {
+        this.currentContainer = 'httpContainer'
+      }
     },
     toggleDarkMode() {
       this.isDarkMode = !this.isDarkMode
@@ -131,6 +142,7 @@ export default {
 
       const logItems = message.filter(item => item.type.startsWith('log'))
       const throwableItems = message.filter(item => item.type === 'throwable')
+      const httpItems = message.filter(item => item.type === 'http.request')
 
       if (throwableItems.length > 0) {
         this.mediator.throwableContainer = throwableItems
@@ -145,6 +157,14 @@ export default {
 
         if (this.currentContainer !== 'logContainer') {
           this.noticeCount.logContainer += logItems.length
+        }
+      }
+
+      if (httpItems.length > 0) {
+        this.mediator.httpContainer = httpItems
+
+        if (this.currentContainer !== 'httpContainer') {
+          this.noticeCount.httpContainer += httpItems.length
         }
       }
     })
