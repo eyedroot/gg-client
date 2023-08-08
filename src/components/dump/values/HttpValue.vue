@@ -6,7 +6,7 @@
       <div class="flex flex-row items-center space-x-3">
         <fa-icon icon="arrow-up" class="text-blue-500"></fa-icon>
         <span class="text-[11px] tracking-tighter font-bold" :class="httpMethodColor">{{ request.method.value }}</span>
-        <AnchorShell href="https://phpgg.kr/api/v1/meta/info">https://phpgg.kr/api/v1/meta/info</AnchorShell>
+        <AnchorShell :href="request.url.value">{{ request.url.value }}</AnchorShell>
       </div>
     </div>
 

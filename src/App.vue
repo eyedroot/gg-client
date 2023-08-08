@@ -82,8 +82,10 @@ export default {
     currentContainer: function (selectContainer) {
       if (selectContainer === 'logContainer') {
         this.noticeCount.logContainer = 0
-      } else {
+      } else if (selectContainer === 'throwableContainer') {
         this.noticeCount.throwableContainer = 0
+      } else if (selectContainer === 'httpContainer') {
+        this.noticeCount.httpContainer = 0
       }
     },
   },
