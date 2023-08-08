@@ -5,7 +5,7 @@
     "buildResources": "resources"
   },
   "mac": {
-    "icon": "./src/appIcons/icons/icon-512.png",
+    "icon": "./src/assets/appIcons/icon-512.png",
     "target": {
       "target": "dmg",
       "arch": [
@@ -15,7 +15,7 @@
     }
   },
   "win": {
-    "icon": "./src/appIcons/icons/icon-512.png",
+    "icon": "./src/assets/appIcons/icon-512.png",
     "target": {
       "target": "nsis",
       "arch": [
@@ -24,6 +24,6 @@
     }
   },
   "linux": {
-    "icon": "./src/appIcons/icons/icons-512.png"
+    "icon": "./src/assets/appIcons/icons-512.png"
   }
 }
