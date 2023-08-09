@@ -21,7 +21,7 @@
 
     <div class="--code !mt-2">
       <component
-        :is="components[this.$getValueComponent(props.messageDto.data)]"
+        :is="components[$getValueComponent(props.messageDto.data)]"
         :capsule-dto="props.messageDto.data"></component>
     </div>
   </div>
@@ -29,11 +29,14 @@
 
 <script setup>
 import AnchorShell from "@/components/fragments/AnchorShell.vue";
-import {computed} from "vue";
+import {computed, getCurrentInstance} from "vue";
 
 import ArrayValue from "@/components/dump/values/ArrayValue.vue";
 import ScalarValue from "@/components/dump/values/ScalarValue.vue";
 import StdClassValue from "@/components/dump/values/StdClassValue.vue";
+
+const { proxy } = getCurrentInstance()
+const $getValueComponent = proxy.$getValueComponent
 
 const components = {
   ArrayValue,
