@@ -22,8 +22,9 @@ import {
   faPlay,
   faPause,
   faCircleCheck,
+  faNetworkWired,
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faClock, faCode, faEraser, faFileLines, faBug, faXmark, faArrowDownShortWide, faArrowUpWideShort, faMagnifyingGlassPlus, faMagnifyingGlassMinus, faFloppyDisk, faCopy, faImage, faMemory, faLightbulb, faSun, faPlay, faPause, faCircleCheck, faArrowUp, faArrowDown)
+library.add(faClock, faCode, faEraser, faFileLines, faBug, faXmark, faArrowDownShortWide, faArrowUpWideShort, faMagnifyingGlassPlus, faMagnifyingGlassMinus, faFloppyDisk, faCopy, faImage, faMemory, faLightbulb, faSun, faPlay, faPause, faCircleCheck, faArrowUp, faArrowDown, faNetworkWired)
 
 export default FontAwesomeIcon

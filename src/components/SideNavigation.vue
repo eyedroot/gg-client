@@ -47,7 +47,7 @@
           class="--nav-button"
           :class="{ 'active': selectedContainer === 'httpContainer' }"
           @click="emitSelectContainer('httpContainer')">
-          <img :src="httpIcon" alt="HTTP" class="w-5">
+          <fa-icon icon="network-wired"></fa-icon>
         </button>
       </span>
     </div>
@@ -95,7 +95,6 @@ import AnchorText from "@/components/fragments/AnchorShell.vue"
 import { webFrame } from "electron"
 import {inject, ref} from "vue"
 import Logo from "@/assets/appIcons/icon-192.png"
-import HttpIcon from "@/assets/icons/http_9518033.png"
 
 export default {
   name: "SideNavigation",
@@ -115,7 +114,6 @@ export default {
   },
   setup() {
     const logo = ref(Logo)
-    const httpIcon = ref(HttpIcon)
 
     const currentZoomFactor = ref(1.1)
     const showZoomLayer = ref(false)
@@ -124,7 +122,6 @@ export default {
 
     return {
       logo,
-      httpIcon,
       currentZoomFactor,
       showZoomLayer,
       isDataListening,

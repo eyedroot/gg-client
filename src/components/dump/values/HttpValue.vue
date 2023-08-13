@@ -6,7 +6,7 @@
       <div class="flex flex-row items-center space-x-3">
         <fa-icon icon="arrow-up" class="text-blue-500"></fa-icon>
         <span class="text-[11px] tracking-tighter font-bold" :class="httpMethodColor">{{ request.method.value }}</span>
-        <AnchorShell :href="request.url.value">{{ request.url.value }}</AnchorShell>
+        <AnchorShell class="dark:text-gray-200" :href="request.url.value">{{ request.url.value }}</AnchorShell>
       </div>
     </div>
 
@@ -66,15 +66,15 @@ const response = computed(() => {
 const httpMethodColor = computed(() => {
   switch (request.value.method.value) {
     case 'GET':
-      return 'text-cyan-700'
+      return 'text-cyan-700 dark:text-cyan-500'
     case 'POST':
-      return 'text-blue-700'
+      return 'text-blue-700 dark:text-blue-500'
     case 'PUT':
-      return 'text-yellow-700'
+      return 'text-yellow-700 dark:text-yellow-500'
     case 'DELETE':
-      return 'text-red-700'
+      return 'text-red-700 dark:text-red-500'
     default:
-      return 'text-gray-700'
+      return 'text-gray-700 dark:text-gray-500'
   }
 })
 
@@ -103,6 +103,6 @@ const responseStatusColor = computed(() => {
 
 <style lang="scss">
 .-status-value {
-  @apply inline-flex text-[11px] text-gray-900 tracking-tight;
+  @apply inline-flex text-[11px] text-gray-900 dark:text-gray-400 tracking-tight;
 }
 </style>
