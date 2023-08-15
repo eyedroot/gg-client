@@ -30,12 +30,6 @@
         </div>
       </section>
 
-      <section>
-        <h4>License</h4>
-        <ul class="text-[9px]">
-          <li>HTTP <a href="https://www.freepik.com/search?format=search&last_filter=page&last_value=2&page=2&query=http&type=icon" target="_blank">Icon by Pixel perfect</a></li>
-        </ul>
-      </section>
     </div>
 
   </div>
