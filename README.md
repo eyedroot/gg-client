@@ -2,7 +2,7 @@
 
 You can download latest version [https://phpgg.kr](https://phpgg.kr) via Gumroad 🚀
 
-![GG Client](images/component-min.png "GG Client")
+[images/component-min.png](https://github.com/binbyz/public-gg-client/raw/main/images/component-min.png)
 
 ## About
 
