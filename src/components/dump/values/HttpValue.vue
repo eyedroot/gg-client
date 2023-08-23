@@ -1,6 +1,6 @@
 <template>
   <div class="--code flex flex-col space-y-1">
-    <div class="text-green-700 dark:text-green-500 mb-1.5">/** #{{ displayId }} */</div>
+    <LineNumber :display-id="props.displayId"></LineNumber>
 
     <div class="ml-2.5">
       <div class="flex flex-row items-center space-x-3">
@@ -34,6 +34,7 @@ import {computed, getCurrentInstance} from "vue";
 import ArrayValue from "@/components/dump/values/ArrayValue.vue";
 import ScalarValue from "@/components/dump/values/ScalarValue.vue";
 import StdClassValue from "@/components/dump/values/StdClassValue.vue";
+import LineNumber from "@/components/fragments/LineNumber.vue";
 
 const { proxy } = getCurrentInstance()
 const $getValueComponent = proxy.$getValueComponent

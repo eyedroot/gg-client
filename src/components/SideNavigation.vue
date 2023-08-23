@@ -50,6 +50,17 @@
           <fa-icon icon="network-wired"></fa-icon>
         </button>
       </span>
+
+      <span class="relative inline-flex">
+        <SideNavigationBalloon :notice-count="noticeCount.sqlContainer"></SideNavigationBalloon>
+
+        <button
+          class="--nav-button"
+          :class="{ 'active': selectedContainer === 'sqlContainer' }"
+          @click="emitSelectContainer('sqlContainer')">
+          <fa-icon icon="database"></fa-icon>
+        </button>
+      </span>
     </div>
 
     <div class="relative mt-auto">

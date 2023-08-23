@@ -1,5 +1,5 @@
 <template>
-  <div v-if="['log', 'throwable', 'http.request'].includes(messageDto.type)"
+  <div v-if="['log', 'throwable', 'http.request', 'sql.model'].includes(messageDto.type)"
        class="flex h-fit overflow-x-auto px-0.5 pt-1">
 
     <div class="--code-wrap flex-auto items-center relative" ref="code">
@@ -54,6 +54,12 @@
         :display-id="displayId">
       </HttpValue>
 
+      <SqlValue
+        v-else-if="messageDto.type === 'sql.model'"
+        :message-dto="messageDto"
+        :display-id="displayId">
+      </SqlValue>
+
       <div v-if="showBacktrace">
         <BackTrace
           :backtrace="this.messageDto.trace"
@@ -79,7 +85,7 @@
 
 <script>
 import TimeAgo from "@/components/dump/rows/TimeAgo.vue";
-import LineNumber from "@/components/dump/rows/LineNumber.vue";
+import LineCircle from "@/components/dump/rows/LineCircle.vue";
 import LanguageVersion from "@/components/dump/rows/LanguageVersion.vue";
 
 import ArrayValue from "@/components/dump/values/ArrayValue.vue";
@@ -98,9 +104,11 @@ import copyJson from "@/utilities/copy_json";
 import clipboardFromString from "@/utilities/clipboard";
 import copyAssoc from "@/utilities/copy_assoc";
 import HttpValue from "@/components/dump/values/HttpValue.vue";
+import SqlValue from "@/components/dump/values/SqlValue.vue";
 
 export default {
   components: {
+    SqlValue,
     HttpValue,
     ThrowableValue,
     UsageValue,
@@ -109,7 +117,7 @@ export default {
     BackTrace,
     CallFile,
     LanguageVersion,
-    LineNumber,
+    LineCircle,
     TimeAgo,
     ArrayValue,
     ScalarValue,

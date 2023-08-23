@@ -28,6 +28,11 @@
       v-show="currentContainer === 'httpContainer'"
       :data="mediator.httpContainer"></ScrollableView>
 
+    <ScrollableView
+      ref="sqlContainer"
+      v-show="currentContainer === 'sqlContainer'"
+      :data="mediator.sqlContainer"></ScrollableView>
+
     <NewVersion :meta="meta"></NewVersion>
   </div>
 </template>
@@ -54,12 +59,14 @@ export default {
       logContainer: [],
       throwableContainer: [],
       httpContainer: [],
+      sqlContainer: [],
     })
     const currentContainer = ref('logContainer')
     const noticeCount = reactive({
       logContainer: 0,
       throwableContainer: 0,
       httpContainer: 0,
+      sqlContainer: 0,
     })
 
     const meta = inject('meta')
@@ -86,6 +93,8 @@ export default {
         this.noticeCount.throwableContainer = 0
       } else if (selectContainer === 'httpContainer') {
         this.noticeCount.httpContainer = 0
+      } else if (selectContainer === 'sqlContainer') {
+        this.noticeCount.sqlContainer = 0
       }
     },
   },
@@ -108,6 +117,10 @@ export default {
 
       if ((e.metaKey || e.ctrlKey) && e.key === '4') {
         this.currentContainer = 'httpContainer'
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key === '5') {
+        this.currentContainer = 'sqlContainer'
       }
     },
     toggleDarkMode() {
@@ -138,6 +151,8 @@ export default {
     window.addEventListener('keydown', this.handleKeydown)
 
     ipcRenderer.on("gg", (event, message) => {
+      console.log(message)
+
       if (! this.isDataListening) {
         return
       }
@@ -145,6 +160,7 @@ export default {
       const logItems = message.filter(item => item.type.startsWith('log'))
       const throwableItems = message.filter(item => item.type === 'throwable')
       const httpItems = message.filter(item => item.type === 'http.request')
+      const sqlItems = message.filter(item => item.type === 'sql.model')
 
       if (throwableItems.length > 0) {
         this.mediator.throwableContainer = throwableItems
@@ -167,6 +183,14 @@ export default {
 
         if (this.currentContainer !== 'httpContainer') {
           this.noticeCount.httpContainer += httpItems.length
+        }
+      }
+
+      if (sqlItems.length > 0) {
+        this.mediator.sqlContainer = sqlItems
+
+        if (this.currentContainer !== 'sqlContainer') {
+          this.noticeCount.sqlContainer += sqlItems.length
         }
       }
     })
