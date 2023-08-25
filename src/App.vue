@@ -151,8 +151,6 @@ export default {
     window.addEventListener('keydown', this.handleKeydown)
 
     ipcRenderer.on("gg", (event, message) => {
-      console.log(message)
-
       if (! this.isDataListening) {
         return
       }
