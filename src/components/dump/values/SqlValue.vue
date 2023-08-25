@@ -5,7 +5,9 @@
     <div class="-sql" v-html="formatSql()"></div>
 
     <div class="flex flex-row items-center space-x-3 mt-2.5">
-      <span class="-status-value">Time: {{ props.messageDto.data.value.time.value }}</span>
+      <span class="-status-value">
+        Time: {{ props.messageDto.data.value.time.value }}<em class="ml-0.5 not-italic text-gray-500">ms</em>
+      </span>
       <span class="-status-value">Driver: {{ props.messageDto.data.value.configs.value.driver.value }}</span>
       <span class="-status-value">Connection: {{ props.messageDto.data.value.connectionName.value }}</span>
       <span class="-status-value">Database: {{ props.messageDto.data.value.configs.value.database.value }}</span>
