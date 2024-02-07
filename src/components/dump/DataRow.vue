@@ -7,9 +7,9 @@
         <fa-icon icon="xmark" class="text-gray-800 dark:text-gray-300"></fa-icon>
       </button>
 
-      <div v-if="messageDto.type.startsWith('log')"
-           class="--code" :class="{ throwable: messageDto.type === 'throwable' }">
-        <CallFile :focusFile="focusFile()" :id="displayId"></CallFile>
+      <div v-if="messageDto.type.startsWith('log')" class="--code">
+        <LineNumber
+          :display-id="displayId"></LineNumber>
 
         <div class="mb-3" ref="rValue">
           <component
@@ -92,7 +92,6 @@ import ArrayValue from "@/components/dump/values/ArrayValue.vue";
 import ScalarValue from "@/components/dump/values/ScalarValue.vue";
 import StdClassValue from "@/components/dump/values/StdClassValue.vue";
 
-import CallFile from "@/components/dump/rows/CallFile.vue";
 import BackTrace from "@/components/dump/rows/BackTrace.vue";
 import NoteValue from "@/components/dump/values/NoteValue.vue";
 import {inject, ref, toRaw} from "vue";
@@ -105,9 +104,11 @@ import clipboardFromString from "@/utilities/clipboard";
 import copyAssoc from "@/utilities/copy_assoc";
 import HttpValue from "@/components/dump/values/HttpValue.vue";
 import SqlValue from "@/components/dump/values/SqlValue.vue";
+import LineNumber from "@/components/fragments/LineNumber.vue";
 
 export default {
   components: {
+    LineNumber,
     SqlValue,
     HttpValue,
     ThrowableValue,
@@ -115,7 +116,6 @@ export default {
     RowExtensions,
     NoteValue,
     BackTrace,
-    CallFile,
     LanguageVersion,
     LineCircle,
     TimeAgo,
@@ -161,23 +161,6 @@ export default {
   methods: {
     toggleBacktrace() {
       this.showBacktrace = !this.showBacktrace;
-    },
-    focusFile() {
-      if (this.messageDto.language.toUpperCase() === 'PHP') {
-        if (this.messageDto.type === 'throwable') {
-          return this.messageDto.data.value
-        }
-
-        for (let i = 0; i < this.messageDto.trace.length; i++) {
-          let row = this.messageDto.trace[i]
-
-          if (row.file && (!row.file.includes('gg/src/Gg.php') && !row.file.includes('gg/src/helpers/helper.php') && !row.file.includes('/vendor/'))) {
-            return row
-          }
-        }
-      }
-
-      return { file: '', line: -1 }
     },
     saveToLocalStorage() {
       const logs = JSON.parse(localStorage.getItem(this.storageName)) || []
