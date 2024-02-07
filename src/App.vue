@@ -127,8 +127,8 @@ export default {
       this.isDarkMode = !this.isDarkMode
     },
     getMeta() {
-      http.get('/v1/meta/version').then(response => {
-        const { latestVersion, publicRepositoryUrl, releaseNotes } = response.data.data
+      http.get('/version').then(response => {
+        const { latestVersion, publicRepositoryUrl, releaseNotes } = response.data
         const packageJson = require('../package.json')
 
         this.meta.latestVersion = latestVersion

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const http = axios.create({
-  baseURL: "https://phpgg.kr/api",
+  baseURL: "https://php.beauty/api/phpgg",
   headers: {
     "Content-type": "application/json",
   },
