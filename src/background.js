@@ -4,6 +4,7 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import express from 'express'
+import {decode} from "@msgpack/msgpack";
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const server = express()
@@ -31,11 +32,24 @@ async function createWindow() {
     }
   })
 
-  server.post('/api/receiver', (req, res) => {
-    // send to renderer
-    win.webContents.send('gg', req.body)
+  server.use(express.raw({ type: 'application/x-msgpack'}))
 
-    res.status(200).send('gg')
+  server.post('/api/receiver', (req, res) => {
+    try {
+      const data = decode(req.body)
+
+      if (isDevelopment) {
+        console.log('Decoded Data', data)
+      }
+
+      // send to renderer
+      win.webContents.send('gg', data)
+
+      res.status(200).send('gg')
+    } catch (error) {
+      console.error('Decoding Failed', error)
+      res.status(500).send('Decoding Failed')
+    }
   })
 
   server.get('/api/ping', (req, res) => {
