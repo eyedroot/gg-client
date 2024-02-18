@@ -32,7 +32,10 @@ async function createWindow() {
     }
   })
 
-  server.use(express.raw({ type: 'application/x-msgpack'}))
+  server.use(express.raw({
+    type: 'application/x-msgpack',
+    limit: '512mb'
+  }))
 
   server.post('/api/receiver', (req, res) => {
     try {
