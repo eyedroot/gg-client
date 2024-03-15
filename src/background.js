@@ -27,6 +27,8 @@ async function createWindow() {
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
       devTools: true,
     },
+    frame: false,
+    thickFrame: false,
   });
 
   server.use(

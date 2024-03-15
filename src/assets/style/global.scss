@@ -72,6 +72,16 @@ hr {
   }
 }
 
+.--draggable {
+  @apply cursor-move;
+  -webkit-app-region: drag;
+}
+
+.--clickable {
+  @apply cursor-pointer;
+  -webkit-app-region: no-drag;
+}
+
 .--backtrace {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
     sans-serif;
