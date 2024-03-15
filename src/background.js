@@ -1,6 +1,4 @@
-'use strict';
-
-import { app, protocol, BrowserWindow } from 'electron';
+import { app, protocol, BrowserWindow, nativeTheme } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer';
 import express from 'express';
@@ -29,6 +27,14 @@ async function createWindow() {
     },
     frame: false,
     thickFrame: false,
+  });
+
+  win.webContents.on('did-finish-load', () => {
+    win.webContents.send('is-native-dark-mode', nativeTheme.shouldUseDarkColors);
+
+    nativeTheme.on('updated', () => {
+      win.webContents.send('is-native-dark-mode', nativeTheme.shouldUseDarkColors);
+    });
   });
 
   server.use(

@@ -1,6 +1,5 @@
 import { createApp, reactive, ref } from 'vue';
 import App from './App.vue';
-
 import FontAwesomeIcon from '@/fontawsome_icon';
 
 import '@/assets/style/tailwind.css';

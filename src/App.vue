@@ -162,6 +162,10 @@ export default {
 
     window.addEventListener('keydown', this.handleKeydown);
 
+    ipcRenderer.on('is-native-dark-mode', (event, isNativeDarkMode) => {
+      this.isDarkMode = isNativeDarkMode;
+    });
+
     ipcRenderer.on('gg', (event, message) => {
       if (!this.isDataListening) {
         return;
