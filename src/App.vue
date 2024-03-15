@@ -128,6 +128,12 @@ export default {
       if ((e.metaKey || e.ctrlKey) && e.key === '5') {
         this.currentContainer = 'sqlContainer';
       }
+
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'c') {
+        if (window.confirm('Do you want to erase all data?')) {
+          this.$refs[this.currentContainer].clearLogs(this.currentContainer === 'shiftContainer');
+        }
+      }
     },
     toggleDarkMode() {
       this.isDarkMode = !this.isDarkMode;
