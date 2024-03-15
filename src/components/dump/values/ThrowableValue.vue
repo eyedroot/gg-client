@@ -10,7 +10,9 @@
     </div>
     <div class="flex flex-row space-x-5">
       <span class="--title">Message</span>
-      <span class="--value text-orange-600 font-bold dark:text-orange-300">{{ messageDto.data.value.message }} (CODE: {{ messageDto.data.value.code }})</span>
+      <span class="--value text-orange-600 font-bold dark:text-orange-300"
+        >{{ messageDto.data.value.message }} (CODE: {{ messageDto.data.value.code }})</span
+      >
     </div>
 
     <CodeViewer :focus-line="codeViewerFile.line" :source-code="codeViewerFile.sourceCode"></CodeViewer>
@@ -20,28 +22,28 @@
 </template>
 
 <script>
-import CodeViewer from "@/components/dump/rows/CodeViewer.vue";
-import {computed} from "vue";
+import CodeViewer from '@/components/dump/rows/CodeViewer.vue';
+import { computed } from 'vue';
 
 export default {
   name: 'ThrowableValue',
-  components: {CodeViewer},
+  components: { CodeViewer },
   props: {
     messageDto: {
       type: Object,
-      required: true
+      required: true,
     },
   },
   setup(props) {
     const codeViewerFile = computed(() => {
-      return props.messageDto.trace.find((trace) => trace.file === props.messageDto.data.value.file)
-    })
+      return props.messageDto.trace.find((trace) => trace.file === props.messageDto.data.value.file);
+    });
 
     return {
       codeViewerFile,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style scoped lang="scss">

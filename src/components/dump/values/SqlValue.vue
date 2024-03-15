@@ -16,40 +16,40 @@
 </template>
 
 <script setup>
-import { format } from 'sql-formatter'
-import { highlight } from "sql-highlight"
-import LineNumber from "@/components/fragments/LineNumber.vue";
+import { format } from 'sql-formatter';
+import { highlight } from 'sql-highlight';
+import LineNumber from '@/components/fragments/LineNumber.vue';
 
 const props = defineProps({
   displayId: {
     type: Number,
-    required: true
+    required: true,
   },
   messageDto: {
     type: Object,
-    required: true
+    required: true,
   },
-})
+});
 
 const formatSql = () => {
-  const params = props.messageDto.data.value.bindings.value.map(binding => {
-    return (binding.type === 'string') ? `'${binding.value}'` : String(binding.value)
-  })
+  const params = props.messageDto.data.value.bindings.value.map((binding) => {
+    return binding.type === 'string' ? `'${binding.value}'` : String(binding.value);
+  });
 
   const sql = props.messageDto.data.value.sql.value;
-  const language = props.messageDto.data.value.configs.value.driver.value ?? 'mysql'
+  const language = props.messageDto.data.value.configs.value.driver.value ?? 'mysql';
 
   let formattedSql = format(sql, {
     params: params,
     language: language,
     tabWidth: 2,
     keywordCase: 'upper',
-  })
+  });
 
   return highlight(formattedSql, { html: true })
     .replace(/(\r\n|\n|\r)/gm, '<br>')
-    .replace(/\s{2}/gm, '&nbsp;&nbsp;')
-}
+    .replace(/\s{2}/gm, '&nbsp;&nbsp;');
+};
 </script>
 
 <style lang="scss">

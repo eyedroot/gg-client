@@ -1,10 +1,10 @@
-import axios from "axios"
+import axios from 'axios';
 
 const ping = axios.create({
-  baseURL: "http://localhost:21868/api/ping",
+  baseURL: 'http://localhost:21868/api/ping',
   headers: {
-    "Content-type": "application/json",
-  }
-})
+    'Content-type': 'application/json',
+  },
+});
 
-export default ping
+export default ping;

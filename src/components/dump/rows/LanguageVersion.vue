@@ -7,21 +7,19 @@ export default {
   props: {
     language: {
       type: String,
-      required: true
+      required: true,
     },
     version: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     getLanguageColor() {
-      return 'bg-violet-500 text-white border-[0px] border-violet-600'
-    }
-  }
-}
+      return 'bg-violet-500 text-white border-[0px] border-violet-600';
+    },
+  },
+};
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

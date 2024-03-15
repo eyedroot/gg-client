@@ -10,23 +10,23 @@ export default {
     line: {
       type: Number,
       default: 0,
-      required: true
+      required: true,
     },
   },
   data() {
     return {
       circleColor: 'bg-blue-500',
-    }
+    };
   },
   computed: {
     getLineNumber() {
-      return this.line + 1
+      return this.line + 1;
     },
   },
   mounted() {
     setTimeout(() => {
-      this.circleColor = 'bg-gray-200'
-    }, 1000 * 60)
-  }
-}
+      this.circleColor = 'bg-gray-200';
+    }, 1000 * 60);
+  },
+};
 </script>

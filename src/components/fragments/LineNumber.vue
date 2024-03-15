@@ -6,7 +6,7 @@
 const props = defineProps({
   displayId: {
     type: Number,
-    required: true
+    required: true,
   },
-})
+});
 </script>

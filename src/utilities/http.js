@@ -1,10 +1,10 @@
-import axios from "axios"
+import axios from 'axios';
 
 const http = axios.create({
-  baseURL: "https://php.beauty/api/phpgg",
+  baseURL: 'https://php.beauty/api/phpgg',
   headers: {
-    "Content-type": "application/json",
+    'Content-type': 'application/json',
   },
-})
+});
 
-export default http
+export default http;

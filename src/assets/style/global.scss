@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   @apply h-full;
 }
 
@@ -7,7 +8,8 @@ label {
 }
 
 #app {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 13px;
@@ -19,18 +21,31 @@ hr {
 }
 
 .--code {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
+    sans-serif;
 
   @apply relative p-2 bg-gray-100 border-[1px] border-gray-300 hover:border-gray-400 hover:shadow box-border leading-5;
   @apply dark:bg-slate-800 dark:border-gray-900;
 
-  .brackets { @apply font-semibold; }
-  .brackets-0 { @apply text-red-700 dark:text-red-400; }
-  .brackets-1 { @apply text-green-700 dark:text-green-400; }
-  .brackets-2 { @apply text-violet-700 dark:text-violet-400; }
-  .brackets-3 { @apply text-pink-700 dark:text-pink-400; }
+  .brackets {
+    @apply font-semibold;
+  }
+  .brackets-0 {
+    @apply text-red-700 dark:text-red-400;
+  }
+  .brackets-1 {
+    @apply text-green-700 dark:text-green-400;
+  }
+  .brackets-2 {
+    @apply text-violet-700 dark:text-violet-400;
+  }
+  .brackets-3 {
+    @apply text-pink-700 dark:text-pink-400;
+  }
 
-  .collapsed { @apply hidden; }
+  .collapsed {
+    @apply hidden;
+  }
 
   &.viewer {
     @apply ml-5 my-2;
@@ -58,7 +73,8 @@ hr {
 }
 
 .--backtrace {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
+    sans-serif;
 }
 
 .--found-text {
@@ -72,9 +88,15 @@ hr {
 }
 
 @keyframes fade {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .--dimmed {

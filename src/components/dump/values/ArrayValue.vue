@@ -1,31 +1,23 @@
 <template>
   <span class="--header array" :class="{ '--dimmed': isDimmed }">
-    <span class="text-purple-900 font-bold dark:text-violet-400">Array:{{ Object.keys(this.capsuleDto.value).length }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
+    <span class="text-purple-900 font-bold dark:text-violet-400"
+      >Array:{{ Object.keys(this.capsuleDto.value).length }}</span
+    >
+    <span class="brackets" :class="getBracketsIndex">[</span>
 
-    <CodeFolding
-      type="array"
-      :bracket-index="getBracketsIndex"
-      :is-fold="isFold"
-      @handleFold="handleFold">
+    <CodeFolding type="array" :bracket-index="getBracketsIndex" :is-fold="isFold" @handleFold="handleFold">
     </CodeFolding>
   </span>
 
-  <div class="relative flex flex-col" v-if="! isFold">
-    <div class="pl-[1.5rem]"
-         v-for="(value, key) in capsuleDto.value"
-         :key="key">
-
+  <div class="relative flex flex-col" v-if="!isFold">
+    <div class="pl-[1.5rem]" v-for="(value, key) in capsuleDto.value" :key="key">
       <span class="h-fit">
         <ScalarValue :is-property-or-key="true" :capsule-dto="this.$convertKeyToCapsuleDto(key)"></ScalarValue>
       </span>
 
       <span class="h-fit mx-1.5 dark:text-gray-300">=></span>
 
-      <component
-        :is="this.$getValueComponent(value)"
-        :capsule-dto="value"
-        :depth="depth + 1">
-      </component>
+      <component :is="this.$getValueComponent(value)" :capsule-dto="value" :depth="depth + 1"> </component>
     </div>
 
     <div class="--tail array">
@@ -35,9 +27,9 @@
 </template>
 
 <script>
-import {defineAsyncComponent, ref} from 'vue';
-import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue";
-import useDimmed from "@/utilities/dimmed"
+import { defineAsyncComponent, ref } from 'vue';
+import CodeFolding from '@/components/dump/values/CodeFoldingTail.vue';
+import useDimmed from '@/utilities/dimmed';
 
 export default {
   name: 'ArrayValue',
@@ -54,39 +46,39 @@ export default {
     },
     capsuleDto: {
       type: Object,
-      required: true
+      required: true,
     },
   },
   setup(props) {
-    const isFold = ref(false)
-    const { isDimmed, dimmed } = useDimmed()
+    const isFold = ref(false);
+    const { isDimmed, dimmed } = useDimmed();
 
     const handleFold = () => {
-      dimmed(() => isFold.value = ! isFold.value)
-    }
+      dimmed(() => (isFold.value = !isFold.value));
+    };
 
     if (props.depth === 0 && Object.keys(props.capsuleDto.value).length >= 30) {
-      isFold.value = true
+      isFold.value = true;
     }
 
     if (props.depth >= 1) {
-      isFold.value = true
+      isFold.value = true;
     }
 
     if (Object.keys(props.capsuleDto.value).length === 0) {
-      isFold.value = false
+      isFold.value = false;
     }
 
     return {
       isFold,
       handleFold,
       isDimmed,
-    }
+    };
   },
   computed: {
     getBracketsIndex() {
-      return `brackets-${this.depth % 4}`
+      return `brackets-${this.depth % 4}`;
     },
   },
-}
+};
 </script>

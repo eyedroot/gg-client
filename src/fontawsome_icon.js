@@ -1,5 +1,5 @@
-import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-import {library} from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faClock,
   faCode,
@@ -24,8 +24,32 @@ import {
   faCircleCheck,
   faNetworkWired,
   faDatabase,
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faClock, faCode, faEraser, faFileLines, faBug, faXmark, faArrowDownShortWide, faArrowUpWideShort, faMagnifyingGlassPlus, faMagnifyingGlassMinus, faFloppyDisk, faCopy, faImage, faMemory, faLightbulb, faSun, faPlay, faPause, faCircleCheck, faArrowUp, faArrowDown, faNetworkWired, faDatabase)
+library.add(
+  faClock,
+  faCode,
+  faEraser,
+  faFileLines,
+  faBug,
+  faXmark,
+  faArrowDownShortWide,
+  faArrowUpWideShort,
+  faMagnifyingGlassPlus,
+  faMagnifyingGlassMinus,
+  faFloppyDisk,
+  faCopy,
+  faImage,
+  faMemory,
+  faLightbulb,
+  faSun,
+  faPlay,
+  faPause,
+  faCircleCheck,
+  faArrowUp,
+  faArrowDown,
+  faNetworkWired,
+  faDatabase,
+);
 
-export default FontAwesomeIcon
+export default FontAwesomeIcon;

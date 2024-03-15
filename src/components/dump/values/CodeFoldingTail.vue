@@ -2,13 +2,17 @@
   <template v-if="isFold">
     <span
       class="inline-flex bg-gray-300 rounded-sm mx-0.5 px-0.5 cursor-pointer dark:bg-gray-600 dark:text-gray-300"
-      @click="$emit('handleFold')">...</span>
+      @click="$emit('handleFold')"
+      >...</span
+    >
     <span class="brackets" :class="bracketIndex">{{ getCollapsedTail }}</span>
   </template>
   <template v-else>
     <span
       class="inline-flex rounded-sm mx-0.5 cursor-pointer text-gray-700 dark:text-gray-300"
-      @click="$emit('handleFold')">▼</span>
+      @click="$emit('handleFold')"
+      >▼</span
+    >
   </template>
 </template>
 
@@ -38,6 +42,6 @@ export default {
     getCollapsedTail() {
       return this.type === 'array' ? ']' : '}';
     },
-  }
-}
+  },
+};
 </script>

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import { shell } from 'electron'
+import { shell } from 'electron';
 
 export default {
-  name: "AnchorShell",
+  name: 'AnchorShell',
   props: {
     href: {
       type: String,
@@ -22,12 +22,12 @@ export default {
   },
   setup(props) {
     const handleOpenExternal = () => {
-      shell.openExternal(props.href)
-    }
+      shell.openExternal(props.href);
+    };
 
     return {
       handleOpenExternal,
-    }
+    };
   },
-}
+};
 </script>

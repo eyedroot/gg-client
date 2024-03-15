@@ -7,28 +7,28 @@ export default {
   props: {
     focusFile: {
       type: Object,
-      required: true
+      required: true,
     },
     id: {
       type: Number,
       default: 1,
-      required: true
+      required: true,
     },
   },
   computed: {
     printFocusFile() {
       if (!this.focusFile.file || !this.focusFile.line) {
-        return ''
+        return '';
       }
 
       let fileName = `${this.focusFile.file}:${this.focusFile.line}`;
 
       if ('code' in this.focusFile) {
-        fileName += ` (CODE: ${this.focusFile.code})`
+        fileName += ` (CODE: ${this.focusFile.code})`;
       }
 
-      return fileName
-    }
+      return fileName;
+    },
   },
-}
+};
 </script>

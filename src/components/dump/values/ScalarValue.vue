@@ -2,8 +2,10 @@
   <span class="--value" :class="textColor">
     <span :class="multilineOrDoubleQuote" v-html="printScalarType"></span>
     <span
-      v-if="! isPropertyOrKey && ['float', 'integer', 'double', 'boolean'].includes(capsuleDto.type)"
-      class="ml-1.5 text-[9px] tracking-tighter text-gray-400 italic select-none">// {{ getShortType }}</span>
+      v-if="!isPropertyOrKey && ['float', 'integer', 'double', 'boolean'].includes(capsuleDto.type)"
+      class="ml-1.5 text-[9px] tracking-tighter text-gray-400 italic select-none"
+      >// {{ getShortType }}</span
+    >
   </span>
 </template>
 
@@ -13,26 +15,26 @@ export default {
   props: {
     capsuleDto: {
       type: Object,
-      required: true
+      required: true,
     },
     isPropertyOrKey: {
       type: Boolean,
       default: false,
-      required: false
-    }
+      required: false,
+    },
   },
   methods: {
     space2nbsp(str) {
-      return str.replace(/ /g, '&nbsp;')
+      return str.replace(/ /g, '&nbsp;');
     },
     nl2br(str) {
-      return str.replace(/\r\n|\r|\n/g, '<br>')
+      return str.replace(/\r\n|\r|\n/g, '<br>');
     },
     text2link(str) {
-      return str.replace(/(https?:\/\/\S+?)(&nbsp;|\s|$)/g, '<a href="$1" target="_blank">$1</a>$2') // noinspection JSUnresolvedVariable
+      return str.replace(/(https?:\/\/\S+?)(&nbsp;|\s|$)/g, '<a href="$1" target="_blank">$1</a>$2'); // noinspection JSUnresolvedVariable
     },
     numberFormat(str) {
-      return String(str).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1<span class="select-none">,</span>')
+      return String(str).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1<span class="select-none">,</span>');
     },
     escapeHtml(str) {
       return str.replace(/[&<>'"]/g, function (tag) {
@@ -42,46 +44,46 @@ export default {
           '>': '&gt;',
           "'": '&#039;',
           '"': '&quot;',
-        }
+        };
 
-        return charsToReplace[tag] || tag
-      })
-    }
+        return charsToReplace[tag] || tag;
+      });
+    },
   },
   computed: {
     textColor() {
       return {
         property: this.isPropertyOrKey === true,
         [typeof this.capsuleDto.value]: this.isPropertyOrKey === false,
-      }
+      };
     },
     multilineOrDoubleQuote() {
       if (this.capsuleDto.type === 'string') {
-        return this.capsuleDto.value.includes('\n') ? '--multiline' : '--double-quote'
+        return this.capsuleDto.value.includes('\n') ? '--multiline' : '--double-quote';
       }
 
-      return {}
+      return {};
     },
     printScalarType() {
       if (this.capsuleDto.value === null) {
-        return 'null'
+        return 'null';
       }
 
       if (this.capsuleDto.type === 'string') {
-        return this.text2link(this.space2nbsp(this.escapeHtml(this.nl2br(this.capsuleDto.value))))
+        return this.text2link(this.space2nbsp(this.escapeHtml(this.nl2br(this.capsuleDto.value))));
       }
 
       if (this.capsuleDto.type === 'integer') {
-        return this.numberFormat(this.capsuleDto.value)
+        return this.numberFormat(this.capsuleDto.value);
       }
 
-      return this.capsuleDto.value
+      return this.capsuleDto.value;
     },
     getShortType() {
-      return this.capsuleDto.type === 'integer' ? 'int' : this.capsuleDto.type
-    }
-  }
-}
+      return this.capsuleDto.type === 'integer' ? 'int' : this.capsuleDto.type;
+    },
+  },
+};
 </script>
 
 <style lang="scss">

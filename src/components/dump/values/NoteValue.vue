@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "NoteValue",
+  name: 'NoteValue',
   components: {},
   props: {
     messageDto: {
@@ -21,9 +21,9 @@ export default {
     },
   },
   data() {
-    return {}
+    return {};
   },
   methods: {},
   computed: {},
-}
+};
 </script>

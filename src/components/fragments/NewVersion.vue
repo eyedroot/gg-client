@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import AnchorShell from '@/components/fragments/AnchorShell.vue'
-import {ref} from 'vue'
+import AnchorShell from '@/components/fragments/AnchorShell.vue';
+import { ref } from 'vue';
 
 export default {
-  name: "NewVersion",
+  name: 'NewVersion',
   components: { AnchorShell },
   props: {
     meta: {
@@ -26,42 +26,45 @@ export default {
     },
   },
   setup(props) {
-    const showFlag = ref(false)
+    const showFlag = ref(false);
 
     const versionChecker = (latestVersion, currentVersion) => {
-      if (! latestVersion || ! currentVersion) {
-        return false
+      if (!latestVersion || !currentVersion) {
+        return false;
       }
 
-      const latestVersionArray = latestVersion.split('.')
-      const currentVersionArray = currentVersion.split('.')
+      const latestVersionArray = latestVersion.split('.');
+      const currentVersionArray = currentVersion.split('.');
 
       if (latestVersionArray[0] > currentVersionArray[0]) {
-        return true
+        return true;
       }
 
       if (latestVersionArray[1] > currentVersionArray[1]) {
-        return true
+        return true;
       }
 
       if (latestVersionArray[2] > currentVersionArray[2]) {
-        return true
+        return true;
       }
 
-      return false
-    }
+      return false;
+    };
 
     setTimeout(() => {
-      showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion)
-    }, 1000 * 5)
+      showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion);
+    }, 1000 * 5);
 
-    setInterval(() => {
-      showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion)
-    }, 1000 * 60 * 60)
+    setInterval(
+      () => {
+        showFlag.value = versionChecker(props.meta.latestVersion, props.meta.clientVersion);
+      },
+      1000 * 60 * 60,
+    );
 
     return {
       showFlag,
-    }
+    };
   },
-}
+};
 </script>

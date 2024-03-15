@@ -1,12 +1,9 @@
 <template>
   <span class="--header stdclass" :class="{ '--dimmed': isDimmed }">
-    <span class="text-purple-900 font-bold dark:text-violet-400">{{ this.capsuleDto.class }}</span> <span class="brackets" :class="getBracketsIndex">{</span>
+    <span class="text-purple-900 font-bold dark:text-violet-400">{{ this.capsuleDto.class }}</span>
+    <span class="brackets" :class="getBracketsIndex">{</span>
 
-    <CodeFolding
-      type="stdClass"
-      :bracket-index="getBracketsIndex"
-      :is-fold="isFold"
-      @handleFold="handleFold">
+    <CodeFolding type="stdClass" :bracket-index="getBracketsIndex" :is-fold="isFold" @handleFold="handleFold">
     </CodeFolding>
   </span>
 
@@ -14,24 +11,19 @@
     <span class="italic text-gray-500">...pruned properties</span>
   </div>
 
-  <div class="relative flex flex-col" :class="{ 'collapsed': isFold }">
-    <div class="--line pl-[1.5rem]"
-         v-for="(value, key) in capsuleDto.value"
-         :key="key">
-
+  <div class="relative flex flex-col" :class="{ collapsed: isFold }">
+    <div class="--line pl-[1.5rem]" v-for="(value, key) in capsuleDto.value" :key="key">
       <span class="h-fit">
         <span class="text-blue-500 mr-0.5 dark:text-blue-200">{{ getModifierToCharacter(getModifier(key)) }}</span>
         <ScalarValue
-          :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))" :is-property-or-key="true"></ScalarValue>
+          :capsule-dto="this.$convertKeyToCapsuleDto(getPropertyName(key))"
+          :is-property-or-key="true"
+        ></ScalarValue>
       </span>
 
       <span class="h-fit mr-1.5 dark:text-gray-300">:</span>
 
-      <component
-        :is="this.$getValueComponent(value)"
-        :capsule-dto="value"
-        :depth="depth + 1">
-      </component>
+      <component :is="this.$getValueComponent(value)" :capsule-dto="value" :depth="depth + 1"> </component>
     </div>
 
     <div class="--tail array">
@@ -41,9 +33,9 @@
 </template>
 
 <script>
-import {defineAsyncComponent, ref} from 'vue'
-import CodeFolding from "@/components/dump/values/CodeFoldingTail.vue"
-import useDimmed from "@/utilities/dimmed"
+import { defineAsyncComponent, ref } from 'vue';
+import CodeFolding from '@/components/dump/values/CodeFoldingTail.vue';
+import useDimmed from '@/utilities/dimmed';
 
 export default {
   name: 'StdClassValue',
@@ -60,47 +52,47 @@ export default {
     },
     capsuleDto: {
       type: Object,
-      required: true
+      required: true,
     },
   },
   setup(props) {
-    const isFold = ref(false)
-    const { isDimmed, dimmed } = useDimmed()
+    const isFold = ref(false);
+    const { isDimmed, dimmed } = useDimmed();
 
     const handleFold = () => {
-      dimmed(() => isFold.value = ! isFold.value)
-    }
+      dimmed(() => (isFold.value = !isFold.value));
+    };
 
     if (props.depth >= 1) {
-      isFold.value = true
+      isFold.value = true;
     }
 
     return {
       isFold,
       isDimmed,
       handleFold,
-    }
+    };
   },
   methods: {
     getModifier(rawKey) {
-      return rawKey.split('@')[0]
+      return rawKey.split('@')[0];
     },
     getModifierToCharacter(modifier) {
       switch (modifier) {
         case 'public':
-          return '+'
+          return '+';
         case 'protected':
-          return '#'
+          return '#';
         case 'protected static':
-          return '#static'
+          return '#static';
         case 'private':
-          return '-'
+          return '-';
         default:
-          return ''
+          return '';
       }
     },
     getPropertyName(rawKey) {
-      return rawKey.split('@')[1]
+      return rawKey.split('@')[1];
     },
   },
   computed: {
@@ -108,5 +100,5 @@ export default {
       return `brackets-${this.depth % 4}`;
     },
   },
-}
+};
 </script>
