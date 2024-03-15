@@ -1,7 +1,7 @@
 <template>
   <header
-    class="top-1 flex flex-row space-x-6 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300 shadow-sm -ml-0.5 -mt-1 select-none
-      dark:bg-gray-900 dark:border-black"
+    class="top-1 flex py-1.5 flex-row space-x-6 w-full items-center justify-center p-1 z-50 bg-gray-200 border-b-[1px] border-gray-300 shadow-sm -ml-0.5 -mt-1 select-none
+      dark:bg-gray-800 dark:border-black"
     :class="{ fixed: scrollY >= 38 }"
     style="width: calc(100% + 4px)">
 

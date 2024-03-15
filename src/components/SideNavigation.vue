@@ -1,11 +1,11 @@
 <template>
   <aside
-    class="flex flex-col w-[45px] bg-gray-200 border-r-[1px] border-gray-300 py-5 px-1.5 items-center justify-center select-none
-      dark:bg-gray-900 dark:border-black">
-    <div class="flex flex-col w-full space-y-3.5">
-      <span class="inline-flex">
-        <AnchorText href="https://phpgg.kr">
-          <img :src="logo" alt="PHPgg">
+    class="flex flex-col min-w-[50px] max-w-[50px] bg-gray-200 border-r-[1px] border-gray-300 py-5 px-1.5 items-center justify-center select-none
+      dark:bg-gray-800 dark:border-black">
+    <div class="flex flex-col w-full space-y-5">
+      <span class="flex items-center justify-center h-[35px] bg-slate-800 dark:bg-slate-900 rounded-md border-none dark:border dark:border-black">
+        <AnchorText href="https://phpgg.kr" class="no-underline">
+          <span class="text-lg tracking-normal text-white dark:text-white">GG</span>
         </AnchorText>
       </span>
 
@@ -16,7 +16,7 @@
           class="--nav-button"
           :class="{ 'active': selectedContainer === 'logContainer' }"
           @click="emitSelectContainer('logContainer')">
-          <fa-icon icon="code" class="text-sm"></fa-icon>
+          <fa-icon icon="code" class="text-base"></fa-icon>
         </button>
       </span>
 
@@ -27,7 +27,7 @@
           class="--nav-button"
           :class="{ 'active': selectedContainer === 'throwableContainer' }"
           @click="emitSelectContainer('throwableContainer')">
-          <fa-icon icon="bug" class="text-sm"></fa-icon>
+          <fa-icon icon="bug" class="text-base"></fa-icon>
         </button>
       </span>
 
@@ -36,7 +36,7 @@
           class="--nav-button"
           :class="{ 'active': selectedContainer === 'shiftContainer' }"
           @click="emitSelectContainer('shiftContainer')">
-          <fa-icon icon="floppy-disk" class="text-sm"></fa-icon>
+          <fa-icon icon="floppy-disk" class="text-base"></fa-icon>
         </button>
       </span>
 
@@ -47,7 +47,7 @@
           class="--nav-button"
           :class="{ 'active': selectedContainer === 'httpContainer' }"
           @click="emitSelectContainer('httpContainer')">
-          <fa-icon icon="network-wired"></fa-icon>
+          <fa-icon icon="network-wired" class="text-base"></fa-icon>
         </button>
       </span>
 
@@ -58,30 +58,30 @@
           class="--nav-button"
           :class="{ 'active': selectedContainer === 'sqlContainer' }"
           @click="emitSelectContainer('sqlContainer')">
-          <fa-icon icon="database"></fa-icon>
+          <fa-icon icon="database" class="text-base"></fa-icon>
         </button>
       </span>
     </div>
 
-    <div class="relative mt-auto">
+    <div class="relative mt-auto flex flex-col space-y-2.5">
       <button
         class="--nav-button"
         @click="isDataListening = !isDataListening">
-        <fa-icon :icon="isDataListening ? 'pause' : 'play'"></fa-icon>
+        <fa-icon :icon="isDataListening ? 'pause' : 'play'" class="text-base"></fa-icon>
       </button>
 
       <button
           @mouseover="showZoomLayer = true"
           @mouseleave="showZoomLayer = false"
           class="--nav-button hover:opacity-100" @click="handleZoomInOut(true)">
-        <fa-icon icon="magnifying-glass-plus" class="text-sm"></fa-icon>
+        <fa-icon icon="magnifying-glass-plus" class="text-base"></fa-icon>
       </button>
 
       <button
           @mouseover="showZoomLayer = true"
           @mouseleave="showZoomLayer = false"
           class="--nav-button hover:opacity-100" @click="handleZoomInOut(false)">
-        <fa-icon icon="magnifying-glass-minus" class="text-sm"></fa-icon>
+        <fa-icon icon="magnifying-glass-minus" class="text-base"></fa-icon>
       </button>
 
       <div v-if="showZoomLayer"
@@ -94,7 +94,7 @@
       <button
         @click="this.$emit('toggleDarkMode')"
         class="--nav-button !opacity-100">
-        <fa-icon icon="sun"></fa-icon>
+        <fa-icon icon="sun" class="text-base"></fa-icon>
       </button>
     </div>
   </aside>
@@ -105,7 +105,7 @@ import SideNavigationBalloon from "@/components/SideNavigationBalloon.vue"
 import AnchorText from "@/components/fragments/AnchorShell.vue"
 import { webFrame } from "electron"
 import {inject, ref} from "vue"
-import Logo from "@/assets/appIcons/icon-192.png"
+import Logo from "@/assets/appIcons/icon-v2-512.png"
 
 export default {
   name: "SideNavigation",
