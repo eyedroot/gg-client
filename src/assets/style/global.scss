@@ -22,7 +22,7 @@ hr {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 
   @apply relative p-2 bg-gray-100 border-[1px] border-gray-300 hover:border-gray-400 hover:shadow box-border leading-5;
-  @apply dark:bg-gray-800 dark:border-gray-900;
+  @apply dark:bg-slate-800 dark:border-gray-900;
 
   .brackets { @apply font-semibold; }
   .brackets-0 { @apply text-red-700 dark:text-red-400; }

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-green-700 dark:text-green-500 mb-1.5">/** #{{ props.displayId }} */</div>
+  <div class="text-green-700 dark:text-teal-500 mb-1.5">/** #{{ props.displayId }} */</div>
 </template>
 
 <script setup>

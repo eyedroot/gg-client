@@ -123,7 +123,7 @@ export default {
     @apply text-gray-400;
   }
   &.property {
-    @apply text-green-700 font-semibold dark:text-green-400;
+    @apply text-green-700 font-semibold dark:text-lime-400;
     .--double-quote::before {
       content: '"';
       @apply text-gray-500;

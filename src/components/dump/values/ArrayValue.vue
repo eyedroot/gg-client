@@ -1,6 +1,6 @@
 <template>
   <span class="--header array" :class="{ '--dimmed': isDimmed }">
-    <span class="text-purple-900 font-bold dark:text-purple-400">Array:{{ Object.keys(this.capsuleDto.value).length }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
+    <span class="text-purple-900 font-bold dark:text-violet-400">Array:{{ Object.keys(this.capsuleDto.value).length }}</span> <span class="brackets" :class="getBracketsIndex">[</span>
 
     <CodeFolding
       type="array"
