@@ -4,7 +4,7 @@
     :class="{ fixed: scrollY >= 38 }"
     style="width: calc(100% + 4px)"
   >
-    <button class="--clickable" @click="setGrid(1)">
+    <button class="--invalidation-draggable" @click="setGrid(1)">
       <img
         :src="isDarkMode ? '/assets/image/icons/columns-1-dark.svg' : '/assets/image/icons/columns-1.svg'"
         class="w-5 opacity-50"
@@ -13,7 +13,11 @@
       />
     </button>
 
-    <button @click="setGrid(2)" class="--clickable" :class="{ 'opacity-20 cursor-not-allowed': isPreventGrid23() }">
+    <button
+      @click="setGrid(2)"
+      class="--invalidation-draggable"
+      :class="{ 'opacity-20 cursor-not-allowed': isPreventGrid23() }"
+    >
       <img
         :src="isDarkMode ? '/assets/image/icons/columns-2-dark.svg' : '/assets/image/icons/columns-2.svg'"
         class="w-5 opacity-50"
@@ -22,7 +26,11 @@
       />
     </button>
 
-    <button @click="setGrid(3)" class="--clickable" :class="{ 'opacity-20 cursor-not-allowed': isPreventGrid23() }">
+    <button
+      @click="setGrid(3)"
+      class="--invalidation-draggable"
+      :class="{ 'opacity-20 cursor-not-allowed': isPreventGrid23() }"
+    >
       <img
         :src="isDarkMode ? '/assets/image/icons/columns-3-dark.svg' : '/assets/image/icons/columns-3.svg'"
         class="w-5 opacity-50"
@@ -31,11 +39,11 @@
       />
     </button>
 
-    <button @click="setReverse()" class="--clickable">
+    <button @click="setReverse()" class="--invalidation-draggable">
       <fa-icon :icon="getSortIcon()" class="text-gray-800 dark:text-gray-300"></fa-icon>
     </button>
 
-    <button @click="clearLogs()" class="--clickable">
+    <button @click="clearLogs()" class="--invalidation-draggable">
       <fa-icon icon="eraser" class="text-gray-800 dark:text-gray-300"></fa-icon>
     </button>
   </header>

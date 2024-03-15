@@ -1,10 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.html',
-    './src/**/*.vue',
-    './src/**/*.jsx',
-  ],
+  content: ['./src/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
   theme: {
     extend: {
       colors: {
@@ -18,11 +14,14 @@ module.exports = {
         'bluegray-200': '#E2E8F0',
         'bluegray-100': '#F1F5F9',
         'bluegray-50': '#F8FAFC',
-      }
+        scrollbar: {
+          bg: 'var(--scrollbar-bg-color)',
+          thumb: 'var(--scrollbar-thumb-color)',
+          thumbHover: 'var(--scrollbar-thumb-hover-color)',
+        },
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [require('@tailwindcss/typography')],
   darkMode: 'class',
-}
+};
