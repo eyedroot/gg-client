@@ -114,7 +114,6 @@ import SideNavigationBalloon from '@/components/SideNavigationBalloon.vue';
 import AnchorText from '@/components/fragments/AnchorShell.vue';
 import { webFrame } from 'electron';
 import { inject, ref } from 'vue';
-import Logo from '@/assets/appIcons/icon-v2-512.png';
 
 export default {
   name: 'SideNavigation',
@@ -133,15 +132,12 @@ export default {
     },
   },
   setup() {
-    const logo = ref(Logo);
-
     const currentZoomFactor = ref(1.1);
     const showZoomLayer = ref(false);
 
     const isDataListening = inject('isDataListening');
 
     return {
-      logo,
       currentZoomFactor,
       showZoomLayer,
       isDataListening,
