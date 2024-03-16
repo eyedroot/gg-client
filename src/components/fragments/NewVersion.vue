@@ -1,5 +1,5 @@
 <template>
-  <div v-show="showFlag" class="fixed bottom-3 left-14 bg-gray-800 rounded-md p-5">
+  <div v-show="showFlag" class="fixed bottom-3 left-14 bg-gray-800 dark:bg-black rounded-md p-5">
     <div class="flex flex-row space-x-3 items-center">
       <fa-icon icon="lightbulb" class="text-2xl text-yellow-100"></fa-icon>
 
