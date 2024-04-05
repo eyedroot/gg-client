@@ -46,14 +46,20 @@
     <button @click="clearLogs()" class="--invalidation-draggable">
       <fa-icon icon="eraser" class="text-gray-800 dark:text-gray-300"></fa-icon>
     </button>
+
+    <div class="absolute right-3 top-1.5 --invalidation-draggable">
+      <CheckboxButton label="Pinned" />
+    </div>
   </header>
 </template>
 
 <script>
 import { inject } from 'vue';
+import CheckboxButton from '@/components/CheckboxButton.vue';
 
 export default {
   name: 'ScrollableOptions',
+  components: { CheckboxButton },
   props: {
     options: {
       type: Object,
