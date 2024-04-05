@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: 'https://php.beauty/api/phpgg',
+  baseURL: 'https://eyedroot.com/api/gg',
   headers: {
     'Content-type': 'application/json',
   },
