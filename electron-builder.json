@@ -13,9 +13,7 @@
         "arm64"
       ]
     },
-    "identity": "eyedroot",
-    "category": "public.app-category.utilities",
-    "entitlements": "./build/entitlements.mac.plist"
+    "identity": "eyedroot"
   },
   "win": {
     "icon": "./src/assets/appIcons/icon-v3-gg.png",
