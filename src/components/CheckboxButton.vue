@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps, ref } from 'vue';
+import { ipcRenderer } from 'electron';
 
 const props = defineProps({
   label: {
@@ -9,6 +10,11 @@ const props = defineProps({
 });
 
 const isChecked = ref(false);
+
+const callAlwaysOnTop = () => {
+  ipcRenderer.invoke('handleAlwaysOnTop', isChecked.value);
+  isChecked.value = !isChecked.value;
+};
 </script>
 
 <template>
@@ -17,6 +23,7 @@ const isChecked = ref(false);
     :class="{
       'bg-gray-400 text-gray-800 border-gray-800': isChecked,
     }"
+    @click.prevent="callAlwaysOnTop"
   >
     {{ props.label }}
     <input type="checkbox" class="hidden" v-model="isChecked" />

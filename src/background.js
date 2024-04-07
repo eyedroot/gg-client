@@ -1,4 +1,4 @@
-import { app, protocol, BrowserWindow, nativeTheme } from 'electron';
+import { app, protocol, BrowserWindow, nativeTheme, ipcMain } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer';
 import express from 'express';
@@ -27,6 +27,10 @@ async function createWindow() {
     },
     frame: false,
     thickFrame: false,
+  });
+
+  ipcMain.handle('handleAlwaysOnTop', (event, value) => {
+    win.setAlwaysOnTop(!value); // invert the value because the value is the previous state
   });
 
   win.webContents.on('did-finish-load', () => {
