@@ -12,7 +12,10 @@
         "x64",
         "arm64"
       ]
-    }
+    },
+    "identity": "eyedroot",
+    "category": "public.app-category.utilities",
+    "entitlements": "./build/entitlements.mac.plist"
   },
   "win": {
     "icon": "./src/assets/appIcons/icon-v3-gg.png",
